@@ -1,6 +1,12 @@
 body{
     margin: 0px;
 }
+.mini-icon{
+    max-width: 15px;
+}
+.large-icon{
+    max-width: 35px;
+}
 .top-bar{
     background-color: black;
     min-height: 70px;
@@ -10,13 +16,34 @@ body{
 }
 .search-bar{
     background-color: white;
-    padding: 6px;
+    padding: 5px;
+    padding-left: 5px;
     border-radius: 30px;
+    max-height: 20px;
+    display: flex;
 }
 .search-bar input{
     min-width: 350px;
     background-color: transparent;
     border: none;
+    margin-left: 4px;
+}
+.search-bar input:focus{
+    border: none;
+    outline: none; 
+}
+.util-icons{
+    margin-right: 20px;
+    margin-left: auto;
+    display: inline;
+}
+.util-icons a > button{
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 20px;
+}
+.util-icons a > button:hover{
+    background-color: gray;
 }
 .background{
     position: fixed;
@@ -47,7 +74,7 @@ body{
     min-width: 270px;
     font-family:Georgia, 'Times New Roman', Times, serif;
 }
-.authentication-box >h3{
+.authentication-box h3{
     font-size: 25px;
     margin-bottom: 40px;
     margin-top: -20px;
@@ -65,11 +92,16 @@ body{
 .input-section{
     margin-bottom: 20px;
     border-bottom: 2px black solid;
-    min-width: 240px;
+    min-width: 250px;
 }
-.input-section > input{
+.input-section input{
     border: none;
     background-color: transparent; 
+    font-size: 15px; 
+    font-family:Georgia, 'Times New Roman', Times, serif; 
+}
+.input-section > input:focus{
+    outline: none;
 }
 .logo-icon{
     max-width: 20px;
@@ -134,4 +166,54 @@ body{
     margin: 10px;
     margin-left: 5px;
     margin-right: 5px;
+}
+.userdetails-box{
+    display: inline;
+}
+.userdetails-options{
+    background-color: rgba(217, 217, 217, 1);
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 70px;
+    min-height: 100vh;
+    padding: 10px;
+    padding-left: 5px;
+    border-right: rgba(233, 233, 233, 1) 20px solid;
+}
+.userdetails-option{
+    background-color: rgba(69, 69, 69, 1);
+    border: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 20px;
+    margin: 5px;
+    min-width: 120px;
+    min-height: 40px;
+    max-width: 150px;
+    max-height: 50px;
+    border-radius: 40px;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 600;
+    font-size: 15px;
+    
+}
+.userdetails-option:hover{
+    background-color: gray;
+}
+.userdetails-option:active{
+    background-color: lightgray;
+}
+
+.userdetails-option p{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.userdetails-content{
+    border: 5px black solid;
+    display: inline;
+    margin: 100px;
+    padding: 1px;
 }
