@@ -10,15 +10,34 @@
     <!-- Header -->
     <header>
       <div class="top-bar">
+        <div class="cart">
+          <button>
+            <img src="images/cart.png" width="15" class="cartImg" />
+          </button>
+        </div>
+        <div class="notifi">
+          <button>
+            <img src="images/notifi.png" width="15" class="notifiImg" />
+          </button>
+        </div>
         <div class="actions">
-          <button>Sign up</button>
+          <button onclick="window.location.href='../signup.html'">
+            Sign up
+          </button>
+        </div>
+        <div class="profile">
+          <button>
+            <img src="images/profileIcon.png" width="20" class="img" />
+          </button>
         </div>
       </div>
       <div class="banner">
-        <img src="/project/res/logo.png" />
-        <img src="images/banner.jpg" alt="Banner" />
+        <img class="bannerImg" src="images/banner.jpg" alt="Banner" />
+        <div class="logo">
+          <img class="img1" src="/project/res/logo.png" />
+        </div>
         <div class="search-box">
-          <input type="text" placeholder="Search" />
+          <input type="text" placeholder="🔍Search" />
         </div>
       </div>
     </header>
