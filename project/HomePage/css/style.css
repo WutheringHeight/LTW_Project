@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: #f3f3f3;
+  color: #333;
+}
+/* --- Header --- */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #222;
+  height: 50px;
+  color: white;
+  gap: 5px;
+}
+.top-bar .actions button {
+  margin-left: 10px;
+  padding: 5px 15px;
+  border: none;
+  background: white;
+  color: #222;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
