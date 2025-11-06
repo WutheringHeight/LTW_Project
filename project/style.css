@@ -1,5 +1,6 @@
 body{
     margin: 0px;
+    background-color: lightgray;
 }
 .mini-icon{
     max-width: 15px;
@@ -12,7 +13,7 @@ body{
     min-height: 10vh;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 15px;
 }
 .search-bar{
     background-color: white;
@@ -21,6 +22,7 @@ body{
     border-radius: 30px;
     max-height: 20px;
     display: flex;
+    margin-left: 10px;
 }
 .search-bar input{
     min-width: 350px;
@@ -56,6 +58,10 @@ body{
     margin-left: 20vw;
     margin-top: 20vh;
     max-height: 50vh;
+}
+.small-logo{
+    max-width: 50px;
+    min-width: 50px;
 }
 .authentication-box{
     background-color: rgba(251, 251, 251, 1);
@@ -161,43 +167,45 @@ body{
     margin-right: 5px;
 }
 .userdetails-box{
-    display: inline;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 100px;
+    border-radius: 20px;
+    margin-left: 20vw;
+    margin-bottom: 120px;
+    margin-right: 20vw;
+    background-color: white;
+    border: gray 2px solid;
 }
 .userdetails-options{
-    background-color: rgba(217, 217, 217, 1);
+    background-color: gray;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     display: inline-flex;
     flex-direction: column;
-    max-width: 70px;
-    min-height: 100vh;
-    padding: 10px;
-    padding-left: 5px;
-    border-right: rgba(233, 233, 233, 1) 20px solid;
+    min-height: 500px;
+    border-right: rgb(71, 71, 71) 4px solid;
 }
 .userdetails-option{
-    background-color: rgba(69, 69, 69, 1);
-    border: none;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 20px;
-    margin: 5px;
-    min-width: 120px;
-    min-height: 40px;
-    max-width: 150px;
-    max-height: 50px;
-    border-radius: 40px;
+    background: transparent;
+    border: 2px gray solid;
     color: black;
     display: flex;
     align-items: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 600;
     font-size: 15px;
-    
+    border-bottom: lightgray 2px solid;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-width: 200px;
 }
 .userdetails-option:hover{
-    background-color: gray;
+    background-color: lightgray;
 }
 .userdetails-option:active{
-    background-color: lightgray;
+    background-color: darkgrey;
 }
 
 .userdetails-option p{
@@ -205,7 +213,34 @@ body{
     padding-right: 10px;
 }
 .userdetails-content{
-    border: 5px black solid;
-    margin: 100px;
-    padding: 1px;
+    padding: 30px;
+    padding-left: 60px;
 }
+.company-infos{
+    background-color: gray;
+    min-width: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+.company-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 4px;
+}
+.company-info p{
+    margin: 4px;
+    text-align: center;
+    font-size: 18px;
+}
+.company-info h3{
+    margin: 4px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 25px;
+}
+
