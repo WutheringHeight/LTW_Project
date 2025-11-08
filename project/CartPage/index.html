@@ -1,0 +1,127 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>Sản phẩm</th>
+      <th>Giá</th>
+      <th>Số lượng</th>
+      <th>Tổng</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Sản phẩm">
+        <img src="images/image 1.png" alt="">
+        <span>Chó cỏ</span>
+      </td>
+      <td data-label="Giá">250.000₫</td>
+      <td data-label="Số lượng" class="quantity">
+        <input type="number" value="1" min="1">
+      </td>
+      <td data-label="Tổng" class="item-total">250.000₫</td>
+      <td><button class="btn">❌</button></td>
+    </tr>
+    <tr>
+      <td data-label="Sản phẩm">
+        <img src="images/image 2.png" alt="">
+        <span>Chó màu</span>
+      </td>
+      <td data-label="Giá">400.000₫</td>
+      <td data-label="Số lượng" class="quantity">
+        <input type="number" value="2" min="1">
+      </td>
+      <td data-label="Tổng" class="item-total">800.000₫</td>
+      <td><button class="btn">❌</button></td>
+    </tr>
+    <tr>
+      <td data-label="Sản phẩm">
+        <img src="images/image 3.png" alt="">
+        <span>Chó cỏng</span>
+      </td>
+      <td data-label="Giá">250.000₫</td>
+      <td data-label="Số lượng" class="quantity">
+        <input type="number" value="1" min="1">
+      </td>
+      <td data-label="Tổng" class="item-total">250.000₫</td>
+      <td><button class="btn">❌</button></td>
+    </tr><tr>
+      <td data-label="Sản phẩm">
+        <img src="images/image 4.png" alt="">
+        <span>Chó cỏn</span>
+      </td>
+      <td data-label="Giá">250.000₫</td>
+      <td data-label="Số lượng" class="quantity">
+        <input type="number" value="1" min="1">
+      </td>
+      <td data-label="Tổng" class="item-total">250.000₫</td>
+      <td><button class="btn">❌</button></td>
+    </tr><tr>
+      <td data-label="Sản phẩm">
+        <img src="images/image 5.png" alt="">
+        <span>Chó cỏm</span>
+      </td>
+      <td data-label="Giá">250.000₫</td>
+      <td data-label="Số lượng" class="quantity">
+        <input type="number" value="1" min="1">
+      </td>
+      <td data-label="Tổng" class="item-total">250.000₫</td>
+      <td><button class="btn">❌</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Order Summary -->
+<div class="cart-summary">
+  <p>Tạm tính: <strong id="subtotal">1.050.000₫</strong></p>
+  <p>Phí vận chuyển: <strong id="shipping">30.000₫</strong></p>
+  <p class="total">Tổng cộng: <strong id="total">1.080.000₫</strong></p>
+</div>
+
+<!-- Actions -->
+<div class="actions">
+  <button class="btn btn-continue">⬅ Tiếp tục mua sắm</button>
+  <button class="btn btn-checkout">Tiến hành thanh toán ➡</button>
+</div>
+
+<!-- JavaScript tự động tính tiền -->
+<script>
+  const rows = document.querySelectorAll('tbody tr');
+  const subtotalEl = document.getElementById('subtotal');
+  const shippingEl = document.getElementById('shipping');
+  const totalEl = document.getElementById('total');
+
+  const shippingFee = 30000; // phí vận chuyển cố định
+
+  function formatCurrency(number) {
+    return number.toLocaleString('vi-VN') + '₫';
+  }
+
+  function updateCart() {
+    let subtotal = 0;
+
+    rows.forEach(row => {
+      const priceText = row.querySelector('td[data-label="Giá"]').innerText;
+      const quantity = row.querySelector('input').value;
+
+      // loại bỏ dấu '.' và '₫' để lấy số
+      const price = parseInt(priceText.replace(/[₫\.]/g, ''));
+      const total = price * quantity;
+
+      row.querySelector('.item-total').innerText = formatCurrency(total);
+      subtotal += total;
+    });
+
+    subtotalEl.innerText = formatCurrency(subtotal);
+    totalEl.innerText = formatCurrency(subtotal + shippingFee);
+  }
+
+  // gắn sự kiện khi thay đổi số lượng
+  rows.forEach(row => {
+    const input = row.querySelector('input');
+    input.addEventListener('change', updateCart);
+  });
+
+  // tính lần đầu
+  updateCart();
+</script>
