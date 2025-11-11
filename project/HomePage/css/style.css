@@ -164,6 +164,24 @@ main {
   margin: 5px 0;
 }
 
+.sell {
+  display: flex;
+  padding-left: 80px;
+  align-items: center;
+  font-size: 12px;
+  gap: 4px;
+}
+.start {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ffa41c;
+  border-radius: 15px;
+  background-color: #fff8e1;
+  gap: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .item:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
