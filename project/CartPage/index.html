@@ -1,172 +1,76 @@
+!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng & Theo dõi đơn hàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.2s ease;
+        }
 
-<table>
-  <thead>
-    <tr>
-      <th>Sản phẩm</th>
-      <th>Giá</th>
-      <th>Số lượng</th>
-      <th>Tổng</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/flower.png" alt="">
-        <span>Hoa</span>
-      </td>
-      <td data-label="Giá">999.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="1" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">999.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr>
-    <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/fullstart.png" alt="">
-        <span>Đêm Đầy Sao</span>
-      </td>
-      <td data-label="Giá">100.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="2" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">200.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr>
-    <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/monalisa.png" alt="">
-        <span>Monalisa</span>
-      </td>
-      <td data-label="Giá">200.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="1" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">200.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr><tr>
-      <td data-label="Sản phẩm">
-        <img src="images/wc1.jpg" alt="">
-        <span>Lemon</span>
-      </td>
-      <td data-label="Giá">20.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="1" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">20.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr><tr>
-      <td data-label="Sản phẩm">
-        <img src="images/wc2.jpg" alt="">
-        <span>Chó cỏm</span>
-      </td>
-      <td data-label="Giá">40.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="1" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">40.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr>
-     <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/wc3.jpg" alt="">
-        <span>Purple</span>
-      </td>
-      <td data-label="Giá">99.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="0" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">99.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr> <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/wc4.jpg" alt="">
-        <span>Artum</span>
-      </td>
-      <td data-label="Giá">110.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="0" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">0₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr> <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/wc5.jpg" alt="">
-        <span>Valley</span>
-      </td>
-      <td data-label="Giá">60.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="1" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">60.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr> <tr>
-      <td data-label="Sản phẩm">
-        <img src="images/wc6.jpg" alt="">
-        <span>Light House</span>
-      </td>
-      <td data-label="Giá">999.000₫</td>
-      <td data-label="Số lượng" class="quantity">
-        <input type="number" value="1" min="0">
-      </td>
-      <td data-label="Tổng" class="item-total">999.000₫</td>
-      <td><button class="btn">❌</button></td>
-    </tr> 
-  </tbody>
-</table>
+        body {
+            margin: 0;
+            background: #f2f4f8;
+            color: #333;
+        }
 
-<!-- Order Summary -->
-<div class="cart-summary">
-  <p>Tạm tính: <strong id="subtotal">2.617.000₫</strong></p>
-  <p>Phí vận chuyển: <strong id="shipping">30.000₫</strong></p>
-  <p class="total">Tổng cộng: <strong id="total">2.647.000₫</strong></p>
-</div>
+        header {
+            background: #007bff; /* Màu header mới */
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
 
-<!-- Actions -->
-<div class="actions">
-  <button class="btn btn-continue">⬅ Tiếp tục mua sắm</button>
-  <button class="btn btn-checkout">Tiến hành thanh toán ➡</button>
-</div>
+        /* Progress bar - THANH TIẾN TRÌNH ĐƠN HÀNG */
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            counter-reset: step;
+            position: relative;
+            padding: 0 10px;
+        }
 
-<!-- JavaScript tự động tính tiền -->
-<script>
-  const rows = document.querySelectorAll('tbody tr');
-  const subtotalEl = document.getElementById('subtotal');
-  const shippingEl = document.getElementById('shipping');
-  const totalEl = document.getElementById('total');
+        .progress-step {
+            position: relative;
+            text-align: center;
+            width: 25%;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #888;
+            z-index: 10;
+        }
 
-  const shippingFee = 30000; // phí vận chuyển cố định
-
-  function formatCurrency(number) {
-    return number.toLocaleString('vi-VN') + '₫';
-  }
-
-  function updateCart() {
-    let subtotal = 0;
-
-    rows.forEach(row => {
-      const priceText = row.querySelector('td[data-label="Giá"]').innerText;
-      const quantity = row.querySelector('input').value;
-
-      // loại bỏ dấu '.' và '₫' để lấy số
-      const price = parseInt(priceText.replace(/[₫\.]/g, ''));
-      const total = price * quantity;
-
-      row.querySelector('.item-total').innerText = formatCurrency(total);
-      subtotal += total;
-    });
-
-    subtotalEl.innerText = formatCurrency(subtotal);
-    totalEl.innerText = formatCurrency(subtotal + shippingFee);
-  }
-
-  // gắn sự kiện khi thay đổi số lượng
-  rows.forEach(row => {
-    const input = row.querySelector('input');
-    input.addEventListener('change', updateCart);
-  });
-
-  // tính lần đầu
-  updateCart();
-</script>
+        .progress-step::before {
+            counter-increment: step;
+            content: counter(step);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #ccc;
+            display: block;
+            text-align: center;
+            margin: 0 auto 12px;
+            line-height: 34px;
+            border-radius: 50%;
+            background: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 0 0 2px white;
+        }
