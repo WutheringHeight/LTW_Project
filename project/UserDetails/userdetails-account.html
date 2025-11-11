@@ -8,28 +8,41 @@
 </head>
 <body>
     <div class="top-bar">
-        <img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5)">
+        <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;"></a>
         <div class="search-bar">
             <img src="res/search_icon.png" class="large-icon">
             <input alt="Search">
         </div>
         <section class="util-icons">
-            <a><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
+            <a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
             <a><button><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
         </section>
     </div>
     <section class="userdetails-box">
         <div class="userdetails-options">
-        <a><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
-        <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
+        <a href="userdetails-account.html"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
+        <a href="userdetails-bookmark.html""><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
         <a><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
         <a><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
         <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
         <a><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>Help</p></button></a>
         </div>
         <section class="userdetails-content">
-            <p>I am content</p>
+            <br>
+            <section style="display: flex; flex-direction:row; align-items: center; padding-bottom:20px;">
+                <p class="large-text">Profile picture:</p>
+                <img src="res/user_icon.png" style="border-radius:50px; border: 2px gray solid; max-width:80px; min-width:80px; margin-left: 20px;">
+            </section>
+            <hr>
+            <p>Username: ArtEnjoyerGuy723</p>
+            <p>Email: artguy@gmail.com</p>
+            <hr>
+            <h3>Edits: </h3>
+            <button class="mid-button  btn-with-anim">Change username</button>
+            <button class="mid-button btn-with-anim">Change password</button>
+            <hr>
+            <button class="mid-button btn-with-anim" style="margin-left: 25vw;">Log out</button>
         </section>
     </section>
     <div class="company-infos">
@@ -60,25 +73,5 @@
             <p>Cookie Policy</p>
         </section>
     </div>
-    <section class="customerhelp-chat">
-        <button class="customerhelp-chat-btn"><img class="large-icon" src="res/chatbubble_icon.png"></button>
-        <div class="customerhelp-chatbox">
-            <div class="customerhelp-chatbox-header">
-                <p>Customer Service</p>
-            </div>
-            <section class="customerhelp-chatbox-messages">
-                <section class="customerhelp-chatbox-message">
-                    <p>Helpful bot</p>
-                    <div>
-                        <p>Hello, how can I help you today?</p>
-                    </div>
-                </section>
-            </section>
-            <div class="customerhelp-chatbox-footer">
-                <input name="customerhelp-chatbar">
-                <button>Send</button>
-            </div>
-        </div>
-    </section>
 </body>
 </html>

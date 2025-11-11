@@ -8,41 +8,56 @@
 </head>
 <body>
     <div class="top-bar">
-        <img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5)">
+         <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;""></a>
         <div class="search-bar">
             <img src="res/search_icon.png" class="large-icon">
             <input alt="Search">
         </div>
         <section class="util-icons">
-            <a><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
+            <a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
             <a><button><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
         </section>
     </div>
     <section class="userdetails-box">
         <div class="userdetails-options">
-        <a><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
-        <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
+         <a href="userdetails-account.html"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
+        <a href="userdetails-bookmark.html""><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
         <a><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
         <a><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
         <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
         <a><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>Help</p></button></a>
         </div>
         <section class="userdetails-content">
-            <br>
-            <section style="display: flex; flex-direction:row; align-items: center; padding-bottom:20px;">
-                <p class="large-text">Profile picture:</p>
-                <img src="res/user_icon.png" style="border-radius:50px; border: 2px gray solid; max-width:80px; min-width:80px; margin-left: 20px;">
+            <h3>Bookmarks:</h3>
+            <section class="bookmark-box">
+                <a href="../productDetail/product.html"><div class="bookmark">
+                    <img src="res/flower.png">
+                    <section class="bookmark-desp">
+                        <h4>Flower</h4>
+                        <p>Price: 999,000đ</p>
+                        <p>A beautiful oil painting reminiscent of 18th-century art capturing the liveliness and vibrant color of a flower vase</p>
+                        <p>3 Available</p>
+                    </section>
+                    <section class="bookmark-buttons">
+                        <img src="res/trashcan.png" class="mid-icon trashcan">
+                    </section>
+                </div></a>
+                <a href="../productDetail/product.html"><div class="bookmark">
+                    <img src="res/monalisa.png">
+                    <section class="bookmark-desp">
+                        <h4>MonaLisa</h4>
+                        <p>Price: 200,000đ</p>
+                        <p>Did you know an activist group tried to throw soup at the real mona lisa? </p>
+                        <p style="color: red">Out of stock</p>
+                    </section>
+                    <section class="bookmark-buttons">
+                        <img src="res/trashcan.png" class="mid-icon trashcan">
+                    </section>
+                </div></a>
+
             </section>
-            <hr>
-            <p>Username: ArtEnjoyerGuy723</p>
-            <p>Email: artguy@gmail.com</p>
-            <hr>
-            <h3>Edits: </h3>
-            <button class="mid-button  btn-with-anim">Change username</button>
-            <button class="mid-button btn-with-anim">Change password</button>
-            <hr>
-            <button class="mid-button btn-with-anim" style="margin-left: 25vw;">Log out</button>
+            <br><hr>
         </section>
     </section>
     <div class="company-infos">
