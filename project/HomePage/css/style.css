@@ -244,7 +244,10 @@ footer {
   color: #555;
   text-decoration: none;
 }
-
+.footer-column .link a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
 .footer-bottom {
   text-align: center;
   padding-top: 30px;
