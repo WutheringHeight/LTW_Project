@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Futura Regular";
   background-color: #f3f3f3;
   color: #333;
 }
@@ -253,65 +253,65 @@ footer {
   font-size: 0.65rem;
   color: #555;
 }
-.mini-icon{
-    max-width: 15px;
-    max-height: 15px;
+.mini-icon {
+  max-width: 15px;
+  max-height: 15px;
 }
-.mid-icon{
-    max-width: 20px;
-    max-height: 20px;
+.mid-icon {
+  max-width: 20px;
+  max-height: 20px;
 }
-.large-icon{
-    max-width: 35px;
-    max-height: 35px;
+.large-icon {
+  max-width: 35px;
+  max-height: 35px;
 }
-.top-bar{
-    background-color: #222;
-    min-height: 10vh;
-    display: flex;
-    align-items: center;
-    padding-left: 15px;
+.top-bar {
+  background-color: #222;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
 }
-.search-bar{
-    background-color: white;
-    padding: 5px;
-    padding-left: 5px;
-    border-radius: 30px;
-    max-height: 20px;
-    display: flex;
-    margin-left: 10px;
+.search-bar {
+  background-color: white;
+  padding: 5px;
+  padding-left: 5px;
+  border-radius: 30px;
+  max-height: 20px;
+  display: flex;
+  margin-left: 10px;
 }
-.search-bar input{
-    min-width: 350px;
-    background-color: transparent;
-    border: none;
-    margin-left: 4px;
+.search-bar input {
+  min-width: 350px;
+  background-color: transparent;
+  border: none;
+  margin-left: 4px;
 }
-.search-bar input:focus{
-    border: none;
-    outline: none; 
+.search-bar input:focus {
+  border: none;
+  outline: none;
 }
-.util-icons{
-    margin-right: 20px;
-    margin-left: auto;
-    display: inline;
+.util-icons {
+  margin-right: 20px;
+  margin-left: auto;
+  display: inline;
 }
-.util-icons a > button{
-    min-width: 30px;
-    min-height: 30px;
-    border-radius: 20px;
+.util-icons a > button {
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 20px;
 }
-.util-icons a > button:hover{
-    background-color: gray;
+.util-icons a > button:hover {
+  background-color: gray;
 }
-.small-logo{
-    max-width: 50px;
-    min-width: 50px;
+.small-logo {
+  max-width: 50px;
+  min-width: 50px;
 }
-.logo-icon{
-    max-width: 20px;
-    max-height: 20px;
-    position: absolute;
-    right: 290px;
-    transform: translateY(-10%);
+.logo-icon {
+  max-width: 20px;
+  max-height: 20px;
+  position: absolute;
+  right: 290px;
+  transform: translateY(-10%);
 }
