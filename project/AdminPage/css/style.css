@@ -1,0 +1,63 @@
+/* style.css */
+body {
+  margin: 0;
+  font-family: "Futura Regular";
+}
+
+/* Side bar */
+.sidebar {
+  position: fixed; /*Phần tử không thay đổi khi cuộn*/
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background-color: #222;
+  color: white;
+  padding: 20px;
+}
+.head {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.head img {
+  width: 80px;
+}
+
+.head h2 {
+  margin: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  display: flex;
+  height: 40px;
+  align-items: center;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  text-align: left;
+  line-height: 40px;
+  padding-left: 5px;
+}
+.sidebar ul li img {
+  width: 15px;
+  height: 15px;
+  padding-left: 5px;
+}
+
+.sidebar ul li:hover {
+  background-color: rgb(107, 107, 110);
+  border-radius: 5px;
+}
+
+.main-content {
+  margin-left: 240px; /* Để tránh bị che bởi sidebar */
+  padding: 20px;
+}
