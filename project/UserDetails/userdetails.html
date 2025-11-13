@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="top-bar">
@@ -14,9 +15,16 @@
             <input alt="Search">
         </div>
         <section class="util-icons">
-            <a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/notif_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
+            <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
+            <section><a><button onclick="toggleDisplay('notif-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <div class="notif-box non-display" id="notif-box">
+                <div class="notif-header"><h3>Notification</h3></div>
+                <div class="notif">
+                    <p><b>Aviary.Co</b></p>
+                    <p>Hello ArtEnjoyerGuy723, congratualation for making your account successfully</p>
+                </div>
+            </div></section>
+            <section><a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a></section>
         </section>
     </div>
     <section class="userdetails-box">
@@ -26,7 +34,7 @@
         <a><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
         <a><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
         <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
-        <a><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>Help</p></button></a>
+        <a><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
         <section class="userdetails-content">
             <p>I am content</p>
@@ -61,8 +69,8 @@
         </section>
     </div>
     <section class="customerhelp-chat">
-        <button class="customerhelp-chat-btn"><img class="large-icon" src="res/chatbubble_icon.png"></button>
-        <div class="customerhelp-chatbox">
+        <button class="customerhelp-chat-btn" onclick="toggleDisplay('help-chatbox')"><img class="large-icon" src="res/chatbubble_icon.png"></button>
+        <div class="customerhelp-chatbox non-display" id="help-chatbox">
             <div class="customerhelp-chatbox-header">
                 <p>Customer Service</p>
             </div>
@@ -76,7 +84,7 @@
             </section>
             <div class="customerhelp-chatbox-footer">
                 <input name="customerhelp-chatbar">
-                <button>Send</button>
+                <button><img src="res/send_icon.png" class="mid-icon"></button>
             </div>
         </div>
     </section>
