@@ -1,0 +1,57 @@
+<>!DOCTYPE html>
+<html lang="vi">        
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thanh Toán</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">    
+    </head>
+    <body>
+        <header>💳 Trang Thanh Toán</header>
+        <div class = "checkout-container">
+            <h2 class="section-heading">1. Thông Tin Nhận Hàng</h2>
+            < id="checkout-form">
+    <div class="form-group">
+                <label for="name">Họ và tên *</label>
+                <input type="text" id="name" required placeholder="Nguyễn Văn A">
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại *</label>
+                <input type="tel" id="phone" required placeholder="0901 234 567">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+                <label for="address">Địa chỉ chi tiết *</label>
+                <textarea id="address" rows="3" required placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="note">Ghi chú đơn hàng (tùy chọn)</label>
+                <textarea id="note" rows="2" placeholder="Ví dụ: Giao hàng sau 17h, gọi điện trước khi giao..."></textarea>
+            </div>
+            <h2 class="section-heading">2. Phương Thức Thanh Toán</h2>
+            <div id="payment-methods">
+                
+                <div class="payment-option selected" data-method="cod">
+                    <input type="radio" name="payment-method" value="cod" id="payment-cod" checked>
+                    <label for="payment-cod">💰 Thanh toán khi nhận hàng (COD)</label>
+                </div>
+                
+                <div class="payment-option" data-method="bank-transfer">
+                    <input type="radio" name="payment-method" value="bank-transfer" id="payment-bank">
+                    <label for="payment-bank">🏦 Chuyển khoản qua Ngân hàng</label>
+                </div>
+                <div class="payment-details" id="details-bank-transfer">
+                    <p>Ngân hàng: **Vietcombank**</p>
+                    <p>Số tài khoản: **00110022334455**</p>
+                    <p>Chủ tài khoản: **NGUYEN VAN B**</p>
+                    <p style="font-weight: 700; color: #dc3545;">Nội dung chuyển khoản: Tên bạn + SĐT (Ví dụ: AN 0901234567)</p>
+                </div>
+                <div class="payment-option" data-method="card">
+                    <input type="radio" name="payment-method" value="card" id="payment-card">
+                    <label for="payment-card">💳 Thẻ Quốc tế (Visa, Mastercard, JCB)</label>
+                </div>
+                
