@@ -11,7 +11,7 @@ body {
   left: 0;
   width: 220px;
   height: 100%;
-  background-color: #222;
+  background-color: #2c2c3e;
   color: white;
   padding: 20px;
 }
@@ -40,7 +40,7 @@ body {
 }
 
 .sidebar ul li a {
-  color: white;
+  color: #f0f0f0;
   text-decoration: none;
   text-align: left;
   line-height: 40px;
@@ -53,11 +53,104 @@ body {
 }
 
 .sidebar ul li:hover {
-  background-color: rgb(107, 107, 110);
-  border-radius: 5px;
+  background-color: #525273;
+  border-radius: 10px;
+}
+/* Main content */
+.main-content {
+  margin-left: 260px; /* Để tránh bị che bởi sidebar */
+  padding: 20px;
+  background-color: #1e1e2f;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
 }
 
-.main-content {
-  margin-left: 240px; /* Để tránh bị che bởi sidebar */
-  padding: 20px;
+.item-box {
+  min-width: 300px;
+  background-color: #3a3a4d;
+  border-radius: 10px;
+  width: 30%;
+}
+.item-img {
+  width: 40px;
+  height: 40px;
+  background-color: #222;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.item-img img {
+  width: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.item1 {
+  display: flex;
+  align-items: end;
+}
+.item {
+  margin-left: 10px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  flex: 4;
+}
+.status-box {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  flex: 1;
+  height: 20%;
+  padding: 5px;
+  background-color: rgb(176, 229, 176);
+  border-radius: 10px;
+}
+
+/* Recent Order */
+.recent-order-box {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  background-color: #3a3a4d;
+  border: 1px solid #444456;
+}
+.recent-order-name {
+  padding: 10px;
+}
+.recent-order-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #3a3a4d;
+}
+
+.recent-order-table th,
+.recent-order-table td {
+  border: 1px solid #444456;
+  padding: 10px;
+  text-align: left;
+  color: #b0b0b0;
+}
+
+.recent-order-table tr:hover {
+  background-color: #5c5b5b;
+}
+.product-cell {
+  padding: 10px;
+}
+
+.product-info {
+  display: flex;
+  align-items: center; /* căn giữa theo chiều dọc */
+  gap: 10px; /* khoảng cách giữa ảnh và chữ */
+}
+
+.product-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px; /* bo góc ảnh */
+  object-fit: cover; /* ảnh không méo */
+}
+
+.product-info span {
+  font-weight: 500;
+  color: #b0b0b0;
 }
