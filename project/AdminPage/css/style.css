@@ -139,14 +139,14 @@ body {
 
 .product-info {
   display: flex;
-  align-items: center; /* căn giữa theo chiều dọc */
-  gap: 10px; /* khoảng cách giữa ảnh và chữ */
+  align-items: center;
+  gap: 10px;
 }
 
 .product-info img {
   width: 40px;
   height: 40px;
-  border-radius: 5px; /* bo góc ảnh */
+  border-radius: 5px;
   object-fit: cover; /* ảnh không méo */
 }
 

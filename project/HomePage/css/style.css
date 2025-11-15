@@ -10,66 +10,8 @@ body {
 }
 /* --- Header --- */
 .top-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background: #222;
-  height: 60px;
-  color: white;
-  gap: 5px;
+  background-color: #e8d8c3;
 }
-.top-bar .actions button {
-  margin-left: 5px;
-  padding: 5px 15px;
-  border: none;
-  background: white;
-  color: #222;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.top-bar .profile button {
-  margin-left: 5px;
-  margin-right: 12px;
-  padding: 5px 15px;
-  border: none;
-  background: white;
-  border-radius: 20px;
-  cursor: pointer;
-  align-items: center;
-  height: 26px;
-}
-
-.top-bar .profile button img {
-  width: 30px;
-  height: 15px;
-}
-.top-bar .cart button {
-  margin-left: 5px;
-  border: none;
-  background: white;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  height: 26px;
-  width: 26px;
-}
-.top-bar .notifi button {
-  margin-left: 5px;
-  border: none;
-  background: white;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  height: 26px;
-  width: 26px;
-}
-
 /* --- Banner --- */
 .banner {
   position: relative;
@@ -192,7 +134,7 @@ main {
   padding: 10px 25px;
   border: none;
   border-radius: 30px;
-  background: black;
+  background: #1e1e2f;
   color: white;
   cursor: pointer;
 }
