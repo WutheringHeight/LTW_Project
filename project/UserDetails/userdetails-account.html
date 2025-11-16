@@ -21,28 +21,32 @@
     </div>
     <section class="userdetails-box">
         <div class="userdetails-options">
-        <a href="userdetails-account.html"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
-        <a href="userdetails-bookmark.html""><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
-        <a><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
-        <a><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
-        <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
-        <a><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
+            <a href="userdetails-account.html"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
+            <a href="userdetails-bookmark.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
+            <a href="userdetails-notification.html"><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
+            <a href="userdetails-payment.html"><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
+            <a href="userdetails-setting.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
+            <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
         <section class="userdetails-content">
+            
             <br>
             <section style="display: flex; flex-direction:row; align-items: center; padding-bottom:20px;">
-                <p class="large-text">Profile picture:</p>
+                <p class="large-text"><b>Profile picture:</b></p>
                 <img src="res/user_icon.png" style="border-radius:50px; border: 2px gray solid; max-width:80px; min-width:80px; margin-left: 20px;">
+                <button class="mini-button btn-with-anim" style="margin-left: 20px; margin-top: 45px;">Change</button>
             </section>
             <hr>
-            <p>Username: ArtEnjoyerGuy723</p>
-            <p>Email: artguy@gmail.com</p>
-            <hr>
-            <h3>Edits: </h3>
-            <button class="mid-button  btn-with-anim">Change username</button>
-            <button class="mid-button btn-with-anim">Change password</button>
-            <hr>
-            <button class="mid-button btn-with-anim" style="margin-left: 25vw;">Log out</button>
+            <h2>Account Settings</h2>
+            <div class="setting-section">
+                <section class="setting-option"><p>Username: ArtEnjoyerGuy723</p><button class="mini-button btn-with-anim">Change</button></section>
+                <section class="setting-option"><p>Email: artguy@gmail.com</p><button class="mini-button btn-with-anim">Change</button></section>
+                <section class="setting-option"><p>Phone number: +87 325 325 2364</p><button class="mini-button btn-with-anim">Change</button></section>
+                <section class="setting-option"><p>Password:***********</p><button class="mini-button btn-with-anim">Change</button></section>
+                <section class="setting-option"><p>Enable Two-Factor Authentication</p><input type="checkbox" class="toggle-button"></section>
+            </div>
+            <hr><br><br><br><br>
+            <button class="mini-button btn-with-anim" style="margin-left: 25vw;">Log out</button>
         </section>
     </section>
     <div class="company-infos">

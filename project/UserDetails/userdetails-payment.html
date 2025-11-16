@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="top-bar">
@@ -14,9 +15,16 @@
             <input alt="Search">
         </div>
         <section class="util-icons">
-            <a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/notif_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
+            <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
+            <section><a><button onclick="toggleDisplay('notif-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <div class="notif-box non-display" id="notif-box">
+                <div class="notif-header"><h3>Notification</h3></div>
+                <div class="notif">
+                    <p><b>Aviary.Co</b></p>
+                    <p>Hello ArtEnjoyerGuy723, congratualation for making your account successfully</p>
+                </div>
+            </div></section>
+            <section><a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a></section>
         </section>
     </div>
     <section class="userdetails-box">
@@ -27,35 +35,19 @@
         <a href="userdetails-payment.html"><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
         <a href="userdetails-setting.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
         <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
-    </div>
+        </div>
         <section class="userdetails-content">
-            <section class="faq-section">
-                <h2>FAQs</h2>
-                <details>
-                    <summary>What types of canvas art do you sell?</summary>
-                    <p>We offer ready-made designs, limited editions, and custom-printed canvas art in various sizes and styles.</p>
-                </details>
-                <details>
-                    <summary>Do the colors look the same in real life as on screen?</summary>
-                    <p>We ensure sellers provide high-quality and faithful examplary images. Any untruthful advertisement will be met with proper penalties as per our terms and conditions</p>
-                </details>
-                <details>
-                    <summary>How long does shipping take?</summary>
-                    <p>Most orders are processed within 2–3 business days. Delivery typically takes 5–10 business days depending on your location and the seller.</p>
-                </details>
-                <details>
-                    <summary>Do you offer international shipping?</summary>
-                    <p>Yes, we ship worldwide! Shipping costs and delivery times vary by region.</p>
-                </details>
-                <details>
-                    <summary>How is the artwork packaged?</summary>
-                    <p>We carefully wrap each canvas in protective layers and ship it in sturdy, eco-friendly packaging to prevent damage.</p>
-                </details>
-                <details>
-                    <summary>Can I track my order?</summary>
-                    <p>Absolutely. Once your order ships, you’ll receive an email with a tracking link.</p>
-                </details>
-            </section>
+             <h2>Payments & Billing</h2>
+            <div class="setting-section">  
+                <section class="setting-option"><p>Delivery Address</p><button class="mini-button">Change</button></section>
+                <section class="setting-option"><p>Payment method:</p><button class="mini-button">Change</button></section>
+                <section class="setting-option"><p>Delivery Address</p><button class="mini-button">Change</button></section>
+
+                <p><input type="checkbox" id="manage-cards"><label for="manage-cards">Add / remove payment methods</label></p>
+                <p><input type="checkbox" id="default-payment"><label for="default-payment">Set default payment method</label></p>
+                <p><input type="checkbox" id="billing-info"><label for="billing-info">Edit billing information / tax ID</label></p>
+                <p><input type="checkbox" id="manage-subscriptions"><label for="manage-subscriptions">Manage subscriptions / auto-pay</label></p>
+            </div>
         </section>
     </section>
     <div class="company-infos">
@@ -87,8 +79,8 @@
         </section>
     </div>
     <section class="customerhelp-chat">
-        <button class="customerhelp-chat-btn"><img class="large-icon" src="res/chatbubble_icon.png"></button>
-        <div class="customerhelp-chatbox">
+        <button class="customerhelp-chat-btn" onclick="toggleDisplay('help-chatbox')"><img class="large-icon" src="res/chatbubble_icon.png"></button>
+        <div class="customerhelp-chatbox non-display" id="help-chatbox">
             <div class="customerhelp-chatbox-header">
                 <p>Customer Service</p>
             </div>
