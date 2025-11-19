@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="top-bar">
-        <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;"></a>
+         <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;""></a>
         <div class="search-bar">
             <img src="res/search_icon.png" class="large-icon">
             <input alt="Search">
@@ -41,7 +41,26 @@
         <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
         <section class="userdetails-content">
-            <p>I am content</p>
+            <h3>Notification:</h3>
+            <section class="notification-box">
+                <div class="full-notification">
+                    <p>Sender: <b>Aviary.Co</b></p>
+                    <hr>
+                    <p>Hello ArtEnjoyerGuy723, congratualation on making your account successfully.
+                        We're so happy to have you here. If you ever have trouble with anything, please feel free to contact our customer help line or chatbox for assistance.
+                        We wish you the best of luck on your journey to find the art that speaks yo your soul.
+                    </p>
+                    <button class="mini-button btn-with-anim">Archive</button>
+                </div>
+                <div class="full-notification">
+                    <p>Sender: <b>System</b></p>
+                    <hr>
+                    <p>Account successfully created.
+                    </p>
+                    <button class="mini-button btn-with-anim">Archive</button>
+                </div>
+            </section>
+            <br><hr>
         </section>
     </section>
     <div class="company-infos">
@@ -72,38 +91,5 @@
             <p>Cookie Policy</p>
         </section>
     </div>
-    <section class="chat">
-        <button class="chat-btn" onclick="toggleDisplay('help-chatbox')"><img class="large-icon" src="res/chatbubble_icon.png"></button>
-        <div class="chatbox non-display" id="help-chatbox">
-            <section class="chat-contactlist">
-                <div class="chat-contact">
-                    <img src="res/user_icon.png" class="mid-icon">
-                    <p>Helpful bot</p>
-                </div>
-                <div class="chat-contact">
-                    <img src="res/user_icon.png" class="mid-icon">
-                    <p>Admin John</p>
-                </div>
-            </section>
-            <section class="chat-area">
-                <div class="chat-area-header">
-                <p>Customer Service</p>
-            </div>
-            <section class="chat-area-messages">
-                <section class="chat-area-message">
-                    <p>Helpful bot</p>
-                    <div>
-                        <p>Hello, how can I help you today?</p>
-                    </div>
-                </section>
-            </section>
-            <div class="chat-area-footer">
-                <input name="chatbar">
-                <button><img src="res/send_icon.png" class="mid-icon"></button>
-            </div>
-            </section>
-            
-        </div>
-    </section>
 </body>
 </html>

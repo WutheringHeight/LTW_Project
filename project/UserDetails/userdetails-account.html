@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="top-bar">
@@ -14,9 +15,20 @@
             <input alt="Search">
         </div>
         <section class="util-icons">
-            <a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/notif_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
+           <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
+            <section><a><button onclick="toggleDisplay('notif-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <div class="notif-box non-display" id="notif-box">
+                <div class="notif-header"><h3>Notification</h3></div>
+                <div class="notif">
+                    <p><b>Aviary.Co</b></p>
+                    <p>Hello ArtEnjoyerGuy723, congratualation for making your account successfully</p>
+                </div>
+                 <div class="notif">
+                    <p><b>System</b></p>
+                    <p>Account successfully created.</p>
+                </div>
+            </div></section>
+            <section><a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a></section>
         </section>
     </div>
     <section class="userdetails-box">

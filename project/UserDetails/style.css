@@ -131,6 +131,7 @@ body {
 .toggle-button{
   width: 50px;
   height: 20px;
+  margin: 0px;
 }
 .btn-with-anim:hover {
   background-color: gray;
@@ -269,7 +270,7 @@ p {
 .trashcan:hover {
   filter: invert(100%);
 }
-.customerhelp-chat {
+.chat {
   position: fixed;
   bottom: 10px;
   right: 20px;
@@ -277,7 +278,11 @@ p {
   flex-direction: row-reverse;
   align-items: flex-end;
 }
-.customerhelp-chat-btn {
+.chatbox{
+  display: flex;
+  flex-direction: row;
+}
+.chat-btn {
   margin-left: 15px;
   margin-bottom: 10px;
   background-color: gray;
@@ -285,24 +290,23 @@ p {
   padding: 10px;
   border: none;
 }
-.customerhelp-chat-btn:hover {
+.chat-btn:hover {
   background-color: rgb(139, 139, 139);
 }
-.customerhelp-chat-btn:active {
+.chat-btn:active {
   background-color: rgb(85, 85, 85);
 }
-.customerhelp-chatbox {
+.chat-area {
   background-color: whitesmoke;
   border-radius: 20px;
 }
-.customerhelp-chatbox-header {
+.chat-area-header {
   background-color: rgb(139, 139, 139);
-  border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 6px;
   padding-left: 12px;
 }
-.customerhelp-chatbox-messages {
+.chat-area-messages {
   min-height: 300px;
   min-width: 150px;
   max-height: 300px;
@@ -310,44 +314,65 @@ p {
   display: flex;
   flex-direction: column-reverse;
 }
-.customerhelp-chatbox-messages {
+.chat-area-messages {
   margin: 5px;
 }
-.customerhelp-chatbox-message > p {
+.chat-area-message > p {
   font-size: 14px;
   padding-left: 4px;
 }
-.customerhelp-chatbox-message > div {
+.chat-area-message > div {
   background-color: rgb(139, 139, 139);
   border-radius: 10px;
   padding: 5px;
 }
-.customerhelp-chatbox-footer {
+.chat-area-footer {
   background-color: rgb(139, 139, 139);
-  border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 6px;
   padding-left: 12px;
   display: flex;
   flex-direction: row;
 }
-.customerhelp-chatbox-footer button{
+.chat-area-footer button{
     background-color: transparent;
     border: none;
 }
-.customerhelp-chatbox-footer button img:hover{
+.chat-area-footer button img:hover{
     filter: invert(70%);
 }
-.customerhelp-chatbox-footer button img:active{
+.chat-area-footer button img:active{
     filter: invert(100%);
 }
-.customerhelp-chatbox-footer input:focus{
+.chat-area-footer input:focus{
     outline: none;
 }
-.customerhelp-chatbox-footer input{
+.chat-area-footer input{
     border-radius: 10px;
     border: none;
     max-height: 20px;
+}
+.chat-contactlist{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(91, 91, 91);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-top: 30px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.chat-contact{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  background-color: rgb(139, 139, 139);
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+.chat-contact:hover{
+  background-color: rgb(164, 164, 164);
 }
 .non-display{
     display: none !important;
@@ -388,10 +413,16 @@ details p {
 }
 .setting-section{
   margin-left: 20px;
+  min-width: 410px;
 }
 .setting-option{
   display:flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 4px;
+}
+.full-notification{
+  border: gray 2px solid;
+  padding: 10px;
   margin-bottom: 4px;
 }
