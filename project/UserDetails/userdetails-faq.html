@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="top-bar">
@@ -14,20 +15,31 @@
             <input alt="Search">
         </div>
         <section class="util-icons">
-            <a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/notif_icon.png" class="mini-icon"></button></a>
-            <a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
+            <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
+            <section><a><button onclick="toggleDisplay('notif-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <div class="notif-box non-display" id="notif-box">
+                <div class="notif-header"><h3>Notification</h3></div>
+                <div class="notif">
+                    <p><b>Aviary.Co</b></p>
+                    <p>Hello ArtEnjoyerGuy723, congratualation for making your account successfully</p>
+                </div>
+                 <div class="notif">
+                    <p><b>System</b></p>
+                    <p>Account successfully created.</p>
+                </div>
+            </div></section>
+            <section><a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a></section>
         </section>
     </div>
     <section class="userdetails-box">
         <div class="userdetails-options">
         <a href="userdetails-account.html"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
-        <a href="userdetails-bookmark.html""><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
-        <a><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
-        <a><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
-        <a><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
-        <a><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
-        </div>
+        <a href="userdetails-bookmark.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
+        <a href="userdetails-notification.html"><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
+        <a href="userdetails-payment.html"><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
+        <a href="userdetails-setting.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
+        <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
+    </div>
         <section class="userdetails-content">
             <section class="faq-section">
                 <h2>FAQs</h2>

@@ -41,7 +41,18 @@
         <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
         <section class="userdetails-content">
-            <p>I am content</p>
+            <h2>Payments & Billing</h2>
+            <div class="setting-section">  
+                <section class="setting-option"><p>Delivery Address: 102 That Streat, Glutenbergs</p><button class="mini-button btn-with-anim">Change</button></section>
+                <section class="setting-option"><p>Payment method:</p><button class="mini-button btn-with-anim">Change</button></section>
+                <section class="setting-option"><p>Delivery Address</p><button class="mini-button btn-with-anim">Change</button></section>
+                <h3>Banking:</h3>
+                <section>
+                    <img src="res/chatbubble_icon.png">
+                    <p>Your Bank's Code</p><input>
+                    <p>Card Number</p><input>
+                </section>
+            </div>
         </section>
     </section>
     <div class="company-infos">
@@ -72,37 +83,24 @@
             <p>Cookie Policy</p>
         </section>
     </div>
-    <section class="chat">
-        <button class="chat-btn" onclick="toggleDisplay('help-chatbox')"><img class="large-icon" src="res/chatbubble_icon.png"></button>
-        <div class="chatbox non-display" id="help-chatbox">
-            <section class="chat-contactlist">
-                <div class="chat-contact">
-                    <img src="res/user_icon.png" class="mid-icon">
-                    <p>Helpful bot</p>
-                </div>
-                <div class="chat-contact">
-                    <img src="res/user_icon.png" class="mid-icon">
-                    <p>Admin John</p>
-                </div>
-            </section>
-            <section class="chat-area">
-                <div class="chat-area-header">
+    <section class="customerhelp-chat">
+        <button class="customerhelp-chat-btn" onclick="toggleDisplay('help-chatbox')"><img class="large-icon" src="res/chatbubble_icon.png"></button>
+        <div class="customerhelp-chatbox non-display" id="help-chatbox">
+            <div class="customerhelp-chatbox-header">
                 <p>Customer Service</p>
             </div>
-            <section class="chat-area-messages">
-                <section class="chat-area-message">
+            <section class="customerhelp-chatbox-messages">
+                <section class="customerhelp-chatbox-message">
                     <p>Helpful bot</p>
                     <div>
                         <p>Hello, how can I help you today?</p>
                     </div>
                 </section>
             </section>
-            <div class="chat-area-footer">
-                <input name="chatbar">
+            <div class="customerhelp-chatbox-footer">
+                <input name="customerhelp-chatbar">
                 <button><img src="res/send_icon.png" class="mid-icon"></button>
             </div>
-            </section>
-            
         </div>
     </section>
 </body>
