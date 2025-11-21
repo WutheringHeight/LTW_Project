@@ -93,16 +93,17 @@
     }
 
     // Giá trị mô phỏng (từ giỏ hàng)
-    const MOCK_SUBTOTAL = 999000;
-    const MOCK_SHIPPING = 30000;
-    const MOCK_TOTAL = MOCK_SUBTOTAL + MOCK_SHIPPING;
+    const SAVED_SUBTOTAL = parseInt(localStorage.getItem('cartSubtotal')) || 0;
+     const SAVED_SHIPPING = parseInt(localStorage.getItem('cartShipping')) || 30000; // Giả định phí vận chuyển mặc định là 30.000đ nếu không tìm thấy
+     const SAVED_TOTAL = parseInt(localStorage.getItem('cartTotal')) || SAVED_SUBTOTAL + SAVED_SHIPPING;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        // Cập nhật tóm tắt đơn hàng
-        document.getElementById('summary-subtotal').innerText = formatCurrency(MOCK_SUBTOTAL);
-        document.getElementById('summary-shipping').innerText = formatCurrency(MOCK_SHIPPING);
-        document.getElementById('summary-total').innerText = formatCurrency(MOCK_TOTAL);
+     document.addEventListener('DOMContentLoaded', () => {
+
+         document.getElementById('summary-subtotal').innerText = formatCurrency(SAVED_SUBTOTAL);
+         document.getElementById('summary-shipping').innerText = formatCurrency(SAVED_SHIPPING);
+         document.getElementById('summary-total').innerText = formatCurrency(SAVED_TOTAL);
+
+   
 
         const paymentOptions = document.querySelectorAll('.payment-option');
         const radioInputs = document.querySelectorAll('input[name="payment-method"]');
@@ -170,7 +171,7 @@
             const customerName = document.getElementById('name').value;
             
             // CHỈNH SỬA: Khắc phục lỗi cú pháp Template Literal (Đã khắc phục lỗi dòng 156)
-            alert(`✅ Đơn hàng của ${customerName} trị giá ${formatCurrency(MOCK_TOTAL)} đã được đặt thành công!\n\nPhương thức thanh toán: ${selectedPayment.toUpperCase()}.\n\nChúng tôi sẽ sớm liên hệ xác nhận.`);
+            alert(`✅ Đơn hàng của ${customerName} trị giá ${formatCurrency(SAVED_TOTAL)} đã được đặt thành công!\n\nPhương thức thanh toán: ${selectedPayment.toUpperCase()}.\n\nChúng tôi sẽ sớm liên hệ xác nhận.`);
             
             // Chuyển hướng hoặc xóa giỏ hàng (trong thực tế)
             // window.location.href = 'thank-you-page.html';
