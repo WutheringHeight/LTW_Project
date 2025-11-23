@@ -1,246 +1,171 @@
-/* style.css */
-
-/* --- 1. Thiết lập chung (DARK MODE) --- */
-:root {
-    --primary-color: #4a90e2; /* Xanh dương sáng hơn trên nền tối */
-    --secondary-color: #7b7b7b; /* Xám nhạt */
-    --success-color: #4cd964; /* Xanh lá sáng */
-    --danger-color: #ff453a; /* Đỏ sáng */
-    --background-color: #121212; /* Nền rất tối */
-    --card-background: #1e1e1e; /* Nền card/form (như container) */
-    --border-color: #383838; /* Màu border input */
-    --selected-border: #4a90e2; /* Màu border khi chọn */
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* Đảm bảo font chữ và cơ bản được đặt */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color);
+    background-color: #f4f4f4; /* Màu nền nhẹ */
+    color: #333;
     line-height: 1.6;
-    color: #e0e0e0; /* Màu chữ sáng */
-    padding-bottom: 50px; 
 }
 
-/* --- 2. Header --- */
 header {
-    background: #1f1f1f; /* Tông màu tối đậm */
-    color: #ffffff;
-    padding: 1.5rem 0;
     text-align: center;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
-    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.8em;
+    margin-bottom: 20px; 
 }
 
-/* --- 3. Container và Cấu trúc chung --- */
+/* Container chính bao bọc form */
 .checkout-container {
-    max-width: 800px; 
-    margin: 0 auto;
-    padding: 0 15px;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Khung/Shadow cho container */
 }
 
+/* Tiêu đề các phần */
 .section-heading {
-    font-size: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
     font-weight: 700;
-    color: var(--primary-color);
-    margin: 25px 0 15px 0;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #383838; /* Border tối */
+    color: #4CAF50;
 }
 
-/* --- 4. Form Groups (Thông tin nhận hàng) --- */
+/* Các nhóm form (Label + Input) */
 .form-group {
     margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    font-weight: 500;
     margin-bottom: 5px;
-    color: #c9c9c9; /* Màu label sáng nhẹ */
+    font-weight: 500;
 }
 
-.form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group input[type="email"],
-.form-group textarea {
+/* Tạo khung cho Input và Textarea */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea,
+input[type="number"] { 
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    background-color: #2c2c2c; /* Nền input tối */
-    color: #e0e0e0; /* Chữ input sáng */
+    border: 1px solid #ccc; /* Viền khung input */
+    border-radius: 4px;
+    box-sizing: border-box; /* Rất quan trọng để padding không làm tăng chiều rộng vượt quá 100% */
+    font-size: 1em;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-/* --- 5. Phương thức thanh toán --- */
-#payment-methods {
-    background-color: var(--card-background);
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
+/* Định dạng các lựa chọn thanh toán */
 .payment-option {
-    display: flex;
-    align-items: center;
-    padding: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #383838;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s;
-}
-
-.payment-option:hover {
-    border-color: #555555;
-}
-
-.payment-option.selected {
-    border-color: var(--selected-border);
-    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.15);
-    background-color: #2a2a2a; /* Nền nhạt hơn cho lựa chọn */
+    display: flex; 
+    align-items: center;
 }
 
 .payment-option input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
+    margin-right: 10px; /* Khoảng cách giữa radio và label */
 }
 
 .payment-option label {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-left: 10px;
-    cursor: pointer;
-    width: 100%; 
+    cursor: pointer; 
+    margin-bottom: 0; 
+}
+
+
+.payment-option.selected {
+    border-color: #007bff; /* Viền nổi bật khi được chọn */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
 .payment-details {
-    margin: 10px 0 20px 0;
-    padding: 15px;
-    background-color: #2c2c2c;
-    border: 1px dashed var(--secondary-color);
-    border-radius: 6px;
-    display: none; 
+    margin-left: 30px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff;
+    margin-top: 5px;
+    margin-bottom: 15px; 
+    display: none; /* Mặc định ẩn, sẽ được JS hiện */
 }
 
-.payment-details p {
-    margin-bottom: 8px;
+/* Kiểu cho input bị vô hiệu hóa (tạm thời) */
+input[disabled] {
+    background-color: #eee;
+    cursor: not-allowed;
 }
 
-.payment-details strong {
-    color: #f0f0f0;
-}
-
-/* Styling riêng cho form thẻ bên trong chi tiết thanh toán */
-#details-card .form-group {
-    margin-bottom: 10px;
-}
-
-/* --- 6. Tóm tắt đơn hàng --- */
+/* Định dạng tổng kết */
 .checkout-summary {
-    background-color: var(--card-background);
-    border: 1px solid #383838;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background-color: #fcfcfc;
 }
 
 .checkout-summary p {
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 1rem;
 }
 
-.total-row {
-    border-top: 1px solid #383838;
-    padding-top: 10px;
-    margin-top: 15px !important;
-    font-size: 1.2rem !important;
+.checkout-summary .total-row {
+    font-size: 1.1em;
     font-weight: 700;
+    color: #dc3545;
+    border-top: 1px dashed #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
 }
 
-#summary-total {
-    color: var(--danger-color); 
-    font-size: 1.3rem;
+
+/* --- CSS MỚI CHO NÚT LIÊN KẾT --- */
+.btn-back-to-cart {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* Tăng khoảng cách với nút Đặt hàng */
+    text-align: center;
+    text-decoration: none; /* Bỏ gạch chân link */
+    
+    background-color: #007bff; /* Màu xanh dương */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-/* --- 7. Nút Đặt hàng --- */
+.btn-back-to-cart:hover {
+    background-color: #0056b3;
+}
+/* ---------------------------------- */
+
+
+/* Nút đặt hàng */
 .btn-place-order {
     display: block;
     width: 100%;
     padding: 15px;
-    margin-top: 25px;
-    background-color: var(--success-color);
-    color: #121212; /* Chữ tối trên nền sáng */
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.3rem;
-    font-weight: 700;
+    border-radius: 5px;
+    font-size: 1.2em;
     cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    margin-top: 15px; /* Điều chỉnh lại margin top */
+    transition: background-color 0.2s;
 }
 
 .btn-place-order:hover {
-    background-color: #3fb452;
-    box-shadow: 0 5px 10px rgba(76, 217, 100, 0.3);
-}
-
-/* --- 8. Media Queries (Responsive) --- */
-@media (max-width: 600px) {
-    header {
-        font-size: 1.5rem;
-        padding: 12px 0;
-    }
-    
-    .checkout-container {
-        padding: 0 10px;
-    }
-
-    .section-heading {
-        font-size: 1.3rem;
-    }
-    
-    .btn-place-order {
-        font-size: 1.1rem;
-        padding: 12px;
-    }
-    
-    .payment-option {
-        padding: 12px;
-    }
-    
-    .payment-option label {
-        font-size: 1rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.95rem;
-    }
+    background-color: #45a049;
 }

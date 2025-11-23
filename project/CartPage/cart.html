@@ -9,6 +9,9 @@
     
     </head>
 <body>
+    <a href="../CheckoutPage/checkoutpage.html">
+    Tiến hành thanh toán (Go to Checkout)
+</a>
     <header>🛒 Giỏ Hàng Của Bạn</header>
     <div class="container">
 
@@ -112,9 +115,14 @@
 
         // Cập nhật tổng tiền tạm tính và tổng cộng
         subtotalEl.innerText = formatCurrency(subtotal);
-        totalEl.innerText = formatCurrency(subtotal + shippingFee);
+         totalEl.innerText = formatCurrency(subtotal + shippingFee);
+ 
+        // Lưu trữ giá trị vào LocalStorage
+        localStorage.setItem('cartSubtotal', subtotal);
+        localStorage.setItem('cartTotal', subtotal + shippingFee);
+        localStorage.setItem('cartShipping', shippingFee);
         
-        // Cập nhật trạng thái nút thanh toán (ví dụ: tắt/mở nếu giỏ trống)
+        // Cập nhật trạng thái nút thanh toán 
         const checkoutBtn = document.querySelector('.btn-checkout');
         if (checkoutBtn) {
              checkoutBtn.disabled = (subtotal === 0);
@@ -137,8 +145,7 @@
 
     // Mô phỏng quá trình thanh toán và chuyển trạng thái
     function checkout() {
-        // Lấy giá trị subtotal từ DOM (cách lấy này không lý tưởng, nên dùng biến subtotal trong updateCart)
-        // Cách lấy an toàn hơn: 
+      
         const subtotalText = subtotalEl.innerText.replace(/[₫\.]/g, '');
         const subtotalValue = parseInt(subtotalText.trim()); 
         
@@ -152,7 +159,6 @@
             updateProgress('processed'); // Chuyển sang trạng thái "Đã xử lý"
         }
         
-        // Mô phỏng các trạng thái tiếp theo sau một khoảng thời gian
         setTimeout(() => {
             if(currentStatus === 'processed') {
                 alert('Đơn hàng đang được giao!');
