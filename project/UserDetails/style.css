@@ -17,6 +17,10 @@ body {
   max-width: 35px;
   max-height: 35px;
 }
+.mega-icon{
+  max-width: 150px;
+  max-height: 150px;
+}
 .top-bar{
     background-color: #222;
     min-height: 10vh;
@@ -425,4 +429,48 @@ details p {
   border: gray 2px solid;
   padding: 10px;
   margin-bottom: 4px;
+}
+.banking-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: #555 2px solid;
+}
+.banking-input{
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+}
+.nav-box{
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 100px;
+  background-color: #848484;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+.nav-box a {
+  display: block;
+  width: 100%;
+}
+.nav-option{
+  background-color: #d7d7d7;
+  border: 2px gray solid;
+  color: black;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: lightgray 2px solid;
+  border-radius: 0px !important;
+  margin-bottom: 2px;
 }
