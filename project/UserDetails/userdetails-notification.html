@@ -16,7 +16,7 @@
         </div>
         <section class="util-icons">
             <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
-            <section><a><button onclick="toggleDisplay('notif-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <section><a><button onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box');"><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <div class="notif-box non-display" id="notif-box">
                 <div class="notif-header"><h3>Notification</h3></div>
                 <div class="notif">
@@ -28,7 +28,15 @@
                     <p>Account successfully created.</p>
                 </div>
             </div></section>
-            <section><a><button><img src="res/three_dash_icon.png" class="mini-icon"></button></a></section>
+            <section><a><button onclick="toggleDisplay('nav-box'); makeNonDisplay('notif-box');"><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
+            <div class="nav-box non-display" id="nav-box">
+                    <a href="userdetails-account.html"><button class="nav-option"><img src="res/user_icon.png" class="mid-icon"><p>Account</p></button></a>
+                    <a href="userdetails-bookmark.html"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Bookmark</p></button></a>
+                    <a href="userdetails-notification.html"><button class="nav-option"><img src="res/notif_icon.png" class="mid-icon"><p>Notification</p></button></a>
+                    <a href="userdetails-payment.html"><button class="nav-option"><img src="res/credit_card_icon.png" class="mid-icon"><p>Payment</p></button></a>
+                    <a href="userdetails-setting.html"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Settings</p></button></a>
+                    <a href="userdetails-faq.html"><button class="nav-option"><img src="res/chatbubble_icon.png" class="mid-icon"><p>FAQs</p></button></a>
+            </div></section>
         </section>
     </div>
     <section class="userdetails-box">
@@ -91,5 +99,37 @@
             <p>Cookie Policy</p>
         </section>
     </div>
+    <section class="chat">
+        <button class="chat-btn" onclick="toggleDisplay('help-chatbox')"><img class="large-icon" src="res/chatbubble_icon.png"></button>
+        <div class="chatbox non-display" id="help-chatbox">
+            <section class="chat-contactlist">
+                <div class="chat-contact chat-contact-chose">
+                    <img src="res/user_icon.png" class="mid-icon">
+                    <p>Helpful bot</p>
+                </div>
+                <div class="chat-contact">
+                    <img src="res/user_icon.png" class="mid-icon">
+                    <p>Admin John</p>
+                </div>
+            </section>
+            <section class="chat-area">
+                <div class="chat-area-header">
+                <p>Customer Service</p>
+            </div>
+            <section class="chat-area-messages">
+                <section class="chat-area-message">
+                    <p>Helpful bot</p>
+                    <div>
+                        <p>Hello, how can I help you today?</p>
+                    </div>
+                </section>
+            </section>
+            <div class="chat-area-footer">
+                <input name="chatbar">
+                <button><img src="res/send_icon.png" class="mid-icon"></button>
+            </div>
+            </section>
+        </div>
+    </section>
 </body>
 </html>
