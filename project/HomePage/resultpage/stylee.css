@@ -8,7 +8,7 @@ body {
     margin: 0;
     background: #121212; 
     color: #cccccc; }
-
+/* Item  */
 a {
     color: #89b4f8;    text-decoration: none;
 }
@@ -17,7 +17,7 @@ a:hover {
     color: #ffffff;
 }
 
-
+/* Top bar */
 header {
     background: #1f1f1f; 
     color: #ffffff;
@@ -75,7 +75,7 @@ header {
 .large-icon {
     filter: invert(1);
 }
-
+/* Main content  */
 .search-results-page {
     max-width: 1200px;
     margin: 30px auto;

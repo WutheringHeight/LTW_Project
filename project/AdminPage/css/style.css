@@ -1,4 +1,3 @@
-/* style.css */
 body {
   margin: 0;
   font-family: "Futura Regular";
@@ -6,7 +5,7 @@ body {
 
 /* Side bar */
 .sidebar {
-  position: fixed; /*Phần tử không thay đổi khi cuộn*/
+  position: fixed; 
   top: 0;
   left: 0;
   width: 220px;
@@ -58,7 +57,7 @@ body {
 }
 /* Main content */
 .main-content {
-  margin-left: 260px; /* Để tránh bị che bởi sidebar */
+  margin-left: 260px;
   padding: 20px;
   background-color: #1e1e2f;
   display: flex;
