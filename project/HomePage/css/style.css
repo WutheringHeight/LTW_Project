@@ -131,13 +131,23 @@ body {
 /* --- Banner --- */
 .banner {
   position: relative;
+  width: 100%;
+  height: 500px; /* giữ chiều cao cho banner */
+  overflow: hidden;
 }
 
 .banner .bannerImg {
+  position: absolute;
   width: 100%;
   height: 500px;
   object-fit: cover;
   filter: brightness(80%);
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.banner .bannerImg.active {
+  opacity: 1;
 }
 
 .banner .logo {

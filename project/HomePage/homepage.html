@@ -71,8 +71,9 @@
       </div>
     </header>
         <!-- Banner -->
-    </div>
       <div class="banner">
+        <img class="bannerImg active" src="images/banner2.jpg" alt="Banner"/>
+        <img class="bannerImg" src="images/banner3.jpg" alt="Banner" />
         <img class="bannerImg" src="images/banner.jpg" alt="Banner" />
         <div class="logo">
           <img class="img1" src="/project/userDetails/res/logo.png" />
@@ -312,5 +313,18 @@
         <p>&copy; 2025 BanTranh</p>
       </div>
     </footer>
+    <script>
+      const images = document.querySelectorAll('.banner .bannerImg');
+      let current = 0;
+
+      function changeBanner() {
+      images[current].classList.remove('active');
+
+      current = (current + 1) % images.length;
+
+      images[current].classList.add('active');
+      }
+      setInterval(changeBanner, 2300);
+    </script>
   </body>
 </html>
