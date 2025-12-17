@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="/project/UserDetails/script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <a href="/project/HomePage/homepage.html"
+          ><img
+            src="/project/UserDetails/res/logo.png"
+            class="large-icon"
+            style="filter: invert(1); transform: scale(1.5); padding-top: 2px"
+        /></a>
+        <div class="search-bar">
+          <img
+            src="/project/UserDetails/res/search_icon.png"
+            class="large-icon"
+          />
+          <input alt="Search" />
+        </div>
+        <section class="util-icons">
+          <section>
+            <a href="../CartPage/cart.html"
+              ><button>
+                <img
+                  src="/project/UserDetails/res/purse_icon.png"
+                  class="mini-icon"
+                /></button
+            ></a>
+          </section>
+          <section>
+            <a
+              ><button
+                onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box');"
+              >
+                <img
+                  src="/project/UserDetails/res/notif_icon.png"
+                  class="mini-icon"
+                /></button
+            ></a>
+            <div class="notif-box non-display" id="notif-box">
+              <div class="notif-header"><h3>Notification</h3></div>
+              <div class="notif">
+                <p><b>Aviary.Co</b></p>
+                <p>
+                  Hello ArtEnjoyerGuy723, congratualation for making your
+                  account successfully
+                </p>
+              </div>
+              <div class="notif">
+                <p><b>System</b></p>
+                <p>Account successfully created.</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <a
+              ><button
+                onclick="toggleDisplay('nav-box'); makeNonDisplay('notif-box');"
+              >
+                <img
+                  src="/project/UserDetails/res/three_dash_icon.png"
+                  class="mini-icon"
+                /></button
+            ></a>
+            <div class="nav-box non-display" id="nav-box">
+              <a href="/project/UserDetails/userdetails-account.html"
+                ><button class="nav-option">
+                  <img
+                    src="/project/UserDetails/res/user_icon.png"
+                    class="mid-icon"
+                  />
+                  <p>Account</p>
+                </button></a
+              >
+              <a href="/project/UserDetails/userdetails-bookmark.html"
+                ><button class="nav-option">
+                  <img
+                    src="/project/UserDetails/res/setting_icon.png"
+                    class="mid-icon"
+                  />
+                  <p>Bookmark</p>
+                </button></a
+              >
+              <a href="/project/UserDetails/userdetails-notification.html"
+                ><button class="nav-option">
+                  <img
+                    src="/project/UserDetails/res/notif_icon.png"
+                    class="mid-icon"
+                  />
+                  <p>Notification</p>
+                </button></a
+              >
+              <a href="/project/UserDetails/userdetails-payment.html"
+                ><button class="nav-option">
+                  <img
+                    src="/project/UserDetails/res/credit_card_icon.png"
+                    class="mid-icon"
+                  />
+                  <p>Payment</p>
+                </button></a
+              >
+              <a href="/project/UserDetails/userdetails-setting.html"
+                ><button class="nav-option">
+                  <img
+                    src="/project/UserDetails/res/setting_icon.png"
+                    class="mid-icon"
+                  />
+                  <p>Settings</p>
+                </button></a
+              >
+              <a href="/project/UserDetails/userdetails-faq.html"
+                ><button class="nav-option">
+                  <img
+                    src="/project/UserDetails/res/chatbubble_icon.png"
+                    class="mid-icon"
+                  />
+                  <p>FAQs</p>
+                </button></a
+              >
+            </div>
+          </section>
+        </section>
+      </div>
+    </header>
+    <main class="product-detail">
+      <div class="image">
+        <img src="/project/HomePage/images/monalisa.png" alt="Monalisa" />
+      </div>
+      <div class="info">
+        <h2 class="title">Tranh Monalisa FAKE</h2>
+        <div class="news">
+          <p>
+            Chat trực tiếp hoặc gọi
+            <a class="phone" href="tel:+84999456789"><u>0999.456.789</u></a> để
+            được tư vấn và đặt hàng.
+          </p>
+        </div>
+        <p class="price">Giá: 200,000đ</p>
+        <p class="size">Kích thước: 40x80cm</p>
+        <p class="description">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+          dolorem amet voluptas reiciendis sequi! Vero odio libero quisquam ea
+          ullam.
+        </p>
+        <p class="description">Chất liệu: Sơn dầu</p>
+        <p class="description">Kỹ thuật vẽ: vẽ tay</p>
+        <div>
+          <p>Số lượng</p>
+          <div class="quantity">
+            <button style="border-right: none">-</button>
+            <input type="text" value="1" id="qty" />
+            <button style="border-left: none">+</button>
+          </div>
+        </div>
+        <div class="button">
+          <button class="buy-btn">Thêm vào giỏ</button>
+          <button class="buy-btn" style="background-color: #f8991d">
+            ĐẶT HÀNG NHANH
+          </button>
+        </div>
+      </div>
+    </main>
+    
+    <section class="ratings-reviews">
+      <h2>⭐ Đánh giá & Phản hồi Khách hàng</h2>
+      <div class="overall-rating">
+        <h3>Đánh giá trung bình: 4.5/5</h3>
+        <p>Dựa trên 56 đánh giá</p>
+      </div>
+
+      <div class="rating-breakdown">
+        <h4>Chi tiết Rating</h4>
+        <div class="star-row">
+          <span class="star-count">5 sao</span>
+          <div class="progress-bar"><div class="bar-fill" style="width: 80%;"></div></div>
+          <span class="star-percent"> (80%)</span>
+        </div>
+        <div class="star-row">
+          <span class="star-count">4 sao</span>
+          <div class="progress-bar"><div class="bar-fill" style="width: 10%;"></div></div>
+          <span class="star-percent"> (10%)</span>
+        </div>
+        <div class="star-row">
+          <span class="star-count">3 sao</span>
+          <div class="progress-bar"><div class="bar-fill" style="width: 5%;"></div></div>
+          <span class="star-percent"> (5%)</span>
+        </div>
+        <div class="star-row">
+          <span class="star-count">2 sao</span>
+          <div class="progress-bar"><div class="bar-fill" style="width: 3%;"></div></div>
+          <span class="star-percent"> (3%)</span>
+        </div>
+        <div class="star-row">
+          <span class="star-count">1 sao</span>
+          <div class="progress-bar"><div class="bar-fill" style="width: 2%;"></div></div>
+          <span class="star-percent"> (2%)</span>
+        </div>
+      </div>
+
+      <div class="reviews-list">
+        <h4>Nhận xét nổi bật</h4>
+        <div class="review-item">
+          <div class="review-header">
+            <span class="reviewer-name">Người dùng A***g</span>
+            <span class="review-rating" style="color: #ffa41c">★★★★★</span>
+          </div>
+          <p class="review-date">Ngày: 20/11/2025</p>
+          <p class="review-text">Tranh rất đẹp và chất lượng, màu sắc sống động y như mô tả. Đóng gói cẩn thận. Rất hài lòng!</p>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <span class="reviewer-name">Khách B***n</span>
+            <span class="review-rating" style="color: #ffa41c">★★★★☆</span>
+          </div>
+          <p class="review-date">Ngày: 15/11/2025</p>
+          <p class="review-text">Tranh tốt, giao hàng nhanh. Chỉ có một chút vết xước nhỏ ở khung, nhưng tổng thể chấp nhận được.</p>
+        </div>
+        
+        <a href="#" class="view-all-reviews">Xem tất cả đánh giá (56)</a>
+      </div>
+      
+      <div class="write-review">
+          <h4>Viết đánh giá của bạn</h4>
+          <form>
+              <div class="your-rating">
+                  <label>Đánh giá sao:</label>
+                  <span class="review-star-input" style="color: #ffa41c">
+                      ★ ★ ★ ★ ★
+                  </span>
+              </div>
+              <textarea placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."></textarea>
+              <button type="submit" class="buy-btn">Gửi đánh giá</button>
+          </form>
+      </div>
+
+    </section>
+    
+    <section class="categoryMore">
+      <h2>Gợi ý</h2>
+      <div class="galleryMore">
+        <a class="itemMore" href="/project/productDetail/product.html">
+          <img src="/project/HomePage/images/monalisa.png" alt="Oil Painting" />
+          <p class="title">Monalisa</p>
+          <div class="sellMore">
+            <div class="startMore" style="color: #ffa41c">
+              ★<span style="color: black"> 5.0</span>
+            </div>
+            <p class="selled" style="color: gray">Đã bán: 35</p>
+          </div>
+          <p class="price">200,000đ</p>
+        </a>
+        <a class="itemMore" href="/project/productDetail/product.html">
+          <img src="/project/HomePage/images/monalisa.png" alt="Oil Painting" />
+          <p class="title">Monalisa</p>
+          <div class="sellMore">
+            <div class="startMore" style="color: #ffa41c">
+              ★<span style="color: black"> 5.0</span>
+            </div>
+            <p class="selled" style="color: gray">Đã bán: 35</p>
+          </div>
+          <p class="price">200,000đ</p>
+        </a>
+        <a class="itemMore" href="/project/productDetail/product.html">
+          <img src="/project/HomePage/images/monalisa.png" alt="Oil Painting" />
+          <p class="title">Monalisa</p>
+          <div class="sellMore">
+            <div class="startMore" style="color: #ffa41c">
+              ★<span style="color: black"> 5.0</span>
+            </div>
+            <p class="selled" style="color: gray">Đã bán: 35</p>
+          </div>
+          <p class="price">200,000đ</p>
+        </a>
+      </div>
+    </section>
+    <!-- Chat box -->
+    <section class="chat">
+      <button class="chat-btn" onclick="toggleDisplay('help-chatbox')">
+        <img
+          class="large-icon"
+          src="/project/UserDetails/res/chatbubble_icon.png"
+        />
+      </button>
+      <div class="chatbox non-display" id="help-chatbox">
+        <section class="chat-contactlist">
+          <div class="chat-contact chat-contact-chose">
+            <img
+              src="/project/UserDetails/res/user_icon.png"
+              class="mid-icon"
+            />
+            <p>Helpful bot</p>
+          </div>
+          <div class="chat-contact">
+            <img
+              src="/project/UserDetails/res/user_icon.png"
+              class="mid-icon"
+            />
+            <p>Admin John</p>
+          </div>
+        </section>
+        <section class="chat-area">
+          <div class="chat-area-header">
+            <p>Customer Service</p>
+          </div>
+          <section class="chat-area-messages">
+            <section class="chat-area-message">
+              <p>Helpful bot</p>
+              <div>
+                <p>Hello, how can I help you today?</p>
+              </div>
+            </section>
+          </section>
+          <div class="chat-area-footer">
+            <input name="chatbar" />
+            <button>
+              <img
+                src="/project/UserDetails/res/send_icon.png"
+                class="mid-icon"
+              />
+            </button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Về chúng tôi</h3>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat,
+            commodi.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email: <u>webbantrang@gmail.com</u></li>
+            <li>Điện thoại: 0999 456 789</li>
+            <li>Địa chỉ: TP.HCM</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Sản phẩm</h3>
+          <ul>
+            <li class="link">
+              <a href="/project/HomePage/homepage.html">Oil Painting</a>
+            </li>
+            <li class="link">
+              <a href="/project/HomePage/homepage.html">WaterColor Painting</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 BanTranh</p>
+      </div>
+    </footer>
+  </body>
+</html>

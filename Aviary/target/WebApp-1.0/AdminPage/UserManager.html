@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Manager</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style2.css"/>
+  </head>
+  <body> 
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="head">
+        <img src="/project/Login&SignUp/res/logo.png" />
+        
+        <h2>ADMIN</h2>
+      </div>
+      <ul>
+        <li>
+          <img src="/project/AdminPage/img/category.png" />
+          <a href="/project/AdminPage/index.html">Thương mại</a>
+        </li>
+        <li >
+          <img src="/project/AdminPage/img/user.png" />
+          <a href="/project/AdminPage/AdminProduct.html">Sản Phẩm</a>
+        </li>
+        <li style="background-color: #525273; border-radius: 10px">
+          <img src="/project/AdminPage/img/user.png" />
+          <a href="/project/AdminPage/UserManager.html">Người dùng</a>
+        </li>
+        <li>
+          <a href="/project/HomePage/homepage.html">HomePage</a>
+        </li>
+      </ul>
+    </div>
+    <!-- main content  -->
+    <div class="container">
+      <h1>Quản lí tài khoản người dùng</h1>
+      <h2>ADMIN</h2>
+      <button >+ Thêm ADMIN</button>
+      <table class="product-table"> 
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tài khoản</th>
+            <th>Mật khẩu</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody class="product-list">
+          <tr>
+            <td>01</td>
+            <td><span>admin</span></td>
+            <td><span>123</span></td>
+            <td><span>Hoạt động</span></td>
+          </tr>
+      </table>
+      <h2>Người dùng</h2>
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tài khoản</th>
+            <th>Mật khẩu</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody class="product-list">
+          <tr>
+            <td>01</td>
+          <td><span>Teo91</span></td>
+          <td><span>123</span></td>
+          <td><span>Hoạt động</span></td>
+        </tr>
+          <tr>
+            <td>02</td>
+          <td><span>Ti</span></td>
+          <td><span>200000</span></td>
+          <td><span>Bị khóa</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

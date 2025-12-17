@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Side bar -->
+    <div class="sidebar">
+      <div class="head">
+        <img src="/project/Login&SignUp/res/logo.png" />
+        <h2>ADMIN</h2>
+      </div>
+      <ul>
+        <li style="background-color: #525273; border-radius: 5px">
+          <img src="/project/AdminPage/img/category.png" />
+          <a href="/project/AdminPage/index.html">Thương mại</a>
+        </li>
+        <li>
+          <img src="/project/AdminPage/img/user.png" />
+          <a href="/project/AdminPage/AdminProduct.html">Sản Phẩm</a>
+        </li>
+        <li>
+          <img src="/project/AdminPage/img/user.png" />
+          <a href="/project/AdminPage/UserManager.html">Người dùng</a>
+        </li>
+        <li>
+          <a href="/project/HomePage/homepage.html">HomePage</a>
+        </li>
+      </ul>
+    </div>
+<!-- Main content  -->
+    <div class="main-content">
+      <!-- userbox -->
+      <div class="item-box">
+        <div class="item-img">
+          <img src="/project/AdminPage/img/user.png" />
+        </div>
+        <div class="item1">
+          <div class="item">
+            <span style="color: white">Khách hàng</span>
+            <h2 style="color: white; margin: 0px">3,782</h2>
+          </div>
+          <div class="status-box">
+            <span style="color: rgb(4, 83, 4)"> ↑11.01%</span>
+          </div>
+        </div>
+      </div>
+      <!-- orderbox -->
+      <div class="item-box">
+        <div class="item-img">
+          <img src="/project/AdminPage/img/user.png" />
+        </div>
+        <div class="item1">
+          <div class="item">
+            <span style="color: white">Sản phẩm bán ra</span>
+            <h2 style="color: white; margin: 0px">5,722</h2>
+          </div>
+          <div class="status-box" style="background-color: rgb(253, 171, 171)">
+            <span style="color: rgb(211, 10, 10)"> ↓3.01%</span>
+          </div>
+        </div>
+      </div>
+      <!-- RecentOrder -->
+      <div class="recent-order-box">
+        <div class="recent-order-name">
+          <h2 style="color: white">Đơn hàng hiện tại</h2>
+        </div>
+        <table class="recent-order-table">
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Tên khách hàng</th>
+              <th>Số điện thoại</th>
+              <th>Sản Phẩm</th>
+              <th>Giá</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Phạm Thị Tèo</td>
+              <td>0443.222.323</td>
+              <td class="product-cell">
+                <div class="product-info">
+                  <img src="/project/HomePage/images/monalisa.png" />
+                  <span>Monalisa</span>
+                </div>
+              </td>
+              <td>200.000đ</td>
+              <td>Đã giao</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Phạm Thị Tũn</td>
+              <td>0443.231.323</td>
+              <td class="product-cell">
+                <div class="product-info">
+                  <img src="/project/HomePage/images/flower.png" />
+                  <span>FLower</span>
+                </div>
+              </td>
+              <td>999.000đ</td>
+              <td>Đang xử lý</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>Phạm Thị Loan</td>
+              <td>3343.222.323</td>
+              <td class="product-cell">
+                <div class="product-info">
+                  <img src="/project/HomePage/images/red.png" />
+                  <span>Countryside</span>
+                </div>
+              </td>
+              <td>230.000đ</td>
+              <td>Chờ thanh toán</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </body>
+</html>

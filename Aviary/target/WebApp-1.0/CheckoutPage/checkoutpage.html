@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thanh Toán</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css"> 	
+    </head>
+    <body>
+        
+        <header>💳 Trang Thanh Toán</header>
+        <div class = "checkout-container">
+            <h2 class="section-heading">1. Thông Tin Nhận Hàng</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="name">Họ và tên *</label>
+                    <input type="text" id="name" required placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại *</label>
+                    <input type="tel" id="phone" required placeholder="0901 234 567">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="example@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ chi tiết *</label>
+                    <textarea id="address" rows="3" required placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="note">Ghi chú đơn hàng (tùy chọn)</label>
+                    <textarea id="note" rows="2" placeholder="Ví dụ: Giao hàng sau 17h, gọi điện trước khi giao..."></textarea>
+                </div>
+                <h2 class="section-heading">2. Phương Thức Thanh Toán</h2>
+                <div id="payment-methods">
+
+                    <div class="payment-option selected" data-method="cod">
+                        <input type="radio" name="payment-method" value="cod" id="payment-cod" checked>
+                        <label for="payment-cod">💰 Thanh toán khi nhận hàng (COD)</label>
+                    </div>
+
+                    <div class="payment-option" data-method="bank-transfer">
+                        <input type="radio" name="payment-method" value="bank-transfer" id="payment-bank">
+                        <label for="payment-bank">🏦 Chuyển khoản qua Ngân hàng</label>
+                    </div>
+                    <div class="payment-details" id="details-bank-transfer">
+                        <p>Ngân hàng: **Vietcombank**</p>
+                        <p>Số tài khoản: **00110022334455**</p>
+                        <p>Chủ tài khoản: **NGUYEN VAN B**</p>
+                        <p style="font-weight: 700; color: #dc3545;">Nội dung chuyển khoản: Tên bạn + SĐT (Ví dụ: AN 0901234567)</p>
+                    </div>
+
+                    <div class="payment-option" data-method="card">
+                        <input type="radio" name="payment-method" value="card" id="payment-card">
+                        <label for="payment-card">💳 Thẻ Quốc tế (Visa, Mastercard, JCB)</label>
+                    </div>
+                    <div class="payment-details" id="details-card">
+                        <div class="form-group">
+                            <label for="card-number">Số thẻ</label>
+                            <input type="text" id="card-number" disabled placeholder="xxxx xxxx xxxx xxxx">
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 10px;">
+                            <div style="width: 50%;">
+                                <label for="expiry-date">Ngày hết hạn (MM/YY)</label>
+                                <input type="text" id="expiry-date" disabled placeholder="MM/YY">
+                            </div>
+                            <div style="width: 50%;">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" disabled placeholder="xxx">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h2 class="section-heading">3. Tóm Tắt & Hoàn Tất Đơn Hàng</h2>
+                <div class="checkout-summary">
+                    <p>Tạm tính hàng hóa: <strong id="summary-subtotal">999.000₫</strong></p>
+                    <p>Phí vận chuyển: <strong id="summary-shipping">30.000₫</strong></p>
+                    <p class="total-row">Tổng thanh toán: <strong id="summary-total">1.029.000₫</strong></p>
+                </div>
+
+                <a href="../CartPage/cart.html" class="btn btn-back-to-cart">🛒 Quay lại Giỏ hàng</a>
+
+                <button type="submit" class="btn btn-place-order">Đặt hàng ngay</button>
+            </form>
+        </div>
+
+
+        <script>
+            // Hàm chuyển đổi số sang tiền tệ (sử dụng lại từ code cũ)
+            function formatCurrency(number) {
+                const safeNumber = Math.max(0, number);
+                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(safeNumber).replace('₫', '') + '₫';
+            }
+
+            // Giá trị mô phỏng (từ giỏ hàng)
+            const SAVED_SUBTOTAL = parseInt(localStorage.getItem('cartSubtotal')) || 0;
+            const SAVED_SHIPPING = parseInt(localStorage.getItem('cartShipping')) || 30000; 
+            const SAVED_TOTAL = parseInt(localStorage.getItem('cartTotal')) || SAVED_SUBTOTAL + SAVED_SHIPPING;
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                document.getElementById('summary-subtotal').innerText = formatCurrency(SAVED_SUBTOTAL);
+                document.getElementById('summary-shipping').innerText = formatCurrency(SAVED_SHIPPING);
+                document.getElementById('summary-total').innerText = formatCurrency(SAVED_TOTAL);
+
+                const paymentOptions = document.querySelectorAll('.payment-option');
+                const radioInputs = document.querySelectorAll('input[name="payment-method"]');
+                const cardInputs = document.querySelectorAll('#details-card input');
+                
+                /**
+                 * Cập nhật giao diện và trạng thái của các phương thức thanh toán
+                 */
+                function updatePaymentMethod(selectedMethod) {
+                    // Ẩn tất cả các chi tiết thanh toán
+                    document.querySelectorAll('.payment-details').forEach(detail => {
+                        detail.style.display = 'none';
+                    });
+                    
+                    // Vô hiệu hóa tất cả input thẻ
+                    cardInputs.forEach(input => input.disabled = true);
+
+                    // Thêm/Xóa class 'selected' cho border
+                    paymentOptions.forEach(option => {
+                        option.classList.remove('selected');
+                        if (option.dataset.method === selectedMethod) {
+                            option.classList.add('selected');
+                            // Đảm bảo radio button được chọn đúng
+                            option.querySelector('input[type="radio"]').checked = true;
+                        }
+                    });
+                    
+                    // Hiển thị chi tiết thanh toán hoặc kích hoạt input cần thiết
+                    if (selectedMethod === 'bank-transfer') {
+                        document.getElementById('details-bank-transfer').style.display = 'block';
+                    } else if (selectedMethod === 'card') {
+                        document.getElementById('details-card').style.display = 'block';
+                        cardInputs.forEach(input => input.disabled = false);
+                    }
+                }
+
+                // Lắng nghe sự kiện CHANGE trên radio button 
+                radioInputs.forEach(input => {
+                    input.addEventListener('change', (event) => {
+                        const method = event.target.value;
+                        updatePaymentMethod(method);
+                    });
+                });
+                
+                // Thêm sự kiện CLICK cho DIV cha để chọn radio nếu click vào khoảng trống
+                paymentOptions.forEach(option => {
+                    option.addEventListener('click', (event) => {
+                        // Kiểm tra nếu không click trực tiếp vào input/label, thì tự động chọn radio
+                        if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'LABEL') {
+                            const radio = option.querySelector('input[type="radio"]');
+                            if (radio) {
+                                radio.checked = true;
+                                updatePaymentMethod(option.dataset.method);
+                            }
+                        }
+                    });
+                });
+
+                // Gắn sự kiện submit form
+                document.getElementById('checkout-form').addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    
+                    // Lấy phương thức thanh toán đã chọn
+                    const selectedPayment = document.querySelector('input[name="payment-method"]:checked').value;
+                    const customerName = document.getElementById('name').value;
+                    
+                    alert(`✅ Đơn hàng của ${customerName} trị giá ${formatCurrency(SAVED_TOTAL)} đã được đặt thành công!\n\nPhương thức thanh toán: ${selectedPayment.toUpperCase()}.\n\nChúng tôi sẽ sớm liên hệ xác nhận.`);
+                    
+                    // Chuyển hướng hoặc xóa giỏ hàng (trong thực tế)
+                    // window.location.href = 'thank-you-page.html';
+                });
+                
+                // Thiết lập trạng thái ban đầu (COD được chọn)
+                updatePaymentMethod('cod');
+            });
+        </script>
+
+    </body>
+</html>
