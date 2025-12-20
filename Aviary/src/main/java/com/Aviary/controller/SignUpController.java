@@ -15,7 +15,7 @@ public class SignUpController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        request.getRequestDispatcher("Login&SignUp/signup.jsp").forward(request, response);
+        request.getRequestDispatcher("LoginNSignUp/signup.jsp").forward(request, response);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class SignUpController extends HttpServlet {
             response.sendRedirect("HomePage/homePage.jsp");
         } else {
             request.setAttribute("error", "Email or password is incorrect. Please try again.");
-            request.getRequestDispatcher("Login&SignUp/signup.jsp").forward(request, response);
+            request.getRequestDispatcher("LoginNSignUp/signup.jsp").forward(request, response);
         }
     }
 }

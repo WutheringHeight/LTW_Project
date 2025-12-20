@@ -1,0 +1,174 @@
+body {
+  margin: 0px;
+  background-color: lightgray;
+}
+.mini-icon {
+  max-width: 15px;
+  max-height: 15px;
+}
+.mid-icon {
+  max-width: 20px;
+  max-height: 20px;
+}
+.large-icon {
+  max-width: 35px;
+  max-height: 35px;
+}
+.top-bar {
+  background-color: #222;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+.search-bar {
+  background-color: white;
+  padding: 5px;
+  padding-left: 5px;
+  border-radius: 30px;
+  max-height: 20px;
+  display: flex;
+  margin-left: 10px;
+}
+.search-bar input {
+  min-width: 350px;
+  background-color: transparent;
+  border: none;
+  margin-left: 4px;
+}
+.search-bar input:focus {
+  border: none;
+  outline: none;
+}
+.util-icons {
+  margin-right: 20px;
+  margin-left: auto;
+  display: inline;
+}
+.util-icons a > button {
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 20px;
+}
+.util-icons a > button:hover {
+  background-color: gray;
+}
+.background {
+  position: fixed;
+  min-height: 100%;
+  min-width: 100%;
+  z-index: -100;
+}
+.logo {
+  position: fixed;
+  margin-left: 20vw;
+  margin-top: 20vh;
+  max-height: 50vh;
+}
+.small-logo {
+  max-width: 50px;
+  min-width: 50px;
+}
+.authentication-box {
+  background-color: rgba(251, 251, 251, 1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  margin-right: 55px;
+  min-height: 350px;
+  max-width: 270px;
+  min-width: 270px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.authentication-box h3 {
+  font-size: 25px;
+  margin-bottom: 40px;
+  margin-top: -20px;
+}
+.authentication-box > p {
+  font-size: 12px;
+  border-top: 2px black solid;
+  margin: 5px;
+  margin-bottom: 10px;
+  margin-bottom: 40px;
+}
+.input-label {
+  display: inline;
+}
+.input-section {
+  margin-bottom: 20px;
+  border-bottom: 2px black solid;
+  min-width: 250px;
+}
+.input-section input {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.input-section > input:focus {
+  outline: none;
+}
+.logo-icon {
+  max-width: 20px;
+  max-height: 20px;
+  position: absolute;
+  right: 305px;
+  transform: translateY(-15%);
+}
+.mid-button {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.long-button {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  min-width: 240px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.btn-with-anim:hover {
+  background-color: gray;
+}
+.passwordRecovery-box {
+  background-color: rgba(251, 251, 251, 1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  min-height: 200px;
+  max-width: 270px;
+  min-width: 270px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.passwordRecovery-box > h3 {
+  font-size: 25px;
+  margin-bottom: 40px;
+  margin-top: -20px;
+}
+.verification-code-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.verification-code-box > input {
+  font-size: 25px;
+  max-width: 20px;
+  margin: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
