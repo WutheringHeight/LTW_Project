@@ -1,5 +1,0 @@
-com\Aviary\service\UserService.class
-com\Aviary\components\User.class
-com\Aviary\components\JDBIProvider.class
-com\Aviary\dao\UserDao.class
-com\Aviary\controller\SignUpController.class

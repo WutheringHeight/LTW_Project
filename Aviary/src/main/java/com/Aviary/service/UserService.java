@@ -6,6 +6,8 @@ import com.Aviary.dao.UserDao;
 public class UserService {
     
     public static int validateUser(String email,String password){
-        return UserDao.getUserID(email, password);
+        if(password.equals(UserDao.getUserPassword(email)))
+            return UserDao.getUserID(email);
+        return -1;
     }
 }
