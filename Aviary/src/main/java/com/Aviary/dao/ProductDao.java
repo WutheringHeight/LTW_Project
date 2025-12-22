@@ -51,5 +51,33 @@ public class ProductDao {
             .list();
         });
     }
-    
+    public static List<Product> getRelatedProduct(int amount, int productID){
+        return JDBIProvider.get().withHandle(handle -> {
+            return handle.createQuery("select top :amount * from Product where category = (select category from Product where PID = :PID)and PID <> :PID;")
+                .bind("amount",amount)
+                .bind("PID", productID)
+                .mapToBean(Product.class)
+                .list();
+        });
+    }
+    public static int checkStock(int productID){
+        return JDBIProvider.get().withHandle(handle -> {
+            try{
+                return handle.createQuery("select stockQuantity from Product where ID = :PID;")
+                .bind("PID", productID)
+                .mapToBean(Integer.class)
+                .one();
+            }catch(Exception e){
+                //product doesn't exist
+                return -1;
+            }
+        });
+    }
+    public static void updateStock(int receiptID){
+        JDBIProvider.get().useHandle(handle -> 
+            handle.createUpdate("update Product set stock = stock - r.quantity, soldQuantity = soldQuantity + r.quantity from Product p join Receipt r on p.PID = r.PID where r.ID = :receipt_ID;")
+            .bind("receipt_ID", receiptID)
+            .execute()
+        );
+    }
 }

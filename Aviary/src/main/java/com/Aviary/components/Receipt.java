@@ -12,7 +12,7 @@ public class Receipt implements Serializable{
      @ColumnName("PID")
     private int ProductID;
     private int quantity;
-    private int totalPrice;
+    private double totalPrice;
     private Date createdAt;
     
     public Receipt(){
@@ -51,11 +51,11 @@ public class Receipt implements Serializable{
         this.quantity = quantity;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return this.totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
