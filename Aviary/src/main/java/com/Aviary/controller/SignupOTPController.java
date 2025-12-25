@@ -1,0 +1,44 @@
+package com.Aviary.controller;
+
+import java.io.IOException;
+
+import com.Aviary.dao.UserDao;
+import com.Aviary.service.UserService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+@WebServlet("/signup_otp")
+public class SignupOTPController extends HttpServlet{
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("action", "complete account creation");
+        req.getRequestDispatcher("LoginNSignUp/otp.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String otp = (String)session.getAttribute("OTP");
+        String input = req.getParameter("otp");
+
+        if(otp.equals(input)){
+            //proceeds with account creation
+            String email = (String)session.getAttribute("email");
+            String password = (String)session.getAttribute("password");
+            int userID = UserService.createNewAccount(email, password);
+            session.setAttribute("UserID", userID);
+            resp.sendRedirect("HomePage/homepage.jsp");
+        }
+        //wrong otp
+        req.setAttribute("error", "The OTP you've just typed is incorrect.");
+        req.getRequestDispatcher("LoginNSignUp/otp.jsp").forward(req, resp);
+        
+        
+    }
+}

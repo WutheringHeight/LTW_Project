@@ -11,7 +11,7 @@ public class UserDao {
             return handle.createQuery("Select ID from UserAccount where email = :email")
             .bind("email", email)
             .mapTo(Integer.class)
-            .one();
+            .findOne().orElse(-1);
         });
     }
     public static String getUserPassword(String email){
