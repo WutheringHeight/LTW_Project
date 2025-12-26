@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.Aviary.dao.UserDao;
 import com.Aviary.service.UserService;
+import com.Aviary.service.Util;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,8 +30,8 @@ public class SignupOTPController extends HttpServlet{
 
         if(otp.equals(input)){
             //proceeds with account creation
-            String email = (String)session.getAttribute("email");
-            String password = (String)session.getAttribute("password");
+            String email = Util.getFromSession(session, "email", String.class);
+            String password = Util.getFromSession(session, "password", String.class);
             int userID = UserService.createNewAccount(email, password);
             session.setAttribute("UserID", userID);
             resp.sendRedirect("HomePage/homepage.jsp");

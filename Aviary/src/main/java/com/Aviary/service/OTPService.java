@@ -12,11 +12,10 @@ public class OTPService{
 
         System.out.println(otpCode.toString());
 
-        //TODO: send email before returning otpCode
-        return otpCode.toString();
-    }
+        String subject = "Your email has been used to sign up for Aviary.Co";
+        String body = "Here is the OTP to confirm your account creation \n OTP:" + otpCode;
+        EmailService.send(email, subject, body);
 
-    public static void main(String[] args) {
-        System.err.println(sendOTP(""));
+        return otpCode.toString();
     }
 }
