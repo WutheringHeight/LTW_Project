@@ -2,6 +2,8 @@ package com.Aviary.service;
 
 import java.util.Random;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 public class OTPService{
     public static String sendOTP(String email){
         Random rd = new Random();
@@ -17,5 +19,12 @@ public class OTPService{
         EmailService.send(email, subject, body);
 
         return otpCode.toString();
+    }
+    public static String getOTP(HttpServletRequest req){
+        StringBuilder otpBuilder = new StringBuilder();
+        for(int i = 1; i<7; i++){
+            otpBuilder.append(req.getParameter("otp"+i));
+        }
+        return otpBuilder.toString();
     }
 }

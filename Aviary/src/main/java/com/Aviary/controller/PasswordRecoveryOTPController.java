@@ -14,8 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/signup_otp")
-public class SignupOTPController extends HttpServlet{
+@WebServlet("/password_recovery_otp")
+public class PasswordRecoveryOTPController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,27 +23,23 @@ public class SignupOTPController extends HttpServlet{
         String email = Util.getFromSession(session, "email", String.class);
         String otp = OTPService.sendOTP(email);
         session.setAttribute("otp", otp);
-        req.setAttribute("otpCallBack", "signup_otp");
+        req.setAttribute("otpCallBack", "password_recovery_otp");
         req.getRequestDispatcher("LoginNSignUp/OTP.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String email = Util.getFromSession(session, "email", String.class);
         String otp = Util.getFromSession(session, "otp", String.class);
         String input = OTPService.getOTP(req);
 
         if(otp.equals(input)){
-            //proceeds with account creation
-            String password = Util.getFromSession(session, "hashedPassword", String.class);
-            int userID = UserService.createNewAccount(email, password);
-            session.setAttribute("UserID", userID);
-            resp.sendRedirect("HomePage/homepage.jsp");
+            //proceeds with password reset
+            resp.sendRedirect("passwordReset");
         }
         //wrong otp
         req.setAttribute("error", "The OTP you've just typed is incorrect.");
-        req.setAttribute("otpCallBack", "signup_otp");
+        req.setAttribute("otpCallBack", "password_recovery_otp");
         req.getRequestDispatcher("LoginNSignUp/OTP.jsp").forward(req, resp);
         
     }

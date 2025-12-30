@@ -3,6 +3,8 @@ package com.Aviary.dao;
 import java.sql.SQLException;
 
 import com.Aviary.components.JDBIProvider;
+import com.Aviary.components.UserDetail;
+import com.Aviary.components.UserSetting;
 
 public class UserDao {
     
@@ -36,6 +38,13 @@ public class UserDao {
             .bind("email", email)
             .bind("password", password);
         });
+    }
+    public static UserDetail getUserDetail(int UserID){
+        return null;
+    }
+
+    public static UserSetting getUserSetting(int UserID){
+        return null;
     }
 
     
