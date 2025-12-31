@@ -97,6 +97,8 @@ body {
 }
 .input-label {
   display: inline;
+  padding: 10px;
+  
 }
 .input-section {
   margin-bottom: 20px;
@@ -142,12 +144,16 @@ body {
 .btn-with-anim:hover {
   background-color: gray;
 }
+.disabled-button{
+  background-color:lightgray !important; 
+  color:gray !important;
+  
+}
 .OTP-box {
   background-color: rgba(251, 251, 251, 1);
   padding: 20px;
   display: flex;
   flex-direction: column;
-
   border-radius: 50px;
   min-height: 200px;
   max-width: 270px;
@@ -168,11 +174,23 @@ body {
   margin-right: 4px;
   font-size: 20px;
 }
-.passwordRecovery-box > h3 {
+.OTP-box > h3 {
   font-size: 25px;
   margin-bottom: 40px;
   margin-top: -20px;
   
+}
+.white-box {
+  background-color: rgba(251, 251, 251, 1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50px;
+  min-height: 200px;
+  max-width: 300px;
+  min-width: 300px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .verification-code-box {
   display: flex;

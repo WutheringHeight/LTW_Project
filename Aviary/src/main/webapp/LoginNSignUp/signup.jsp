@@ -17,9 +17,10 @@
         <form action="signup" method="post" style="display: flex; flex-direction:column; justify-content: center; align-items: center;">
             <section class="input-section"><label class="input-label">Email : </label><input id="email" name="email"></section>
             <section class="input-section"><label class="input-label">Password : </label><input id="password" name="password"></section>
+            <c:out value="${error}" style="color: red;"/>
             <button class="mid-button btn-with-anim" >Sign up</button>
         </form>
-        <p>already have an account?<a href="login.html">Log in</a></p>
+        <p>already have an account?<a href="login">Log in</a></p>
         <button class="long-button btn-with-anim"><img src="res/google_logo.png" class="logo-icon">Sign in with Google</button>
         <button class="long-button btn-with-anim"><img src="res/fb_logo.png" class="logo-icon">Sign in with Facebook</button>
     </div>
