@@ -1,0 +1,102 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productDetailStyle.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerFooterStyle.css"/>
+</head>
+<body>
+<!-- HEADER -->
+<%@ include file="/templates/header.jsp" %>
+
+<!-- BODY sản phẩm -->
+<section class="product-detail">
+    <div class="product-layout">
+        <!-- Bên trái: 2 ảnh -->
+        <div class="product-images">
+            <c:forEach var="image" items="${product.images}">
+            <img src="${image.imageUrl}" alt="Ảnh trên" class="top-img"/>
+            </c:forEach>
+        </div>
+
+        <!-- Bên phải: thông tin sản phẩm -->
+        <div class="product-info">
+            <h2>${product.productName}</h2>
+            <p class="product-price">
+                <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫
+            </p>
+
+            <!-- Thông tin bổ sung -->
+            <div class="product-meta">
+                <p><strong>🎭 Thể loại:</strong> ${product.kind}</p>
+                <p class="stars">
+                    ✨Đánh giá: (${product.rating}/5)⭐
+                </p>
+                <p><strong>🔥 Đã bán:</strong> ${product.soldQuantity} sản phẩm</p>
+            </div>
+
+            <p class="product-note">🚚 Miễn phí ship cho đơn hàng từ 800K...</p>
+            <p class="product-note">🚚 ${product.description}</p>
+
+            <!-- Số lượng -->
+            <div class="quantity-selector">
+                <button type="button" onclick="changeQuantity(-1)">-</button>
+                <input type="text" id="product-qty" value="1" readonly/>
+                <button type="button" onclick="changeQuantity(1)">+</button>
+            </div>
+
+            <!-- Nút hành động -->
+            <div class="action-buttons">
+                <button class="add-to-cart" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+                <button class="quick-order" onclick="quickOrder(${product.id})">Đặt hàng nhanh</button>
+            </div>
+
+            <!-- Cam kết dịch vụ -->
+            <ul class="service-guarantees">
+                <li>🚀 Ship hoả tốc toàn quốc...</li>
+                <li>✅ Kiểm hàng đảm bảo...</li>
+                <li>🎨 Cam kết tranh đẹp...</li>
+                <li>🔁 Miễn phí bảo hành...</li>
+            </ul>
+
+            <!-- Thương hiệu -->
+            <div class="brand-contact">
+                <strong>VIET CANVAS</strong><br>
+                Hotline: 0983.859.614
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- Footer -->
+    <%@include file="/templates/footer.jsp" %>
+<script>
+    // Hàm xử lý tăng giảm số lượng trên giao diện
+    function changeQuantity(delta) {
+        const qtyInput = document.getElementById('product-qty');
+        let currentQty = parseInt(qtyInput.value);
+        if (currentQty + delta >= 1) {
+            qtyInput.value = currentQty + delta;
+        }
+    }
+
+    // Hàm gửi yêu cầu thêm vào giỏ hàng
+    function addToCart(productId) {
+        const qty = document.getElementById('product-qty').value;
+        // Chuyển hướng hoặc dùng AJAX gửi số lượng đã chọn
+        window.location.href = `cart?action=add&id=${productId}&quantity=${qty}`;
+    }
+
+    // Hàm đặt hàng nhanh (thêm xong đi thẳng tới trang giỏ hàng/thanh toán)
+    function quickOrder(productId) {
+        const qty = document.getElementById('product-qty').value;
+        window.location.href = `cart?action=add&id=${productId}&quantity=${qty}&redirect=checkout`;
+    }
+</script>
+</body>
+</html>

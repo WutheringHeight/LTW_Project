@@ -1,0 +1,185 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Layout sản phẩm */
+.product-detail {
+    padding: 40px;
+}
+
+.product-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* Bên trái: 2 ảnh */
+.product-images {
+    flex: 2;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Bên phải: thông tin */
+.product-info {
+    flex: 1;
+    min-width: 300px;
+    position: sticky;
+    top: 20px; /* khoảng cách từ mép trên khi dính */
+    align-self: flex-start; /* đảm bảo nó bám theo chiều cao khối */
+}
+
+.product-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-code {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d35400;
+    margin-bottom: 10px;
+}
+
+.product-note {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Số lượng */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quantity-selector button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+}
+
+.quantity-selector input {
+    width: 40px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Nút hành động */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.add-to-cart,
+.quick-order {
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.add-to-cart {
+    background-color: #d35400;
+    color: #fff;
+}
+
+.quick-order {
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cam kết dịch vụ */
+.service-guarantees {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.service-guarantees li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* Thương hiệu */
+.brand-contact {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Đánh giá */
+.product-reviews {
+    width: 80%; /* chiếm 80% màn hình */
+    margin: 60px auto; /* căn giữa */
+    padding: 40px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.product-reviews h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.reviews-layout {
+    display: flex;
+    gap: 40px;
+}
+
+/* Thông tin bổ sung */
+.product-meta {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.product-meta p {
+    margin-bottom: 6px;
+}
+
+.product-meta .stars {
+    color: #d35400;
+    font-weight: bold;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .reviews-layout {
+        flex-direction: column;
+    }
+}

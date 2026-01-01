@@ -1,0 +1,153 @@
+
+body {
+    background-color: #f8f8f8;
+    font-family:  'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Header giỏ hàng */
+.cart-title-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cart-title-area h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.link-more {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Bảng sản phẩm */
+.cart-header {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    color: #888;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.col-product { flex: 6; }
+.col-qty { flex: 3; text-align: center; }
+.col-total { flex: 3; text-align: right; }
+
+/* Item sản phẩm */
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    flex: 6;
+}
+
+.product-img {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.product-detail h6 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.product-detail p {
+    margin: 0;
+    font-size: 13px;
+    color: #888;
+}
+
+/* Điều khiển số lượng */
+.qty-control {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qty-btn {
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qty-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-size: 14px;
+}
+
+.btn-remove {
+    margin-left: 15px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.btn-remove:hover { color: #ff0000; }
+
+/* Thành tiền */
+.item-total {
+    flex: 3;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Tổng kết đơn hàng */
+.cart-summary {
+    text-align: right;
+    margin-top: 40px;
+}
+
+.total-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.free-ship-info {
+    color: #ff9800;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.btn-order {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 12px 60px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-order:hover { background-color: #e68a00; }

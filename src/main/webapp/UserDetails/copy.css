@@ -1,0 +1,212 @@
+.nav-box{
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 100px;
+  background-color: #848484;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+.nav-box a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+.nav-option{
+  background-color: #d7d7d7;
+  border: 2px gray solid;
+  color: black;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: lightgray 2px solid;
+  border-radius: 0px !important;
+  margin-bottom: 2px;
+}
+.chat {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+.chatbox{
+  display: flex;
+  flex-direction: row;
+}
+.chat-btn {
+  margin-left: 15px;
+  margin-bottom: 10px;
+  background-color: gray;
+  border-radius: 40px;
+  padding: 10px;
+  border: none;
+}
+.chat-btn:hover {
+  background-color: rgb(139, 139, 139);
+}
+.chat-btn:active {
+  background-color: rgb(85, 85, 85);
+}
+.chat-area {
+  background-color: whitesmoke;
+  border-radius: 20px;
+}
+.chat-area-header {
+  background-color: rgb(139, 139, 139);
+  border-top-right-radius: 20px;
+  padding: 6px;
+  padding-left: 12px;
+}
+.chat-area-messages {
+  min-height: 300px;
+  min-width: 150px;
+  max-height: 300px;
+  max-width: 150px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.chat-area-messages {
+  margin: 5px;
+}
+.chat-area-message > p {
+  font-size: 14px;
+  padding-left: 4px;
+}
+.chat-area-message > div {
+  background-color: rgb(139, 139, 139);
+  border-radius: 10px;
+  padding: 5px;
+}
+.chat-area-footer {
+  background-color: rgb(139, 139, 139);
+  border-bottom-right-radius: 20px;
+  padding: 6px;
+  padding-left: 12px;
+  display: flex;
+  flex-direction: row;
+}
+.chat-area-footer button{
+    background-color: transparent;
+    border: none;
+}
+.chat-area-footer button img:hover{
+    filter: invert(70%);
+}
+.chat-area-footer button img:active{
+    filter: invert(100%);
+}
+.chat-area-footer input:focus{
+    outline: none;
+}
+.chat-area-footer input{
+    border-radius: 10px;
+    border: none;
+    max-height: 20px;
+}
+.chat-contactlist{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(91, 91, 91);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-top: 30px;
+  padding-left: 4px;
+}
+.chat-contact{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  background-color: rgb(139, 139, 139);
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+.chat-contact-chose{
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: whitesmoke;
+}
+.chat-contact:hover{
+  background-color: rgb(164, 164, 164);
+}
+.non-display{
+    display: none !important;
+}.notif-box{
+    position: absolute;
+    right: 20px;
+    background-color: rgb(192, 190, 190);
+    border-radius: 20px;
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 400px;
+    max-height: 400px;
+}
+.notif-header{
+    background-color: rgb(105, 105, 105);
+    padding: 4px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.notif-header h3{
+    margin: 0px;
+}
+.notif{
+    background-color: rgb(250, 250, 250);
+    border-bottom: 2px solid gray;
+    padding: 4px;
+    min-width: 190px;
+    max-width: 190px;
+    min-height: 70px;
+    max-height: 70px;
+    font-size: 15px;
+}.top-bar{
+    background-color: #222;
+    min-height: 10vh;
+    max-height: 10vh;;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+.search-bar {
+  background-color: white;
+  padding: 5px;
+  padding-left: 5px;
+  border-radius: 30px;
+  max-height: 20px;
+  display: flex;
+  margin-left: 10px;
+}
+.search-bar input {
+  min-width: 350px;
+  background-color: transparent;
+  border: none;
+  margin-left: 4px;
+}
+.search-bar input:focus {
+  border: none;
+  outline: none;
+}
+.util-icons{
+    margin-right: 20px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+}
+.util-icons a > button {
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 20px;
+}
+.util-icons a > button:hover {
+  background-color: gray;
+}
