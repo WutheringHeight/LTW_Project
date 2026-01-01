@@ -45,13 +45,14 @@
             <!-- Số lượng -->
             <div class="quantity-selector">
                 <button type="button" onclick="changeQuantity(-1)">-</button>
-                <input type="text" id="product-qty" value="1" readonly/>
+                <input type="number" id="product-qty" value="1" min="1" readonly/>
                 <button type="button" onclick="changeQuantity(1)">+</button>
             </div>
 
             <!-- Nút hành động -->
             <div class="action-buttons">
-                <button class="add-to-cart" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+                <button class="add-to-cart" onclick="addToCart(${product.id})">Thêm vào giỏ </button>
+
                 <button class="quick-order" onclick="quickOrder(${product.id})">Đặt hàng nhanh</button>
             </div>
 
@@ -76,23 +77,21 @@
     <!-- Footer -->
     <%@include file="/templates/footer.jsp" %>
 <script>
-    // Hàm xử lý tăng giảm số lượng trên giao diện
     function changeQuantity(delta) {
-        const qtyInput = document.getElementById('product-qty');
-        let currentQty = parseInt(qtyInput.value);
-        if (currentQty + delta >= 1) {
-            qtyInput.value = currentQty + delta;
+        const qtyInput = document.getElementById("product-qty");
+        let current = parseInt(qtyInput.value);
+        if (current + delta >= 1) {
+            qtyInput.value = current + delta;
         }
     }
 
-    // Hàm gửi yêu cầu thêm vào giỏ hàng
     function addToCart(productId) {
-        const qty = document.getElementById('product-qty').value;
-        // Chuyển hướng hoặc dùng AJAX gửi số lượng đã chọn
-        window.location.href = `cart?action=add&id=${productId}&quantity=${qty}`;
+        const qty = (document.getElementById("product-qty")).value;
+        window.location.href =
+            "cart?action=add&id=" + productId + "&quantity=" + qty;
+        console.log("Đang gửi yêu cầu tới: " + qty + "||" +productId)
     }
 
-    // Hàm đặt hàng nhanh (thêm xong đi thẳng tới trang giỏ hàng/thanh toán)
     function quickOrder(productId) {
         const qty = document.getElementById('product-qty').value;
         window.location.href = `cart?action=add&id=${productId}&quantity=${qty}&redirect=checkout`;

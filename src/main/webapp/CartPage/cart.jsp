@@ -58,7 +58,9 @@
             <i class="fa-solid fa-truck-fast"></i>
             MIỄN PHÍ SHIP cho đơn hàng từ 800K. Hỗ trợ lắp đặt tại TPHCM và một số tỉnh lân cận.
         </div>
-        <button class="btn-order">Đặt hàng</button>
+        <form action="checkout" method="get">
+            <button class="btn-order">Đặt hàng</button>
+        </form>
     </div>
 </div>
 
@@ -66,7 +68,6 @@
 
 <script>
     function updateQty(id, delta) {
-        // Bạn có thể dùng AJAX ở đây để không bị load lại trang
         window.location.href = "cart?action=update&id=" + id + "&delta=" + delta;
     }
 </script>

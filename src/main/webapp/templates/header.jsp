@@ -30,9 +30,9 @@
                         <img src="${pageContext.request.contextPath}/image/search.png" alt="Search"/>
                     </button>
                 </form>
-                <div id="search-suggestions" class="search-suggestions" style="display:flex;">
-                    <ul id="suggestion-list"></ul>
-                </div>
+<%--                <div id="search-suggestions" class="search-suggestions" style="display:flex;">--%>
+<%--                    <ul id="suggestion-list"></ul>--%>
+<%--                </div>--%>
             </div>
 
             <a href="cart"><img src="${pageContext.request.contextPath}/image/cart.png" alt="Cart" class="icon"
@@ -46,6 +46,6 @@
     <script>
         window.CONTEXT_PATH = "${pageContext.request.contextPath}";
     </script>
-    <script src="/js/suggestion.js"></script>
+<%--    <script src="/js/suggestion.js"></script>--%>
 
 </header>

@@ -321,13 +321,32 @@ public class ProductDAO {
         );
     }
 
-    public CartItem getProductForCart(int productId){
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT id, name, type, image, price FROM products WHERE id = :id")
-                        .bind("id", productId)
-                        .mapToBean(CartItem.class)
-                        .findOne().orElse(null)
-        );
+    public CartItem getProductForCart(int productId) {
+        return jdbi.withHandle(handle -> {
+
+            CartItem item = handle.createQuery(
+                            "SELECT id, productName AS name, kind AS type, price " +
+                                    "FROM product WHERE id = :id")
+                    .bind("id", productId)
+                    .mapToBean(CartItem.class)
+                    .findOne()
+                    .orElse(null);
+
+            if (item == null) return null;
+
+            String image = handle.createQuery(
+                            "SELECT image_url FROM product_image " +
+                                    "WHERE product_id = :pid LIMIT 1")
+                    .bind("pid", productId)
+                    .mapTo(String.class)
+                    .findOne()
+                    .orElse(null);
+
+            item.setImage(image);
+
+            return item;
+        });
     }
+
 
 }

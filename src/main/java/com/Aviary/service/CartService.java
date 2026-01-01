@@ -34,6 +34,7 @@ public class CartService {
         if (cart.containsKey(productId)) {
             CartItem item = cart.get(productId);
             item.setQuantity(item.getQuantity() + quantity);
+
         } else {
             CartItem newItem = productDAO.getProductForCart(productId);
             if (newItem != null) {

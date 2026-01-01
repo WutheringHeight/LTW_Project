@@ -20,9 +20,14 @@ import jakarta.servlet.annotation.*;
 public class CartController extends HttpServlet {
     public CartService cartService = new CartService();
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         HttpSession session = request.getSession();
+
         Map<Integer, CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
+
         if (cart == null) {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
@@ -30,47 +35,34 @@ public class CartController extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        // CHỈ xử lý các logic tính toán nếu có action
-        if (action != null) {
-            try {
-                String idStr = request.getParameter("id");
-                if (idStr == null || idStr.isEmpty()) {
-                    response.sendRedirect("cart"); // Quay lại trang giỏ hàng nếu thiếu id
-                    return;
-                }
-                int id = Integer.parseInt(idStr);
-
-                if ("add".equals(action)) {
-                    String qtyParam = request.getParameter("quantity");
-                    int quantity = (qtyParam != null && !qtyParam.isEmpty()) ? Integer.parseInt(qtyParam) : 1;
-                    cartService.addToCart(cart, id, quantity);
-
-                    if ("checkout".equals(request.getParameter("redirect"))) {
-                        response.sendRedirect("checkout");
-                    } else {
-                        response.sendRedirect("cart");
-                    }
-                    return;
-                } else if ("update".equals(action)) {
-                    String deltaParam = request.getParameter("delta");
-                    int delta = (deltaParam != null) ? Integer.parseInt(deltaParam) : 0;
-                    cartService.updateCart(cart, id, delta);
-                } else if ("remove".equals(action)) {
-                    cart.remove(id);
-                }
-
-                response.sendRedirect("cart");
-                return;
-            } catch (NumberFormatException e) {
-                // Log lỗi hoặc chuyển hướng nếu ID không phải là số
-                response.sendRedirect("cart");
-                return;
-            }
+        if ("add".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            cartService.addToCart(cart, id, quantity);
+            response.sendRedirect("cart");
+            return;
         }
 
-        // Nếu action == null, code sẽ chạy xuống đây để hiển thị trang JSP
+        if ("update".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int delta = Integer.parseInt(request.getParameter("delta"));
+
+            cartService.updateCart(cart, id, delta);
+            response.sendRedirect("cart");
+            return;
+        }
+
+        if ("remove".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            cart.remove(id);
+            response.sendRedirect("cart");
+            return;
+        }
+
+        // ======= CART =======
         request.setAttribute("cartItems", cart.values());
         request.setAttribute("totalCartPrice", cartService.calculateTotal(cart));
-        request.getRequestDispatcher("/CartPage/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/CartPage/cart.jsp")
+                .forward(request, response);
     }
 }
