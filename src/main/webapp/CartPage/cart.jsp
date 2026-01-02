@@ -8,10 +8,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/headerFooterStyle.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cartStyle.css"/>
+    <style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background: #fff;
+        width: 450px;
+        margin: 10% auto;
+        padding: 25px;
+        border-radius: 6px;
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    </style>
 </head>
 <body>
 
 <%@ include file="/templates/header.jsp" %>
+<%@ include file="/CheckoutPage/checkout.jsp"%>
 
 <div class="cart-container">
     <div class="cart-title-area">
@@ -58,9 +93,7 @@
             <i class="fa-solid fa-truck-fast"></i>
             MIỄN PHÍ SHIP cho đơn hàng từ 800K. Hỗ trợ lắp đặt tại TPHCM và một số tỉnh lân cận.
         </div>
-        <form action="checkout" method="get">
-            <button class="btn-order">Đặt hàng</button>
-        </form>
+        <button class="btn-order" onclick="openCheckout()">Thanh toán</button>
     </div>
 </div>
 
@@ -69,6 +102,27 @@
 <script>
     function updateQty(id, delta) {
         window.location.href = "cart?action=update&id=" + id + "&delta=" + delta;
+    }
+
+    function openCheckout() {
+        document.getElementById("checkoutModal").style.display = "block";
+    }
+
+    function closeCheckout() {
+        document.getElementById("checkoutModal").style.display = "none";
+    }
+
+    window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("autoCheckout") === "true") {
+            openCheckout();
+        }
+    }
+    window.onclick = function(event) {
+        const modal = document.getElementById("checkoutModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
     }
 </script>
 

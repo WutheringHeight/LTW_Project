@@ -5,28 +5,43 @@
 package com.Aviary.controller;
 
 import java.io.*;
+import java.util.Map;
 
+import com.Aviary.components.CartItem;
+import com.Aviary.service.OrderService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "CheckoutControllerServlet", value = "/CheckoutController-servlet")
+@WebServlet("/checkout")
 public class CheckoutController extends HttpServlet {
-    private String message;
 
-    public void init() {
-        message = "Hello World!";
+    private OrderService orderService = new OrderService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.getRequestDispatcher("/CheckoutPage/checkout.jsp")
+                .forward(request, response);
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
 
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
-    }
+        HttpSession session = request.getSession();
+        Map<Integer, CartItem> cart =
+                (Map<Integer, CartItem>) session.getAttribute("cart");
 
-    public void destroy() {
+        orderService.placeOrder(
+                cart,
+                request.getParameter("name"),
+                request.getParameter("phone"),
+                request.getParameter("address")
+        );
+
+        session.removeAttribute("cart");
+        response.sendRedirect("home");
     }
 }

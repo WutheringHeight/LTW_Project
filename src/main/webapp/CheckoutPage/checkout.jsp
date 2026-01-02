@@ -1,24 +1,33 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html>
-<head>
-    <title>Đặt hàng</title>
-</head>
-<body>
 
-<h2>Thông tin đặt hàng</h2>
+<div id="checkoutModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCheckout()">&times;</span>
 
-<form action="checkout" method="post">
-    <label>Họ tên:</label><br>
-    <input type="text" name="name" required><br><br>
+        <h2>Xác nhận đặt hàng</h2>
 
-    <label>Số điện thoại:</label><br>
-    <input type="text" name="phone" required><br><br>
+        <!-- THÔNG TIN ĐƠN -->
+        <div class="order-summary">
+            <p><b>Tổng số lượng:</b> ${cartItems.size()} tranh</p>
+            <p><b>Tổng tiền:</b>
+                <fmt:formatNumber value="${totalCartPrice}" pattern="#,###"/>₫
+            </p>
+        </div>
 
-    <label>Địa chỉ:</label><br>
-    <textarea name="address" required></textarea><br><br>
+        <!-- FORM GỬI CHECKOUT -->
+        <form action="checkout" method="post">
+            <label>Họ tên</label>
+            <input type="text" name="name" required>
 
-    <button type="submit">Xác nhận đặt hàng</button>
-</form>
+            <label>Số điện thoại</label>
+            <input type="text" name="phone" required>
 
-</body>
-</html>
+            <label>Địa chỉ</label>
+            <textarea name="address" required></textarea>
+
+            <!-- gửi kèm tổng tiền -->
+            <input type="hidden" name="totalPrice" value="${totalCartPrice}">
+
+            <button type="submit" class="btn-order">Xác nhận đặt hàng</button>
+        </form>
+    </div>
+</div>

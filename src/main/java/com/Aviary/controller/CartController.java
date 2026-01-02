@@ -39,7 +39,13 @@ public class CartController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             cartService.addToCart(cart, id, quantity);
-            response.sendRedirect("cart");
+            String redirect = request.getParameter("redirect");
+            String autoCheckout = request.getParameter("autoCheckout");
+            if ("true".equals(autoCheckout)) {
+                response.sendRedirect("cart?autoCheckout=true");
+            } else {
+                response.sendRedirect("cart");
+            }
             return;
         }
 

@@ -94,7 +94,8 @@
 
     function quickOrder(productId) {
         const qty = document.getElementById('product-qty').value;
-        window.location.href = `cart?action=add&id=${productId}&quantity=${qty}&redirect=checkout`;
+        console.log("Đang gửi yêu cầu tới: " + qty + "||" +productId)
+        window.location.href = "cart?action=add&id="+ productId + "&quantity=" + qty + "&redirect=checkout&autoCheckout=true";
     }
 </script>
 </body>
