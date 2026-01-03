@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +20,18 @@
             <section><a><button onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box');"><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <div class="notif-box non-display" id="notif-box">
                 <div class="notif-header"><h3>Notification</h3></div>
-                <div class="notif">
-                    <p><b>Aviary.Co</b></p>
-                    <p>Hello ArtEnjoyerGuy723, congratualation for making your account successfully</p>
-                </div>
-                 <div class="notif">
-                    <p><b>System</b></p>
-                    <p>Account successfully created.</p>
-                </div>
+                <c:forEach items="${notifications}" var="notif">
+                    <div class="notif">
+                        <p><b>notif.accountName</b></p>
+                        <% String message = notif.message;
+                            int maxMsgLen = 50;
+                            if(message.length() > maxMsgLen){
+                                message = message.subString(0,maxMsgLen);
+                            }
+                        %>
+                        <p> <%= message %> </p>
+                    </div>
+                </c:forEach>
             </div></section>
             <section><a><button onclick="toggleDisplay('nav-box'); makeNonDisplay('notif-box');"><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
             <div class="nav-box non-display" id="nav-box">
@@ -58,15 +63,32 @@
             </section>
             <hr>
             <h2>Account Settings</h2>
+            <button class="mini-button btn-with-anim"  onclick="changeInfo('Username')">Change</button>
             <div class="setting-section">
-                <section class="setting-option"><p>Username: ArtEnjoyerGuy723</p><button class="mini-button btn-with-anim">Change</button></section>
-                <section class="setting-option"><p>Email: artguy@gmail.com</p><button class="mini-button btn-with-anim">Change</button></section>
-                <section class="setting-option"><p>Phone number: +87 325 325 2364</p><button class="mini-button btn-with-anim">Change</button></section>
-                <section class="setting-option"><p>Password:***********</p><button class="mini-button btn-with-anim">Change</button></section>
-                <section class="setting-option"><p>Enable Two-Factor Authentication</p><input type="checkbox" class="toggle-button"></section>
+                <section class="setting-option" id="Username">
+                    <section class ="info" style="display:flex;">
+                        <label>Username: </label>
+                        <form action="" style="margin:0px;"><p>a <c:out value="${userDetail.fullname}"/></p></form>
+                    </section>  
+                    
+                </section>
+                <section class="setting-option">
+                    <label>Email:</label>
+                    <p> a<c:out value="${user.email}"/></p> 
+                </section>
+                <section class="setting-option" id="PhoneNumber">
+                    <label>Phone number: </label>
+                    <p> <c:out value="${userDetail.phoneNumber}"/> </p>
+                </section>
+                <section class="setting-option"><p>Enable Two-Factor Authentication</p><% if(userdetail.twoFactorEnabled){ %>
+                    <input checked ="checkbox" class="toggle-button">
+                <% }else{ %>
+                    <input type="checkbox" class="toggle-button">
+                <% } ></section>
             </div>
+            
             <hr><br><br><br><br>
-            <button class="mini-button btn-with-anim" style="margin-left: 25vw;">Log out</button>
+            <button class="mini-button btn-with-anim" style="margin-left: auto; margin-right:0px;">Log out</button>
         </section>
     </section>
     <div class="company-infos">
