@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
-public class BookMarkItem implements Serializable{
+public class BookMarkBean implements Serializable{
      @ColumnName("ID")
     private int id;
      @ColumnName("accID")
@@ -14,7 +14,7 @@ public class BookMarkItem implements Serializable{
     private int ProductID;
     private Date createdAt;
     
-    public BookMarkItem(){}
+    public BookMarkBean(){}
 
     public int getId() {
         return this.id;

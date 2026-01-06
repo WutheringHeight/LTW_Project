@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,22 +52,15 @@
         <section class="userdetails-content">
             <h3>Notification:</h3>
             <section class="notification-box">
-                <div class="full-notification">
-                    <p>Sender: <b>Aviary.Co</b></p>
+                <c:forEach items="notification" var="notif">
+                    <div class="full-notification">
+                    <p>Sender: <b>${notif.accountName}</b></p>
                     <hr>
-                    <p>Hello ArtEnjoyerGuy723, congratualation on making your account successfully.
-                        We're so happy to have you here. If you ever have trouble with anything, please feel free to contact our customer help line or chatbox for assistance.
-                        We wish you the best of luck on your journey to find the art that speaks yo your soul.
+                    <p>${notif.message}
                     </p>
                     <button class="mini-button btn-with-anim">Archive</button>
-                </div>
-                <div class="full-notification">
-                    <p>Sender: <b>System</b></p>
-                    <hr>
-                    <p>Account successfully created.
-                    </p>
-                    <button class="mini-button btn-with-anim">Archive</button>
-                </div>
+                    </div>
+                </c:forEach>
             </section>
             <br><hr>
         </section>

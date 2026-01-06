@@ -22,7 +22,7 @@
                 <div class="notif-header"><h3>Notification</h3></div>
                 <c:forEach items="${notifications}" var="notif">
                     <div class="notif">
-                        <p><b>notif.accountName</b></p>
+                        <p><b>${notif.accountName}</b></p>
                         <% String message = notif.message;
                             int maxMsgLen = 50;
                             if(message.length() > maxMsgLen){
@@ -53,8 +53,7 @@
             <a href="userdetails-setting.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
             <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
-        <section class="userdetails-content">
-            
+        <section class="userdetails-content"> 
             <br>
             <section style="display: flex; flex-direction:row; align-items: center; padding-bottom:20px;">
                 <p class="large-text"><b>Profile picture:</b></p>
@@ -63,30 +62,46 @@
             </section>
             <hr>
             <h2>Account Settings</h2>
-            <button class="mini-button btn-with-anim"  onclick="changeInfo('Username')">Change</button>
             <div class="setting-section">
-                <section class="setting-option" id="Username">
-                    <section class ="info" style="display:flex;">
-                        <label>Username: </label>
-                        <form action="" style="margin:0px;"><p>a <c:out value="${userDetail.fullname}"/></p></form>
-                    </section>  
-                    
-                </section>
-                <section class="setting-option">
-                    <label>Email:</label>
-                    <p> a<c:out value="${user.email}"/></p> 
-                </section>
-                <section class="setting-option" id="PhoneNumber">
-                    <label>Phone number: </label>
-                    <p> <c:out value="${userDetail.phoneNumber}"/> </p>
-                </section>
-                <section class="setting-option"><p>Enable Two-Factor Authentication</p><% if(userdetail.twoFactorEnabled){ %>
-                    <input checked ="checkbox" class="toggle-button">
-                <% }else{ %>
-                    <input type="checkbox" class="toggle-button">
-                <% } ></section>
+                <form action="userDetail_Update" method="post" id="userdetail-form">
+                    <section class="setting-option" id="Username-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>Username: </label>
+                            <p>a<c:out value="${userDetail.fullname}"/></p>
+                            <input type="text" name="username" id="username" class="non-display">
+                        </section>  
+                    </section>
+                    <section class="setting-option" id="Email-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>Email: </label>
+                            <p>a <c:out value="${user.email}"/></p>
+                            <input type="text" name="email" id="email" class="non-display">
+                        </section>  
+                    </section>
+                    <section class="setting-option" id="PhoneNumber-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>PhoneNumber: </label>
+                            <p>a <c:out value="${userDetail.phoneNumber}"/></p>
+                            <input type="text" name="phoneNumber" id="phoneNumber" class="non-display">
+                        </section>  
+                    </section>
+                    <section class="setting-option" id="TFA-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>Enable Two-Factor Authentication: </label>
+                            <% if(userdetail.twoFactorEnabled){ %>
+                                <p> Enabled</p>
+                                <input checked ="checkbox" class="toggle-button" name="TFA" id="TFA" class="non-display"> 
+                            <% }else{ %>
+                                <p> Disabled</p>
+                                <input type="checkbox" class="toggle-button" name="TFA" id="TFA" class="non-display">
+                            <% } >
+                        </section> 
+                    </section>
+                </form>
             </div>
-            
+            <button class="mini-button btn-with-anim" id="change-btn">Change</button>
+            <button class="mini-button btn-with-anim non-display" id="cancel-btn">Cancel</button>
+            <button class="mini-button btn-with-anim non-display" id="save-btn">Save</button>
             <hr><br><br><br><br>
             <button class="mini-button btn-with-anim" style="margin-left: auto; margin-right:0px;">Log out</button>
         </section>
@@ -153,3 +168,57 @@
     </section>
 </body>
 </html>
+
+<script>
+    (function(){
+        console.log("ran")
+        const changeBtn = document.getElementById("change-btn")
+        const cancelBtn = document.getElementById("cancel-btn")
+        const saveBtn = document.getElementById("save-btn")
+
+        const form = document.getElementById("userdetail-form")
+
+        changeBtn.addEventListener("click",() => {
+            changeBtn.classList.add("non-display")
+            cancelBtn.classList.remove("non-display")
+            saveBtn.classList.remove("non-display")
+
+            form.querySelectorAll("p").forEach( (e, i, arr) => {
+                e.classList.add("non-display")
+            })
+            form.querySelectorAll("input").forEach( (e, i, arr) => {
+                e.classList.remove("non-display")
+            })
+        })
+
+        cancelBtn.addEventListener("click", () => {
+            changeBtn.classList.remove("non-display")
+            cancelBtn.classList.add("non-display")
+            saveBtn.classList.add("non-display")
+
+            form.querySelectorAll("p").forEach( (e, i, arr) => {
+                e.classList.remove("non-display")
+            })
+            form.querySelectorAll("input").forEach( (e, i, arr) => {
+                if(e.type == "text"){
+                    e.value = ""
+                }else{
+                    e.checked = false
+                }
+                e.classList.add("non-display")
+            })
+        })
+
+        saveBtn.addEventListener("click", () => {
+            form.submit() 
+            form.querySelectorAll("input").forEach( (e, i, arr) => {
+                if(e.type == "text"){
+                    e.value = ""
+                }else{
+                    e.checked = false
+                }
+                e.classList.add("non-display")
+            })   
+        })
+    })();
+</script>

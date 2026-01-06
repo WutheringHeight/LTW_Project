@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,31 +52,28 @@
         <section class="userdetails-content">
             <h3>Bookmarks:</h3>
             <section class="bookmark-box">
-                <a href="../productDetail/product.html"><div class="bookmark">
-                    <img src="res/flower.png">
-                    <section class="bookmark-desp">
-                        <h4>Flower</h4>
-                        <p>Price: 999,000đ</p>
-                        <p>A beautiful oil painting reminiscent of 18th-century art capturing the liveliness and vibrant color of a flower vase</p>
-                        <p>3 Available</p>
-                    </section>
-                    <section class="bookmark-buttons">
-                        <img src="res/trashcan.png" class="mid-icon trashcan">
-                    </section>
-                </div></a>
-                <a href="../productDetail/product.html"><div class="bookmark">
-                    <img src="res/monalisa.png">
-                    <section class="bookmark-desp">
-                        <h4>MonaLisa</h4>
-                        <p>Price: 200,000đ</p>
-                        <p>Did you know an activist group tried to throw soup at the real mona lisa? </p>
-                        <p style="color: red">Out of stock</p>
-                    </section>
-                    <section class="bookmark-buttons">
-                        <img src="res/trashcan.png" class="mid-icon trashcan">
-                    </section>
-                </div></a>
-
+                <c:forEach items="${bookmarks}" var="bookmark">
+                    <a href="../productDetail/product.html">
+                    <div class="bookmark">
+                        <img src="bookmark.thumbnail">
+                        <section class="bookmark-desp">
+                            <h4>${bookmark.name}</h4>
+                            <p>Price: ${bookmark.price}</p>
+                            <% String message = notif.message;
+                            int maxMsgLen = 100;
+                            if(message.length() > maxMsgLen){
+                                message = message.subString(0,maxMsgLen);
+                            }
+                            %>
+                            <p> <%= message %> </p>
+                            <p>${bookmark.stock} Available</p>
+                        </section>
+                        <button class="bookmark-buttons">               
+                            <img src="res/trashcan.png" class="mid-icon trashcan">
+                        </button>
+                    </div>
+                    </a>
+                </c:forEach>
             </section>
             <br><hr>
         </section>
