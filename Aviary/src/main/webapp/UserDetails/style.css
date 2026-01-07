@@ -483,3 +483,7 @@ details p {
   margin-bottom: 2px;
 }
 
+.red-outline{
+  border: orangered solid 2px;
+  border-radius: 5px;
+}

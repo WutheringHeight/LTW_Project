@@ -9,8 +9,7 @@ public class UserSetting {
     private boolean promoNotif;         
     private boolean sendEmail;          
     private boolean sendSms;             
-    private String language;             
-    private boolean rememberMe;          
+    private String language;                     
     private Date updatedAt;
     
     public UserSetting(){}
@@ -86,18 +85,6 @@ public class UserSetting {
 
     public void setLanguage(String language) {
         this.language = language;
-    }
-
-    public boolean isRememberMe() {
-        return this.rememberMe;
-    }
-
-    public boolean getRememberMe() {
-        return this.rememberMe;
-    }
-
-    public void setRememberMe(boolean rememberMe) {
-        this.rememberMe = rememberMe;
     }
 
     public Date getUpdatedAt() {

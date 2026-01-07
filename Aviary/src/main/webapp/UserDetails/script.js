@@ -55,14 +55,12 @@ function saveInfo(id){
     sect.appendChild(btn)
 }
 
-function updateUserDetail(info,data){
-    console.log(info,data)
-    fetch('updateUserDetail',{
+function update(url,param,data){
+    fetch(url,{
         method : 'POST',
         headers: {"Content-type": "application/x-www-form-urlencoded"},
-        body: info+"="+ data
+        body: param+"="+ data
     })
-    console.log("sent")
 }
 
 

@@ -10,14 +10,14 @@
 </head>
 <body>
     <div class="top-bar">
-         <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;""></a>
+        <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;"></a>
         <div class="search-bar">
             <img src="res/search_icon.png" class="large-icon">
             <input alt="Search">
         </div>
         <section class="util-icons">
             <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
-            <section><a><button onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box');"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <section><a><button onclick="toggleDisplay('notif-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <div class="notif-box non-display" id="notif-box">
                 <div class="notif-header"><h3>Notification</h3></div>
                 <div class="notif">
@@ -50,19 +50,40 @@
             <a href="userdetails_faq"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
         <section class="userdetails-content">
-            <h3>Notification:</h3>
-            <section class="notification-box">
-                <c:forEach items="notification" var="notif">
-                    <div class="full-notification">
-                    <p>Sender: <b>${notif.accountName}</b></p>
-                    <hr>
-                    <p>${notif.message}
-                    </p>
-                    <button class="mini-button btn-with-anim">Archive</button>
-                    </div>
-                </c:forEach>
-            </section>
-            <br><hr>
+            <h2>Payments & Billing</h2>
+            <div class="setting-section">  
+                <section class="setting-option">
+                    <section class="setting-option" id="address-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>Delivery Address: </label>
+                            <p id="address-p">a<c:out value="${payment.deliveryAddress}"/></p>
+                            <input type="text" name="deliveryAddress" id="deliveryAddress" class="non-display">
+                        </section>  
+                    </section>
+                    <button class="mini-button btn-with-anim" id="address-change-btn">Change</button>
+                    <button class="mini-button btn-with-anim non-display" id="address-save-btn">Save</button>
+                </section>
+                <section class="setting-option">
+                    <section class="setting-option" id="Username-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>Payment method: </label>
+                            <select class="drop-box"><option>Banking</option></select>
+                        </section>  
+                    </section>
+                </section>
+                <h3>Banking:</h3>
+                <section class="banking-box" id="banking-sect">
+                    <img src="res/bank_icon.png" class="mega-icon">
+                    <section class="banking-input">
+                        <p id="bank-code-p">Bank Code</p>
+                        <input id="bank-code" name="bank-code">
+                        <p id="card-number-p">Card Number</p>
+                        <input id="card-number" name="card-number">
+                        <br>
+                        <button class="mid-button btn-with-anim non-display" id="banking-save-btn">Save</button>
+                    </section>
+                </section>
+            </div>
         </section>
     </section>
     <div class="company-infos">
@@ -122,8 +143,72 @@
                 <input name="chatbar">
                 <button><img src="res/send_icon.png" class="mid-icon"></button>
             </div>
-            </section>
+            </section> 
         </div>
     </section>
 </body>
 </html>
+
+<script>
+    (function(){
+        const addressSect = document.getElementById('address-sect')
+        const addressChangeBtn = document.getElementById('address-change-btn')
+        const addressSaveBtn = document.getElementById('address-save-btn')
+        const addressP = addressSect.querySelector('p')
+        const addressInput = addressSect.querySelector('input')
+
+        const bankingSect = document.getElementById('banking-sect')
+        const bankcodeP = document.getElementById('bank-code-p')
+        const bankcodeIn = document.getElementById('bank-code')
+        const cardNumberP = document.getElementById('card-number-p')
+        const cardNumberIn = document.getElementById('card-number')
+        const bankingBtn = document.getElementById('banking-save-btn')
+
+        addressChangeBtn.addEventListener("click",() => {
+            addressChangeBtn.classList.add("non-display")
+            addressSaveBtn.classList.remove('non-display')
+
+            addressP.classList.add('non-display')
+            addressInput.classList.remove('non-display')
+            addressInput.value = addressP.textContent
+        })
+        addressSaveBtn.addEventListener("click",() => {
+            addressChangeBtn.classList.remove("non-display")
+            addressSaveBtn.classList.add('non-display')
+
+            addressP.classList.remove('non-display')
+            addressInput.classList.add('non-display')
+            addressP.textContent = addressInput.value
+
+            update('paymentInfoUpdate','deliveryAddress',addressP.textContent)
+
+            addressInput.value = ''
+        })
+        bankcodeIn.addEventListener('change',() => {
+            bankcodeP.textContent = 'Bank Code (unsaved)'
+            bankcodeIn.classList.add('red-outline')
+            bankingBtn.classList.remove('non-display')
+        })
+
+       cardNumberIn.addEventListener('change',() => {
+            cardNumberP.textContent = 'Card Number (unsaved)'
+            cardNumberIn.classList.add('red-outline')
+            bankingBtn.classList.remove('non-display')
+        })
+
+        bankingBtn.addEventListener("click", () => {
+            bankcodeP.textContent = 'Bank Code'
+            cardNumberP.textContent = 'Card Number'
+            bankcodeIn.classList.remove('red-outline')
+            cardNumberIn.classList.remove('red-outline')
+
+            update('paymentInfoUpdate','bankCode',bankcodeP.textContent)
+            update('paymentInfoUpdate','cardNumber',cardNumberP.textContent)
+
+            bankingBtn.classList.add('non-display')
+
+        })
+
+
+    })();
+</script>

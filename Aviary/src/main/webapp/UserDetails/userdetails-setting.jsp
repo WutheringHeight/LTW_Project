@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +9,14 @@
 </head>
 <body>
     <div class="top-bar">
-         <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;""></a>
+        <a href="../HomePage/homepage.html"><img src="res/logo.png" class="large-icon" style="filter: invert(1.0); transform: scale(1.5); padding-top: 2px;"></a>
         <div class="search-bar">
             <img src="res/search_icon.png" class="large-icon">
             <input alt="Search">
         </div>
         <section class="util-icons">
             <section><a href="../CartPage/index.html"><button><img src="res/purse_icon.png" class="mini-icon"></button></a></section>
-            <section><a><button onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box');"><img src="res/notif_icon.png" class="mini-icon"></button></a>
+            <section><a><button onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box')"><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <div class="notif-box non-display" id="notif-box">
                 <div class="notif-header"><h3>Notification</h3></div>
                 <div class="notif">
@@ -31,7 +30,7 @@
             </div></section>
             <section><a><button onclick="toggleDisplay('nav-box'); makeNonDisplay('notif-box');"><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
             <div class="nav-box non-display" id="nav-box">
-                    <a href="userdetails_account"><button class="nav-option"><img src="res/user_icon.png" class="mid-icon"><p>Account</p></button></a>
+                   <a href="userdetails_account"><button class="nav-option"><img src="res/user_icon.png" class="mid-icon"><p>Account</p></button></a>
                     <a href="userdetails_bookmark"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Bookmark</p></button></a>
                     <a href="userdetails_notification"><button class="nav-option"><img src="res/notif_icon.png" class="mid-icon"><p>Notification</p></button></a>
                     <a href="userdetails_payment"><button class="nav-option"><img src="res/credit_card_icon.png" class="mid-icon"><p>Payment</p></button></a>
@@ -42,27 +41,69 @@
     </div>
     <section class="userdetails-box">
         <div class="userdetails-options">
-       <a href="userdetails_account"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
+        <a href="userdetails_account"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
             <a href="userdetails_bookmark"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
             <a href="userdetails_notification"><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
             <a href="userdetails_payment"><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
             <a href="userdetails_setting"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
             <a href="userdetails_faq"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
-        <section class="userdetails-content">
-            <h3>Notification:</h3>
-            <section class="notification-box">
-                <c:forEach items="notification" var="notif">
-                    <div class="full-notification">
-                    <p>Sender: <b>${notif.accountName}</b></p>
-                    <hr>
-                    <p>${notif.message}
-                    </p>
-                    <button class="mini-button btn-with-anim">Archive</button>
-                    </div>
-                </c:forEach>
-            </section>
-            <br><hr>
+        <section class="userdetails-content" id="settings">
+            <h2>Notifications & Communication</h2>
+            <div class="setting-section"> 
+                <section class="setting-option"><p>Order update notification</p>
+                    <% if(userSetting.orderUpdateNotif){ %>  
+                        <input checked type="checkbox" class="toggle-button" name="order-Update" id="order-Update"> 
+                    <% }else{ %>
+                        <input type="checkbox" class="toggle-button" name="order-Update" id="order-Update">
+                    <% } >
+                </section>
+                <section class="setting-option"><p>Promotion & Offers notification</p>
+                    <% if(userSetting.promoNotif){ %>  
+                        <input checked type="checkbox" class="toggle-button" name="promotion-Offer-Notif" id="promotion-Offer-Notif"> 
+                    <% }else{ %>
+                        <input type="checkbox" class="toggle-button" name="promotion-Offer-Notif" id="promotion-Offer-Notif">
+                    <% } >
+                </section>
+                <section class="setting-option"><p>Send me Email</p>
+                    <% if(userSetting.sendEmail){ %>  
+                        <input checked type="checkbox" class="toggle-button" name="send-Email" id="send-SMS"> 
+                    <% }else{ %>
+                        <input type="checkbox" class="toggle-button" name="send-SMS" id="send-SMS">
+                    <% } >
+                </section>
+                <section class="setting-option"><p>Send me SMS messages </p>
+                    <% if(userSetting.sendSms){ %>  
+                        <input checked type="checkbox" class="toggle-button" name="send-SMS" id="send-SMS"> 
+                    <% }else{ %>
+                        <input type="checkbox" class="toggle-button" name="send-SMS" id="send-SMS">
+                    <% } >
+                </section>
+            </div>
+            <h2>Appearance & Accessibility</h2>
+            <div class="setting-section">  
+                <section class="setting-option"><p>Language</p><select class="drop-box"><option>English</option></select></section>
+                <section class="setting-option"><p>Theme</p><select class="drop-box"><option>Light</option></select></section>
+                <section class="setting-option"><p>Text</p><select class="drop-box"><option>Normal</option></select></section>
+            </div>
+            <h2>Privacy & Data</h2>
+            <div class="setting-section">
+                <section class="setting-option"><p>Allow Cookies </p>
+                    <% if(userSetting.){ %>  
+                        <input checked type="checkbox" class="toggle-button" name="allow-Cookies" id="allow-Cookies"> 
+                    <% }else{ %>
+                        <input type="checkbox" class="toggle-button" name="allow-Cookies" id="allow-Cookies">
+                    <% } >
+                </section>
+                <section class="setting-option"><p>Allow saved data </p>
+                    <% if(userSetting.){ %>  
+                        <input checked type="checkbox" class="toggle-button" name="allow-Saved-Data" id="allow-Saved-Data"> 
+                    <% }else{ %>
+                        <input type="checkbox" class="toggle-button" name="allow-Saved-Data" id="allow-Saved-Data">
+                    <% } >
+                </section>
+            </div>
+           
         </section>
     </section>
     <div class="company-infos">
@@ -123,7 +164,21 @@
                 <button><img src="res/send_icon.png" class="mid-icon"></button>
             </div>
             </section>
+            
         </div>
     </section>
 </body>
 </html>
+
+<script>
+    (function(){
+        const settings = document.getElementById("settings").querySelectorAll("input")
+
+        settings.forEach((e,i,arr) => {
+            e.addEventListener("change", () => {
+                update("userSetting_Update", e.name, e.checked)
+            })
+        })
+
+    })();
+</script>

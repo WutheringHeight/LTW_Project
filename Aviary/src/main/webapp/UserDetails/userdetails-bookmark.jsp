@@ -31,23 +31,23 @@
             </div></section>
             <section><a><button onclick="toggleDisplay('nav-box'); makeNonDisplay('notif-box');"><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
             <div class="nav-box non-display" id="nav-box">
-                    <a href="userdetails-account.html"><button class="nav-option"><img src="res/user_icon.png" class="mid-icon"><p>Account</p></button></a>
-                    <a href="userdetails-bookmark.html"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Bookmark</p></button></a>
-                    <a href="userdetails-notification.html"><button class="nav-option"><img src="res/notif_icon.png" class="mid-icon"><p>Notification</p></button></a>
-                    <a href="userdetails-payment.html"><button class="nav-option"><img src="res/credit_card_icon.png" class="mid-icon"><p>Payment</p></button></a>
-                    <a href="userdetails-setting.html"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Settings</p></button></a>
-                    <a href="userdetails-faq.html"><button class="nav-option"><img src="res/chatbubble_icon.png" class="mid-icon"><p>FAQs</p></button></a>
+                    <a href="userdetails_account"><button class="nav-option"><img src="res/user_icon.png" class="mid-icon"><p>Account</p></button></a>
+                    <a href="userdetails_bookmark"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Bookmark</p></button></a>
+                    <a href="userdetails_notification"><button class="nav-option"><img src="res/notif_icon.png" class="mid-icon"><p>Notification</p></button></a>
+                    <a href="userdetails_payment"><button class="nav-option"><img src="res/credit_card_icon.png" class="mid-icon"><p>Payment</p></button></a>
+                    <a href="userdetails_setting"><button class="nav-option"><img src="res/setting_icon.png" class="mid-icon"><p>Settings</p></button></a>
+                    <a href="userdetails_faq"><button class="nav-option"><img src="res/chatbubble_icon.png" class="mid-icon"><p>FAQs</p></button></a>
             </div></section>
         </section>
     </div>
     <section class="userdetails-box">
         <div class="userdetails-options">
-        <a href="userdetails-account.html"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
-        <a href="userdetails-bookmark.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
-        <a href="userdetails-notification.html"><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
-        <a href="userdetails-payment.html"><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
-        <a href="userdetails-setting.html"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
-        <a href="userdetails-faq.html"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
+       <a href="userdetails_account"><button class="userdetails-option" style="border-top-left-radius: 20px;"><img src="res/user_icon.png" class="large-icon"><p>Account</p></button></a>
+            <a href="userdetails_bookmark"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Bookmark</p></button></a>
+            <a href="userdetails_notification"><button class="userdetails-option"><img src="res/notif_icon.png" class="large-icon"><p>Notification</p></button></a>
+            <a href="userdetails_payment"><button class="userdetails-option"><img src="res/credit_card_icon.png" class="large-icon"><p>Payment</p></button></a>
+            <a href="userdetails_setting"><button class="userdetails-option"><img src="res/setting_icon.png" class="large-icon"><p>Settings</p></button></a>
+            <a href="userdetails_faq"><button class="userdetails-option"><img src="res/chatbubble_icon.png" class="large-icon"><p>FAQs</p></button></a>
         </div>
         <section class="userdetails-content">
             <h3>Bookmarks:</h3>
