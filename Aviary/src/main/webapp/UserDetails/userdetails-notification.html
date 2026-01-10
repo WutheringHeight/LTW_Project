@@ -20,14 +20,18 @@
             <section><a><button onclick="toggleDisplay('notif-box'); makeNonDisplay('nav-box');"><img src="res/notif_icon.png" class="mini-icon"></button></a>
             <div class="notif-box non-display" id="notif-box">
                 <div class="notif-header"><h3>Notification</h3></div>
-                <div class="notif">
-                    <p><b>Aviary.Co</b></p>
-                    <p>Hello ArtEnjoyerGuy723, congratualation for making your account successfully</p>
-                </div>
-                 <div class="notif">
-                    <p><b>System</b></p>
-                    <p>Account successfully created.</p>
-                </div>
+                <c:forEach items="${notifications}" var="notif">
+                    <div class="notif">
+                        <p><b>${notif.accountName}</b></p>
+                        <% String message = notif.message;
+                            int maxMsgLen = 50;
+                            if(message.length() > maxMsgLen){
+                                message = message.subString(0,maxMsgLen);
+                            }
+                        %>
+                        <p> <%= message %> </p>
+                    </div>
+                </c:forEach>
             </div></section>
             <section><a><button onclick="toggleDisplay('nav-box'); makeNonDisplay('notif-box');"><img src="res/three_dash_icon.png" class="mini-icon"></button></a>
             <div class="nav-box non-display" id="nav-box">
@@ -52,7 +56,7 @@
         <section class="userdetails-content">
             <h3>Notification:</h3>
             <section class="notification-box">
-                <c:forEach items="notification" var="notif">
+                <c:forEach items="${notification}" var="notif">
                     <div class="full-notification">
                     <p>Sender: <b>${notif.accountName}</b></p>
                     <hr>

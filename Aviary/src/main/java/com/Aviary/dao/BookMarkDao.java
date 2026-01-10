@@ -1,5 +1,8 @@
 package com.Aviary.dao;
 
+import java.util.List;
+
+import com.Aviary.components.BookMarkView;
 import com.Aviary.components.JDBIProvider;
 
 public class BookMarkDao {
@@ -11,5 +14,7 @@ public class BookMarkDao {
             .execute();
         });
     }
-    
+    public static List<BookMarkView> getBookMarkView(int accountID){
+        return null;
+    }
 }

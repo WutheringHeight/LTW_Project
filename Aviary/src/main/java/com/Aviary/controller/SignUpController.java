@@ -30,10 +30,10 @@ public class SignUpController extends HttpServlet {
         String password = request.getParameter("password");
 
         //email already used
-        //if(UserDao.getUserID(email) != -1){
-        //    request.setAttribute("error", "Email already in-used");
-        //    request.getRequestDispatcher("LoginNSignUp/signup.jsp").forward(request, response);
-        //}
+        if(UserDao.getUserID(email) != -1){
+            request.setAttribute("error", "Email already in-used");
+            request.getRequestDispatcher("LoginNSignUp/signup.jsp").forward(request, response);
+        }
         //continue with sign in process
         //forward to OTP
         HttpSession session = request.getSession();
