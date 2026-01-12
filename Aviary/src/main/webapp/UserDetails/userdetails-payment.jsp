@@ -76,9 +76,9 @@
                     <img src="res/bank_icon.png" class="mega-icon">
                     <section class="banking-input">
                         <p id="bank-code-p">Bank Code</p>
-                        <input id="bank-code" name="bank-code">
+                        <input id="bank-code" name="bankCode" value="${payment.bankCode}">
                         <p id="card-number-p">Card Number</p>
-                        <input id="card-number" name="card-number">
+                        <input id="card-number" name="cardNumber" value="${payment.cardNumber}">
                         <br>
                         <button class="mid-button btn-with-anim non-display" id="banking-save-btn">Save</button>
                     </section>
@@ -180,7 +180,7 @@
             addressInput.classList.add('non-display')
             addressP.textContent = addressInput.value
 
-            update('paymentInfoUpdate','deliveryAddress',addressP.textContent)
+            update('paymentInfo_Update','deliveryAddress',addressP.textContent)
 
             addressInput.value = ''
         })
@@ -202,8 +202,8 @@
             bankcodeIn.classList.remove('red-outline')
             cardNumberIn.classList.remove('red-outline')
 
-            update('paymentInfoUpdate','bankCode',bankcodeP.textContent)
-            update('paymentInfoUpdate','cardNumber',cardNumberP.textContent)
+            update('paymentInfo_Update','bankCode',bankcodeP.textContent)
+            update('paymentInfo_Update','cardNumber',cardNumberP.textContent)
 
             bankingBtn.classList.add('non-display')
 

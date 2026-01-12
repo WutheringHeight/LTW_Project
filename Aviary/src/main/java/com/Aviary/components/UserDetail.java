@@ -5,15 +5,14 @@ import java.sql.Date;
 
 public class UserDetail implements Serializable{
     private int accountID;              
-    private String fullName;
+    private String userName;
     private String phoneNumber;
-    private String address;
-    private String gender;
     private String profilePicture;
     private boolean twoFactorEnabled;        
     private Date createdAt;
 
     public UserDetail(){}
+
 
 
     public int getAccountID() {
@@ -24,12 +23,12 @@ public class UserDetail implements Serializable{
         this.accountID = accountID;
     }
 
-    public String getFullName() {
-        return this.fullName;
+    public String getUserName() {
+        return this.userName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhoneNumber() {
@@ -38,22 +37,6 @@ public class UserDetail implements Serializable{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getGender() {
-        return this.gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getProfilePicture() {
@@ -83,5 +66,5 @@ public class UserDetail implements Serializable{
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
+    
 }

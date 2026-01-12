@@ -5,17 +5,17 @@ import java.sql.Date;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
-public class Payment implements Serializable{
+public class PaymentInfo implements Serializable{
      @ColumnName("ID")
     private int id;
-    private int receiptID;
+    @ColumnName("acc_ID")
+    private int accountID;
     private String deliveryAddress;
     private String paymentMethod;
     private String bankCode;
     private String cardNumber;
-    private Date createdAt;
 
-    public Payment(){}
+    public PaymentInfo(){}
 
     public int getId() {
         return this.id;
@@ -25,13 +25,15 @@ public class Payment implements Serializable{
         this.id = id;
     }
 
-    public int getReceiptID() {
-        return this.receiptID;
+
+    public int getAccountID() {
+        return this.accountID;
     }
 
-    public void setReceiptID(int receiptID) {
-        this.receiptID = receiptID;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
+    
 
     public String getDeliveryAddress() {
         return this.deliveryAddress;
@@ -63,14 +65,6 @@ public class Payment implements Serializable{
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
-    }
-
-    public Date getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
 }

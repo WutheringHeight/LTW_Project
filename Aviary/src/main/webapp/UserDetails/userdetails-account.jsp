@@ -60,22 +60,23 @@
                 <img src="res/user_icon.png" style="border-radius:50px; border: 2px gray solid; max-width:80px; min-width:80px; margin-left: 20px;">
                 <button class="mini-button btn-with-anim" style="margin-left: 20px; margin-top: 45px;">Change</button>
             </section>
+            
             <hr>
-            <h2>Account Settings</h2>
+            <h2>Account</h2>
+            
             <div class="setting-section">
-                <form action="userDetail_Update" method="post" id="userdetail-form">
+                <section class="setting-option" id="Email-sect">
+                        <section class ="info" style="display:flex;">
+                            <label>Email: </label>
+                            <p>a <c:out value="${user.email}"/></p>
+                        </section>  
+                </section>
+                <form action="userAccount_Update" method="post" id="userdetail-form">
                     <section class="setting-option" id="Username-sect">
                         <section class ="info" style="display:flex;">
                             <label>Username: </label>
                             <p>a<c:out value="${userDetail.fullname}"/></p>
                             <input type="text" name="username" id="username" class="non-display">
-                        </section>  
-                    </section>
-                    <section class="setting-option" id="Email-sect">
-                        <section class ="info" style="display:flex;">
-                            <label>Email: </label>
-                            <p>a <c:out value="${user.email}"/></p>
-                            <input type="text" name="email" id="email" class="non-display">
                         </section>  
                     </section>
                     <section class="setting-option" id="PhoneNumber-sect">

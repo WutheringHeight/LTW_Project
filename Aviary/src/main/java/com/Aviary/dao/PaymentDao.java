@@ -1,9 +1,10 @@
 package com.Aviary.dao;
 
 import com.Aviary.components.JDBIProvider;
+import com.Aviary.components.PaymentInfo;
 
 public class PaymentDao {
-    public static void createPayment(int receiptID, String deliveryAddress,String paymentMethod, String bankCode,String cardNumber){
+    public static void createPaymentInfo(int receiptID, String deliveryAddress,String paymentMethod, String bankCode,String cardNumber){
         JDBIProvider.get().useHandle(handle -> 
             handle.createUpdate("insert into Payment_Transaction(Receipt_ID, deliveryAddress, paymentMethod, bankCode, cardNumber) values(:receipt_ID, :deliveryAddress, :paymentMethod, :bankCode, :cardNumber);")
             .bind("receipt_ID", receiptID)
@@ -14,4 +15,11 @@ public class PaymentDao {
             .execute()
         );
     }
+    public static PaymentInfo getPaymentInfo(int userID){
+        return null;
+    }
+    public static void updatePaymentInfo(PaymentInfo paymentInfo){
+        
+    }
+
 }

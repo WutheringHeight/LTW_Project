@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.Aviary.components.Notification;
+import com.Aviary.components.PaymentInfo;
 import com.Aviary.components.UserDetail;
 import com.Aviary.dao.NotificationDao;
 import com.Aviary.dao.PaymentDao;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/userDetails_Account")
+@WebServlet("/userDetails_Payment")
 public class UserDetailPaymentController extends HttpServlet {
 
     @Override
@@ -25,12 +26,16 @@ public class UserDetailPaymentController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         int userID = Util.getFromSession(session,"userID",Integer.class);
-
-        request.getRequestDispatcher("UserDetails/userdetails-account.jsp").forward(request, response);
+        PaymentInfo paymentInfo = PaymentDao.getPaymentInfo(userID);
+        request.setAttribute("payment", paymentInfo);
+        List<Notification> notifs = NotificationDao.getNotification(userID);
+        request.setAttribute("notifications", notifs);
+        request.getRequestDispatcher("UserDetails/userdetails-payment.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+
     }
 }

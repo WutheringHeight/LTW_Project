@@ -86,23 +86,6 @@
                 <section class="setting-option"><p>Theme</p><select class="drop-box"><option>Light</option></select></section>
                 <section class="setting-option"><p>Text</p><select class="drop-box"><option>Normal</option></select></section>
             </div>
-            <h2>Privacy & Data</h2>
-            <div class="setting-section">
-                <section class="setting-option"><p>Allow Cookies </p>
-                    <% if(userSetting.){ %>  
-                        <input checked type="checkbox" class="toggle-button" name="allow-Cookies" id="allow-Cookies"> 
-                    <% }else{ %>
-                        <input type="checkbox" class="toggle-button" name="allow-Cookies" id="allow-Cookies">
-                    <% } >
-                </section>
-                <section class="setting-option"><p>Allow saved data </p>
-                    <% if(userSetting.){ %>  
-                        <input checked type="checkbox" class="toggle-button" name="allow-Saved-Data" id="allow-Saved-Data"> 
-                    <% }else{ %>
-                        <input type="checkbox" class="toggle-button" name="allow-Saved-Data" id="allow-Saved-Data">
-                    <% } >
-                </section>
-            </div>
            
         </section>
     </section>

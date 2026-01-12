@@ -6,4 +6,7 @@ public class UserSettingDao {
     public static UserSetting getUserSetting(int userID){
         return null;
     }
+    public static void updateUserSetting(UserSetting userSetting){
+        
+    }
 }
