@@ -39,14 +39,9 @@ public class UserDao {
             .bind("password", password);
         });
     }
-    public static UserDetail getUserDetail(int UserID){
-        return null;
+    public static int createNewGoogleUser(String email){
+        return 0;
     }
-
-    public static UserSetting getUserSetting(int UserID){
-        return null;
-    }
-
     
 
 }

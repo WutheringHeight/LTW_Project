@@ -2,9 +2,7 @@ package com.Aviary.controller;
 
 import java.io.IOException;
 
-import org.mindrot.jbcrypt.BCrypt;
-
-import com.Aviary.dao.UserDao;
+import com.Aviary.dao.UserDetailDao;
 import com.Aviary.service.UserService;
 
 import jakarta.servlet.ServletException;
@@ -32,7 +30,7 @@ public class LoginController extends HttpServlet{
         int id = UserService.validateUser(email,password);
         if (id != -1) {
             //valid log in info
-            boolean twoFA = UserDao.getUserDetail(id).getTwoFactorEnabled();
+            boolean twoFA = UserDetailDao.getUserDetail(id).getTwoFactorEnabled();
             if(twoFA){
                 HttpSession session = request.getSession();
                 session.setAttribute("email", email);
