@@ -15,8 +15,8 @@
             <ul>
                 <li><a href="product">Shop</a></li>
                 <li><a href="gallery#gallery">Gallery</a></li>
-                <li><a href="#">Reviews</a></li>
-                <li><a href="#">Về Chúng Tôi</a></li>
+<%--                <li><a href="#">Reviews</a></li>--%>
+<%--                <li><a href="#">Về Chúng Tôi</a></li>--%>
             </ul>
         </nav>
 

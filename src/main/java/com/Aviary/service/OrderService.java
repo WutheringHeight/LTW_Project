@@ -42,23 +42,53 @@ public class OrderService {
 
         orderDAO.insertOrderItems(orderId, items);
     }
-        public Map<String, String> validate(String name, String phone, String address) {
-            Map<String, String> errors = new HashMap<>();
 
-            if (name == null || name.trim().length() < 3) {
-                errors.put("name", "Họ tên phải có ít nhất 3 ký tự");
-            }
+    public Map<String, String> validate(String name, String phone, String address) {
+        Map<String, String> errors = new HashMap<>();
 
-            if (phone == null || !phone.matches("^0\\d{9}$")) {
-                errors.put("phone", "Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0)");
-            }
-
-            if (address == null || address.trim().length() < 10) {
-                errors.put("address", "Địa chỉ phải rõ ràng (ít nhất 10 ký tự)");
-            }
-
-            return errors;
+        if (name == null || name.trim().length() < 3) {
+            errors.put("name", "Họ tên phải có ít nhất 3 ký tự");
         }
+
+        if (phone == null || !phone.matches("^0\\d{9}$")) {
+            errors.put("phone", "Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0)");
+        }
+
+        if (address == null || address.trim().length() < 10) {
+            errors.put("address", "Địa chỉ phải rõ ràng (ít nhất 10 ký tự)");
+        }
+
+        return errors;
+    }
+
+    public List<Order> getAllOrders() {
+        List<Order> orders = orderDAO.findAll();
+        for (Order o : orders) {
+            o.setItems(orderDAO.findItemsByOrderId(o.getId()));
+        }
+        return orders;
+    }
+
+    public void updateStatus(int id, String status) {
+        orderDAO.updateStatus(id, status);
+    }
+
+    public void deleteOrder(int id) {
+        orderDAO.delete(id);
+    }
+
+    public List<Order> getOrdersPage(int page, int pageSize) {
+        List<Order> orders = orderDAO.findPage(page, pageSize);
+        for (Order o : orders) {
+            o.setItems(orderDAO.findItemsByOrderId(o.getId()));
+        }
+        return orders;
+    }
+
+    public int getTotalPages(int pageSize) {
+        int totalOrders = orderDAO.countOrders();
+        return (int) Math.ceil((double) totalOrders / pageSize);
+    }
 
 }
 
