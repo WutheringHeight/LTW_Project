@@ -6,6 +6,7 @@ import com.Aviary.components.Order;
 import com.Aviary.components.OrderItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,5 +42,23 @@ public class OrderService {
 
         orderDAO.insertOrderItems(orderId, items);
     }
+        public Map<String, String> validate(String name, String phone, String address) {
+            Map<String, String> errors = new HashMap<>();
+
+            if (name == null || name.trim().length() < 3) {
+                errors.put("name", "Họ tên phải có ít nhất 3 ký tự");
+            }
+
+            if (phone == null || !phone.matches("^0\\d{9}$")) {
+                errors.put("phone", "Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0)");
+            }
+
+            if (address == null || address.trim().length() < 10) {
+                errors.put("address", "Địa chỉ phải rõ ràng (ít nhất 10 ký tự)");
+            }
+
+            return errors;
+        }
+
 }
 

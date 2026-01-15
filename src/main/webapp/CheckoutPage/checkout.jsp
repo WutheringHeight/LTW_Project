@@ -1,33 +1,53 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="checkoutModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeCheckout()">&times;</span>
-
         <h2>Xác nhận đặt hàng</h2>
 
-        <!-- THÔNG TIN ĐƠN -->
-        <div class="order-summary">
-            <p><b>Tổng số lượng:</b> ${cartItems.size()} tranh</p>
-            <p><b>Tổng tiền:</b>
-                <fmt:formatNumber value="${totalCartPrice}" pattern="#,###"/>₫
-            </p>
-        </div>
+        <p>
+            <b>Tổng tiền:</b>
+            <span id="checkoutTotalText">
+            <fmt:formatNumber value="${totalCartPrice}" pattern="#,###"/>₫
+            </span>
+        </p>
 
-        <!-- FORM GỬI CHECKOUT -->
+        <input type="hidden" name="totalPrice" id="checkoutTotalInput"
+               value="${totalCartPrice}">
+
         <form action="checkout" method="post">
+
             <label>Họ tên</label>
-            <input type="text" name="name" required>
+            <input type="text" name="name"
+                   value="${oldName}">
+            <c:if test="${errors.name != null}">
+                <div class="error">${errors.name}</div>
+            </c:if>
 
             <label>Số điện thoại</label>
-            <input type="text" name="phone" required>
+            <input type="text" name="phone"
+                   value="${oldPhone}">
+            <c:if test="${errors.phone != null}">
+                <div class="error">${errors.phone}</div>
+            </c:if>
 
             <label>Địa chỉ</label>
-            <textarea name="address" required></textarea>
+            <textarea name="address">${oldAddress}</textarea>
+            <c:if test="${errors.address != null}">
+                <div class="error">${errors.address}</div>
+            </c:if>
 
-            <!-- gửi kèm tổng tiền -->
-            <input type="hidden" name="totalPrice" value="${totalCartPrice}">
-
-            <button type="submit" class="btn-order">Xác nhận đặt hàng</button>
+            <button type="button" class="btn-order" onclick="showConfirm()">
+                Xác nhận đặt hàng
+            </button>
         </form>
+        <!-- Modal -->
+        <div id="confirmModal" class="modalc">
+            <div class="modalc-content">
+                <h3>Bạn có chắc chắn muốn đặt hàng?</h3>
+                <button onclick="submitOrder()">Có</button>
+                <button onclick="closeConfirm()">Không</button>
+            </div>
+        </div>
+
     </div>
 </div>

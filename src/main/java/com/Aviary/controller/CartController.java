@@ -25,7 +25,6 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
         Map<Integer, CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
 
         if (cart == null) {
@@ -54,7 +53,21 @@ public class CartController extends HttpServlet {
             int delta = Integer.parseInt(request.getParameter("delta"));
 
             cartService.updateCart(cart, id, delta);
-            response.sendRedirect("cart");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            CartItem item = cart.get(id);
+
+            double totalCartPrice = cartService.calculateTotal(cart);
+            String json = String.format(
+                    "{\"quantity\":%d,\"itemTotal\":%.0f,\"cartTotal\":%.0f}",
+                    item.getQuantity(),
+                    item.getTotal(),
+                    totalCartPrice
+            );
+
+            response.getWriter().write(json);
             return;
         }
 

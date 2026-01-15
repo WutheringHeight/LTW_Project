@@ -4,83 +4,211 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Admin - Product Management</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminProductStyle.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminHeaderStyle.css"/>
 </head>
 <body>
-<h1>Quản lí sản phẩm</h1>
+<%@ include file="/templates/adminHeader.jsp" %>
 
-<!-- Form thêm sản phẩm -->
 <section class="add-product-container">
-    <h2 class="form-title">Thêm sản phẩm</h2>
-    <form action="Admin" method="post" enctype="multipart/form-data" class="product-form">
+        <form action="Admin" method="post" enctype="multipart/form-data" class="product-form">
+            <input type="hidden" name="action" value="add"/>
+            <h2 class="form-title">Thêm sản phẩm</h2>
+
+            <div class="form-group">
+                <label>Tên sản phẩm</label>
+                <input type="text" name="productName" required/>
+            </div>
+            <div class="form-group">
+                <label>Giá</label>
+                <input type="number" name="price" required/>
+            </div>
+            <div class="form-group">
+                <label>Mô tả</label>
+                <textarea name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Chủ đề</label>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select name="category" required>
+                        <c:forEach var="c" items="${categories}">
+                            <option value="${c.name}">${c.name}</option>
+                        </c:forEach>
+                    </select>
+                    <!-- Icon edit -->
+                    <button type="button" class="action-btn edit-btn" onclick="toggleCategoryManager()">✎</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Loại</label>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <select name="kind" required>
+                        <c:forEach var="k" items="${kinds}">
+                            <option value="${k}">${k}</option>
+                        </c:forEach>
+                    </select>
+                    <button type="button"
+                            class="action-btn edit-btn"
+                            onclick="toggleKindManager()">✎</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tồn kho</label>
+                <input type="number" name="stock" required/>
+            </div>
+
+            <div class="form-group image-upload">
+                <label>Upload ảnh sản phẩm</label>
+                <input type="file" name="thumbnail" accept="image/*" onchange="previewImage(this, 'preview0')"/>
+                <img id="preview0" class="image-preview" src="${pageContext.request.contextPath}/image/placeholder.png"
+                     alt="Preview 0"/>
+            </div>
+            <div class="form-group image-row">
+                <div class="image-upload">
+                    <label>Ảnh hiển thị:</label>
+                    <input type="file" name="extraImage1" accept="image/*" onchange="previewImage(this, 'preview1')"/>
+                    <img id="preview1" class="image-preview"
+                         src="${pageContext.request.contextPath}/image/placeholder.png"
+                         alt="Preview 1"/>
+                </div>
+
+                <div class="image-upload">
+                    <label>Ảnh kích thước:</label>
+                    <input type="file" name="extraImage2" accept="image/*" onchange="previewImage(this, 'preview2')"/>
+                    <img id="preview2" class="image-preview"
+                         src="${pageContext.request.contextPath}/image/placeholder.png"
+                         alt="Preview 2"/>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">THÊM SẢN PHẨM NGAY</button>
+        </form>
+</section>
+
+<!-- Overlay -->
+<div id="categoryOverlay" class="overlay" onclick="closeCategoryManager()"></div>
+
+<!-- Category Manager -->
+<div id="categoryManager" class="edit-category-container modal">
+    <h3 class="form-title">Quản lý chủ đề</h3>
+
+    <table class="category-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên</th>
+            <th>Thao tác</th>
+            <th>Ảnh</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="c" items="${categories}">
+            <tr>
+                <td>${c.id}</td>
+
+                <td>
+                    <input type="text" class="category-input" value="${c.name}">
+                    <input type="file" class="image-input">
+                </td>
+
+                <td>
+                    <button class="btn-save">Lưu</button>
+                    <button class="btn-delete">Xóa</button>
+                </td>
+
+                <td>
+                    <img src="${pageContext.request.contextPath}/${c.pathImage}"
+                         class="thumbnail">
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <h4 class="form-title">Thêm chủ đề mới</h4>
+    <form action="CategoryController"
+          method="post"
+          enctype="multipart/form-data"
+          class="category-form">
+
         <input type="hidden" name="action" value="add"/>
 
         <div class="form-group">
-            <label>Tên sản phẩm</label>
-            <input type="text" name="productName" required/>
-        </div>
-        <div class="form-group">
-            <label>Giá</label>
-            <input type="number" name="price" required/>
-        </div>
-        <div class="form-group">
-            <label>Mô tả</label>
-            <textarea name="description" required></textarea>
+            <input type="text"
+                   name="categoryName"
+                   placeholder="Tên chủ đề mới"
+                   required/>
         </div>
 
         <div class="form-group">
-            <label>Chủ đề</label>
-            <select name="category" required>
-                <option value="">-- Chọn chủ đề --</option>
-                <option value="Tranh Hoa">Tranh Hoa</option>
-                <option value="Phong Cảnh">Phong Cảnh</option>
-                <option value="Động Vật">Động Vật</option>
-                <option value="Trừu Trượng">Trừu Trượng</option>
-                <option value="Hoạt Hình">Hoạt Hình</option>
-                <option value="Phong Thủy">Phong Thủy</option>
-                <option value="Bản Đồ">Bản Đồ</option>
-                <option value="Tối Giản">Tối Giản</option>
-            </select>
+            <input type="file"
+                   name="pathImage"
+                   accept="image/*"
+                   required/>
         </div>
 
-        <div class="form-group">
-            <label>Loại</label>
-            <select name="kind" required>
-                <option value="">-- Chọn loại --</option>
-                <option value="Canvas">Canvas</option>
-                <option value="Sơn Dầu">Sơn Dầu</option>
-                <option value="Tráng Gương">Tráng Gương</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Tồn kho</label>
-            <input type="number" name="stock" required/>
-        </div>
-
-        <div class="form-group image-upload">
-            <label>Upload ảnh sản phẩm</label>
-            <input type="file" name="thumbnail" accept="image/*" onchange="previewImage(this, 'preview0')"/>
-            <img id="preview0" class="image-preview" src="${pageContext.request.contextPath}/image/placeholder.png" alt="Preview 0"/>
-        </div>
-        <div class="form-group image-row">
-            <div class="image-upload">
-                <label>Ảnh hiển thị:</label>
-                <input type="file" name="extraImage1" accept="image/*" onchange="previewImage(this, 'preview1')"/>
-                <img id="preview1" class="image-preview" src="${pageContext.request.contextPath}/image/placeholder.png" alt="Preview 1"/>
-            </div>
-
-            <div class="image-upload">
-                <label>Ảnh kích thước:</label>
-                <input type="file" name="extraImage2" accept="image/*" onchange="previewImage(this, 'preview2')"/>
-                <img id="preview2" class="image-preview" src="${pageContext.request.contextPath}/image/placeholder.png" alt="Preview 2"/>
-            </div>
-        </div>
-        <button type="submit" class="submit-btn">THÊM SẢN PHẨM NGAY</button>
+        <button type="submit" class="submit-btn">
+            Thêm
+        </button>
     </form>
-</section>
+    <button class="close-btn" onclick="closeCategoryManager()">✕</button>
+</div>
 
+<div id="kindOverlay" class="overlay" onclick="closeKindManager()"></div>
+<!-- Kind Manager -->
+<div id="kindManager" class="edit-category-container modal">
+    <h3 class="form-title">Quản lý loại sản phẩm</h3>
+
+    <table class="category-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên loại</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="k" items="${kinds}" varStatus="i">
+            <tr>
+                <td>${i.index + 1}</td>
+
+                <!-- UPDATE -->
+                <td>
+                    <form action="KindController" method="post" class="inline-form">
+                        <input type="hidden" name="action" value="update"/>
+                        <input type="hidden" name="oldName" value="${k}"/>
+
+                        <input type="text" name="newName"
+                               class="category-input"
+                               value="${k}" required/>
+                    <button type="submit" class="btn-save">Lưu</button>
+                    </form>
+                </td>
+                <td>
+                    <!-- DELETE -->
+                    <form action="KindController" method="post" class="inline-form">
+                        <input type="hidden" name="action" value="delete"/>
+                        <input type="hidden" name="name" value="${k}"/>
+                        <button type="submit" class="btn-delete"
+                                onclick="return confirm('Xóa loại này?')">
+                            Xóa
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+    <form id="addKindForm" class="category-form">
+        <input type="hidden" name="action" value="add">
+        <input type="text" name="kindName" placeholder="Tên loại mới" required/>
+        <button type="submit" class="submit-btn">Thêm</button>
+    </form>
+    <div id="kindMessage"></div>
+    <button class="close-btn" onclick="closeKindManager()">✕</button>
+</div>
 
 <!-- Danh sách sản phẩm -->
 <section class="list-section">
@@ -140,6 +268,28 @@
 </section>
 
 <script>
+    document.getElementById("addKindForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        formData.append("action", "add");
+
+        fetch("KindController", {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+                const msg = document.getElementById("kindMessage");
+                msg.textContent = data.message;
+                msg.className = data.success ? "alert success" : "alert error";
+
+                if (data.success) {
+                    this.reset();
+                    // 👉 có thể reload bảng kind bằng AJAX sau
+                }
+            });
+    });
     function previewImage(input, previewId) {
         const preview = document.getElementById(previewId);
         if (input.files && input.files[0]) {
@@ -152,6 +302,26 @@
             // Nếu không chọn file, quay về placeholder
             preview.src = "images/placeholder.png";
         }
+    }
+
+
+    function toggleCategoryManager() {
+        document.getElementById("categoryManager").style.display = "block";
+        document.getElementById("categoryOverlay").style.display = "block";
+    }
+
+    function closeCategoryManager() {
+        document.getElementById("categoryManager").style.display = "none";
+        document.getElementById("categoryOverlay").style.display = "none";
+    }
+    function toggleKindManager() {
+        document.getElementById("kindManager").style.display = "block";
+        document.getElementById("kindOverlay").style.display = "block";
+    }
+
+    function closeKindManager() {
+        document.getElementById("kindManager").style.display = "none";
+        document.getElementById("kindOverlay").style.display = "none";
     }
 </script>
 

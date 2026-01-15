@@ -1,19 +1,20 @@
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:  'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
+
 body {
     background-color: #1e2a38;
     color: #fff;
-    margin: 0;
-    padding: 40px;
 }
 
+/* ================= ADD PRODUCT ================= */
 .add-product-container {
     max-width: 600px;
-    margin: auto;
+    margin: 40px auto;
     background-color: #2c3e50;
     padding: 30px;
     border-radius: 12px;
@@ -22,7 +23,7 @@ body {
 
 .form-title {
     text-align: center;
-    font-size: 28px;
+    font-size: 26px;
     margin-bottom: 25px;
     color: #f39c12;
 }
@@ -34,65 +35,29 @@ body {
 .product-form label {
     display: block;
     margin-bottom: 6px;
-    font-weight: bold;
-    color: #ecf0f1;
+    font-weight: 600;
 }
 
-.product-form input[type="text"],
-.product-form input[type="number"],
-.product-form input[type="date"],
+.product-form input,
 .product-form select,
 .product-form textarea {
     width: 100%;
     padding: 10px;
-    border: none;
     border-radius: 6px;
+    border: none;
     background-color: #34495e;
     color: #fff;
 }
 
 .product-form textarea {
     resize: vertical;
-    height: 80px;
+    min-height: 80px;
 }
 
-.image-upload {
-    position: relative;
-}
-
-.image-placeholder {
-    margin-top: 10px;
-    width: 100%;
-    height: 150px;
-    background-color: #3b4b5c;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #7f8c8d;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #f39c12;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-    background-color: #e67e22;
-}
+/* ================= IMAGE ================= */
 .image-row {
     display: flex;
     gap: 20px;
-    justify-content: space-between;
 }
 
 .image-upload {
@@ -100,54 +65,71 @@ body {
 }
 
 .image-preview {
-    margin-top: 10px;
     width: 100%;
     max-height: 150px;
+    margin-top: 8px;
     object-fit: contain;
     border-radius: 6px;
     background-color: #34495e;
-}.list-section {
-     background-color: #2c3e50;
-     padding: 20px;
-     border-radius: 12px;
-     margin-top: 40px;
-     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
- }
+}
+
+/* ================= BUTTON ================= */
+.submit-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #f39c12;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #e67e22;
+}
+
+/* ================= PRODUCT LIST ================= */
+.list-section {
+    margin: 40px;
+    background-color: #2c3e50;
+    padding: 30px;
+    border-radius: 12px;
+}
 
 .product-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    color: #ecf0f1;
 }
 
-.product-table th, .product-table td {
-    border: 1px solid #34495e;
+.product-table th,
+.product-table td {
     padding: 12px;
+    border: 1px solid #34495e;
     text-align: center;
 }
 
 .product-table th {
     background-color: #1e2a38;
     color: #f39c12;
-    font-weight: bold;
 }
 
 .thumbnail {
     width: 60px;
-    height: auto;
+    height: 60px;
+    object-fit: contain;
     border-radius: 6px;
     background-color: #34495e;
     padding: 4px;
 }
 
+/* ================= ACTION BUTTON ================= */
 .action-btn {
     padding: 6px 12px;
-    border: none;
     border-radius: 6px;
-    font-weight: bold;
+    border: none;
+    font-weight: 600;
     cursor: pointer;
-    margin: 2px;
 }
 
 .edit-btn {
@@ -155,23 +137,226 @@ body {
     color: #fff;
 }
 
-.edit-btn:hover {
-    background-color: #2980b9;
-}
-
 .delete-btn {
     background-color: #e74c3c;
     color: #fff;
 }
 
-.delete-btn:hover {
-    background-color: #c0392b;
-}
-.thumbnail {
-    width: 60px;
-    height: auto;
-    border-radius: 6px;
+/* ================================================= */
+/* ========== CATEGORY MANAGER (CÔ LẬP) ============= */
+/* ================================================= */
+
+#categoryManager {
+    margin-top: 25px;
     background-color: #34495e;
-    padding: 4px;
-    object-fit: contain;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* bảng */
+#categoryManager .category-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#categoryManager th,
+#categoryManager td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+#categoryManager thead {
+    background-color: #2c3e50;
+}
+
+#categoryManager tbody tr {
+    border-bottom: 1px solid #3d566e;
+}
+
+/* ===== cột tên ===== */
+#categoryManager .col-name {
+    width: 300px;
+}
+
+#categoryManager .name-area {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#categoryManager .category-input {
+    width: 220px;
+    height: 32px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none;
+    background-color: #2c3e50;
+    color: #fff;
+}
+#kindManager .category-input {
+    width: 220px;
+    height: 32px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none;
+    background-color: #2c3e50;
+    color: #fff;
+}
+#categoryManager .image-input {
+    font-size: 13px;
+}
+
+/* ===== cột thao tác ===== */
+#categoryManager .col-action {
+    width: 150px;
+}
+
+#categoryManager .action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+#categoryManager .btn-save,
+#categoryManager .btn-delete {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+#kindManager .btn-save,
+#kindManager .btn-delete {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+#categoryManager .btn-save {
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+#categoryManager .btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* ===== ảnh preview ===== */
+#categoryManager .preview-cell {
+    width: 90px;
+    text-align: center;
+}
+
+#categoryManager .thumbnail {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+/* nền mờ */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 999;
+}
+
+/* modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: #34495e;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    display: none;
+    z-index: 1000;
+    scrollbar-width: none;
+}
+
+/* nút đóng */
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
+/* ===== FORM THÊM CHỦ ĐỀ ===== */
+.category-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #3d566e;
+}
+
+/* input text + file */
+.category-form .form-group {
+    margin: 0;
+}
+
+.category-form input[type="text"] {
+    width: 180px;
+    height: 34px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none;
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+.category-form input[type="text"]::placeholder {
+    color: #95a5a6;
+}
+
+.category-form input[type="file"] {
+    font-size: 13px;
+    color: #ecf0f1;
+}
+
+/* nút thêm */
+.category-form .submit-btn {
+    height: 34px;
+    padding: 0 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.category-form .submit-btn:hover {
+    background-color: #2980b9;
+}
+.alert {
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.alert.success {
+    background: #e6f9ee;
+    color: #1b7f4b;
+}
+
+.alert.error {
+    background: #fdecea;
+    color: #b42318;
 }

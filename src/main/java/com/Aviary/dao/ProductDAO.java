@@ -1,9 +1,6 @@
 package com.Aviary.dao;
 
-import com.Aviary.components.CartItem;
-import com.Aviary.components.JDBIProvider;
-import com.Aviary.components.Product;
-import com.Aviary.components.ProductImage;
+import com.Aviary.components.*;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
 
@@ -346,6 +343,15 @@ public class ProductDAO {
 
             return item;
         });
+    }
+    public List<Category> getAllCategories() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery(
+                                "SELECT id, name, path_image FROM category"
+                        )
+                        .mapToBean(Category.class)
+                        .list()
+        );
     }
 
 

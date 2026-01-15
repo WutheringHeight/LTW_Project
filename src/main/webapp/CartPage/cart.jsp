@@ -41,6 +41,70 @@
         padding: 8px;
         margin-bottom: 10px;
     }
+    .error {
+        color: #e53935;
+        font-size: 13px;
+        margin-top: -6px;
+        margin-bottom: 10px;
+    }
+
+    /* ===== MODAL CONFIRM ===== */
+    .modalc {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+    .modalc-content {
+        background: #fff;
+        width: 380px;
+        margin: 15% auto;
+        padding: 25px;
+        border-radius: 6px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        animation: popup 0.25s ease;
+    }
+
+    .modalc-content h3 {
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .modalc-content button {
+        min-width: 90px;
+        padding: 8px 16px;
+        margin: 0 6px;
+        border-radius: 4px;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .modalc-content button:first-of-type {
+        background-color: #ff9800;
+        color: #fff;
+    }
+
+    .modalc-content button:first-of-type:hover {
+        background-color: #e68a00;
+    }
+
+    .modalc-content button:last-of-type {
+        background-color: #eee;
+        color: #333;
+    }
+
+    .modalc-content button:last-of-type:hover {
+        background-color: #ddd;
+    }
+
+
     </style>
 </head>
 <body>
@@ -51,7 +115,7 @@
 <div class="cart-container">
     <div class="cart-title-area">
         <h2>Giỏ Hàng Của Tôi</h2>
-        <a href="products" class="link-more">Xem & lựa thêm</a>
+        <a href="home" class="link-more">Xem & lựa thêm</a>
     </div>
 
     <div class="cart-header">
@@ -72,14 +136,14 @@
 
             <div class="qty-control">
                 <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
-                <input type="text" class="qty-input" value="${item.quantity}" readonly>
+                <input type="text" id="qty-${item.id}" class="qty-input" value="${item.quantity}" readonly>
                 <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
                 <a href="cart?action=remove&id=${item.id}" class="btn-remove">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>
 
-            <div class="item-total">
+            <div class="item-total" id="total-${item.id}">
                 <fmt:formatNumber value="${item.total}" pattern="#,###"/>₫
             </div>
         </div>
@@ -87,7 +151,10 @@
 
     <div class="cart-summary">
         <div class="total-label">
-            Tổng đơn hàng: <fmt:formatNumber value="${totalCartPrice}" pattern="#,###"/>₫
+            Tổng đơn hàng:
+            <span id="cartTotal">
+             <fmt:formatNumber value="${totalCartPrice}" pattern="#,###"/>₫
+            </span>
         </div>
         <div class="free-ship-info">
             <i class="fa-solid fa-truck-fast"></i>
@@ -101,7 +168,28 @@
 
 <script>
     function updateQty(id, delta) {
-        window.location.href = "cart?action=update&id=" + id + "&delta=" + delta;
+        fetch("cart?action=update&id=" + id + "&delta=" + delta)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("qty-" + id).value = data.quantity;
+
+                document.getElementById("total-" + id).innerText =
+                    formatMoney(data.itemTotal);
+
+                document.getElementById("cartTotal").innerText =
+                    formatMoney(data.cartTotal);
+
+                document.getElementById("checkoutTotalText").innerText =
+                    data.cartTotal.toLocaleString() + "₫";
+
+                document.getElementById("checkoutTotalInput").value =
+                    data.cartTotal;
+            })
+            .catch(err => console.error(err));
+    }
+
+    function formatMoney(number) {
+        return new Intl.NumberFormat('vi-VN').format(number) + "₫";
     }
 
     function openCheckout() {
@@ -114,9 +202,8 @@
 
     window.onload = function () {
         const params = new URLSearchParams(window.location.search);
-        if (params.get("autoCheckout") === "true") {
-            openCheckout();
-        }
+        if (params.get("autoCheckout") === "true") { openCheckout(); }
+        <c:if test="${autoCheckout}"> openCheckout(); </c:if>
     }
     window.onclick = function(event) {
         const modal = document.getElementById("checkoutModal");
@@ -124,6 +211,17 @@
             modal.style.display = "none";
         }
     }
+
+        function showConfirm() {
+        document.getElementById("confirmModal").style.display = "block";
+    }
+        function closeConfirm() {
+        document.getElementById("confirmModal").style.display = "none";
+    }
+        function submitOrder() {
+        document.querySelector("form[action$='checkout']").submit();
+    }
+
 </script>
 
 </body>

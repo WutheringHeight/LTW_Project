@@ -1,5 +1,6 @@
 package com.Aviary.service;
 
+import com.Aviary.components.Category;
 import com.Aviary.dao.ProductDAO;
 import com.Aviary.components.Product;
 
@@ -42,4 +43,5 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
     }
+    public List<Category> getAllCategories() {return productDAO.getAllCategories();}
 }

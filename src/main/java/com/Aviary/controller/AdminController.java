@@ -1,7 +1,9 @@
 package com.Aviary.controller;
 
+import com.Aviary.components.Category;
 import com.Aviary.components.Product;
 import com.Aviary.components.ProductImage;
+import com.Aviary.service.KindService;
 import com.Aviary.service.ProductImageService;
 import com.Aviary.service.ProductService;
 import jakarta.servlet.ServletException;
@@ -26,6 +28,7 @@ import java.util.List;
 public class AdminController extends HttpServlet {
     private ProductService productService = new ProductService();
     private ProductImageService productImageService = new ProductImageService();
+    KindService kindService = new KindService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -90,7 +93,11 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // load danh sách sản phẩm
+        List<Category> categories = productService.getAllCategories();
         List<Product> products = productService.getAllProducts();
+        List<String> kinds = kindService.getAll();
+        request.setAttribute("kinds",kinds );
+        request.setAttribute("categories", categories);
         request.setAttribute("products", products);
         request.getRequestDispatcher("AdminPage/adminProduct.jsp").forward(request, response);
     }
