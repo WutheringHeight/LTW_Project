@@ -151,3 +151,15 @@ body {
 }
 
 .btn-order:hover { background-color: #e68a00; }
+.error {
+    color: #e53935;
+    font-size: 11px;
+    margin-top: 5px;
+    font-style: italic;
+}
+.qty-btn:disabled {
+    background-color: #eee;
+    color: #bbb;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+}

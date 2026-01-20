@@ -26,6 +26,11 @@
         <!-- Bên phải: thông tin sản phẩm -->
         <div class="product-info">
             <h2>${product.productName}</h2>
+            <c:if test="${product.stock == 0}">
+                <div class="out-of-stock">
+                    ❌ HẾT HÀNG
+                </div>
+            </c:if>
             <p class="product-price">
                 <fmt:formatNumber value="${product.price}" type="number" groupingUsed="true"/>₫
             </p>
@@ -34,24 +39,34 @@
             <div class="product-meta">
                 <p><strong>🎭 Thể loại:</strong> ${product.kind}</p>
                 <p><strong>🔥 Đã bán:</strong> ${product.soldQuantity} sản phẩm</p>
+                <p><strong>🔥 Còn:</strong> ${product.stock} sản phẩm</p>
             </div>
 
             <p class="product-note">🚚 Miễn phí ship cho đơn hàng từ 800K...</p>
             <p class="product-note">🚚 ${product.description}</p>
 
             <!-- Số lượng -->
-            <div class="quantity-selector">
-                <button type="button" onclick="changeQuantity(-1)">-</button>
-                <input type="number" id="product-qty" value="1" min="1" readonly/>
-                <button type="button" onclick="changeQuantity(1)">+</button>
-            </div>
+            <c:if test="${product.stock > 0}">
+                <div class="quantity-selector">
+                    <button type="button" class="qty-btn" onclick="changeQuantity(-1)">-</button>
+                    <input type="number" id="product-qty" value="1" min="1" max="${product.stock}"
+                           onchange="validateInput(this)"/>
+                    <button type="button" class="qty-btn" onclick="changeQuantity(1)">+</button>
+                </div>
+            </c:if>
 
             <!-- Nút hành động -->
-            <div class="action-buttons">
-                <button class="add-to-cart" onclick="addToCart(${product.id})">Thêm vào giỏ </button>
+            <c:if test="${product.stock > 0}">
+                <div class="action-buttons">
+                    <button class="add-to-cart" onclick="addToCart(${product.id})">
+                        Thêm vào giỏ
+                    </button>
 
-                <button class="quick-order" onclick="quickOrder(${product.id})">Đặt hàng nhanh</button>
-            </div>
+                    <button class="quick-order" onclick="quickOrder(${product.id})">
+                        Đặt hàng nhanh
+                    </button>
+                </div>
+            </c:if>
 
             <!-- Cam kết dịch vụ -->
             <ul class="service-guarantees">
@@ -76,10 +91,50 @@
 <script>
     function changeQuantity(delta) {
         const qtyInput = document.getElementById("product-qty");
-        let current = parseInt(qtyInput.value);
-        if (current + delta >= 1) {
-            qtyInput.value = current + delta;
+        const maxStock = ${product.stock}; // Số lượng tồn kho từ Server
+        let current = parseInt(qtyInput.value) || 1;
+
+        let newValue = current + delta;
+
+        // Ràng buộc giá trị trong khoảng [1, maxStock]
+        if (newValue < 1) {
+            newValue = 1;
+        } else if (newValue > maxStock) {
+            newValue = maxStock;
+            alert("Chỉ còn " + maxStock + " sản phẩm trong kho!");
         }
+
+        qtyInput.value = newValue;
+        updateButtonStates(newValue, maxStock);
+    }
+
+    // Hàm cập nhật trạng thái bật/tắt của nút
+    function updateButtonStates(value, max) {
+        const btnMinus = document.querySelector(".quantity-selector button:first-child");
+        const btnPlus = document.querySelector(".quantity-selector button:last-child");
+
+        btnMinus.disabled = (value <= 1);
+        btnPlus.disabled = (value >= max);
+    }
+
+    // Gọi hàm lần đầu để thiết lập trạng thái nút khi trang vừa load
+    window.onload = function() {
+        const maxStock = ${product.stock};
+        const current = parseInt(document.getElementById("product-qty").value);
+        updateButtonStates(current, maxStock);
+    };
+    function validateInput(input) {
+        const maxStock = ${product.stock};
+        let val = parseInt(input.value);
+
+        if (isNaN(val) || val < 1) {
+            input.value = 1;
+        } else if (val > maxStock) {
+            input.value = maxStock;
+            alert("Số lượng yêu cầu vượt quá tồn kho!");
+        }
+
+        updateButtonStates(parseInt(input.value), maxStock);
     }
 
     function addToCart(productId) {

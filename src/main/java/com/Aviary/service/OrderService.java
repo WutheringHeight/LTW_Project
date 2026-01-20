@@ -4,7 +4,7 @@ import com.Aviary.components.CartItem;
 import com.Aviary.dao.OrderDAO;
 import com.Aviary.components.Order;
 import com.Aviary.components.OrderItem;
-
+import com.Aviary.dao.ProductDAO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
 public class OrderService {
 
     private OrderDAO orderDAO = new OrderDAO();
-
+    private ProductDAO productDAO = new ProductDAO();
     public void placeOrder(Map<Integer, CartItem> cart, String name, String phone, String address) {
         Order order = new Order();
         order.setCustomerName(name);
@@ -38,6 +38,8 @@ public class OrderService {
             item.setPrice(c.getPrice());
             item.setQuantity(c.getQuantity());
             items.add(item);
+
+            productDAO.updateAfterCheckout(c.getId(), c.getQuantity());
         }
 
         orderDAO.insertOrderItems(orderId, items);

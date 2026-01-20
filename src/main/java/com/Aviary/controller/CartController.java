@@ -72,8 +72,15 @@ public class CartController extends HttpServlet {
         }
 
         if ("remove".equals(action)) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            cart.remove(id);
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                if (cart != null) {
+                    cart.remove(id);
+                    session.setAttribute("cart", cart);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             response.sendRedirect("cart");
             return;
         }

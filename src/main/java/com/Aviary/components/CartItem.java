@@ -7,9 +7,17 @@ public class CartItem {
     private String image;
     private double price;
     private int quantity;
-
+    private int stock;
     // Getters, Setters, Constructor
 
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
     public String getName() {
         return name;

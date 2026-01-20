@@ -323,7 +323,7 @@ public class ProductDAO {
         return jdbi.withHandle(handle -> {
 
             CartItem item = handle.createQuery(
-                            "SELECT id, productName AS name, kind AS type, price " +
+                            "SELECT id, productName AS name, kind AS type, price,stock " +
                                     "FROM product WHERE id = :id")
                     .bind("id", productId)
                     .mapToBean(CartItem.class)
@@ -462,6 +462,13 @@ public class ProductDAO {
                         .list()
         );
     }
-
+    public void updateAfterCheckout(int productId, int quantity) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE product SET stock = stock - :qty, soldQuantity = soldQuantity + :qty WHERE id = :id AND stock  >= :qty")
+                        .bind("qty", quantity)
+                        .bind("id", productId)
+                        .execute()
+        );
+    }
 
 }

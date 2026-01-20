@@ -135,13 +135,33 @@
             </div>
 
             <div class="qty-control">
-                <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                <button class="qty-btn"
+                        onclick="updateQty(${item.id}, -1)"
+                        <c:if test="${item.quantity <= 1}">disabled</c:if>>
+                    -
+                </button>
+
+
                 <input type="text" id="qty-${item.id}" class="qty-input" value="${item.quantity}" readonly>
-                <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+
+                <button class="qty-btn"
+                        id="btn-plus-${item.id}"
+                        onclick="updateQty(${item.id}, 1)"
+                        <c:if test="${item.quantity >= item.stock}">disabled</c:if>>
+                    +
+                </button>
+
+
                 <a href="cart?action=remove&id=${item.id}" class="btn-remove">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>
+
+            <c:if test="${item.quantity >= item.stock}">
+                <div id="stock-msg-${item.id}" class="error">
+                    Số lượng trong kho đã đạt giới hạn (${item.stock})
+                </div>
+            </c:if>
 
             <div class="item-total" id="total-${item.id}">
                 <fmt:formatNumber value="${item.total}" pattern="#,###"/>₫
@@ -171,7 +191,20 @@
         fetch("cart?action=update&id=" + id + "&delta=" + delta)
             .then(response => response.json())
             .then(data => {
-                document.getElementById("qty-" + id).value = data.quantity;
+                const qtyInput = document.getElementById("qty-" + id);
+                qtyInput.value = data.quantity;
+
+                const parent = qtyInput.parentElement;
+                const btnMinus = parent.querySelector("button:first-child");
+                const btnPlus = document.getElementById("btn-plus-" + id);
+
+                btnMinus.disabled = (data.quantity <= 1);
+
+                if (data.quantity >= data.maxStock) {
+                    btnPlus.disabled = true;
+                } else {
+                    btnPlus.disabled = false;
+                }
 
                 document.getElementById("total-" + id).innerText =
                     formatMoney(data.itemTotal);
