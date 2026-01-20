@@ -210,4 +210,13 @@ body {
     min-width: 240px;
     border: 1px solid #ccc;
     border-radius: 6px;
-}
+}.status-locked {
+     display: inline-block;
+     padding: 8px 12px;
+     background-color: #34495e;
+     color: #bdc3c7;
+     border-radius: 4px;
+     font-size: 13px;
+     font-style: italic;
+     border: 1px dashed #7f8c8d;
+ }

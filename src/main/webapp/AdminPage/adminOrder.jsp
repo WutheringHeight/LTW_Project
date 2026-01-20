@@ -129,22 +129,34 @@
                         </td>
 
                         <td>
-                            <form action="${pageContext.request.contextPath}/AdminOrder" method="post" style="display:inline;">
-                                <input type="hidden" name="action" value="updateStatus"/>
-                                <input type="hidden" name="id" value="${o.id}"/>
-                                <select name="status" class="status-select">
-                                    <option value="Pending" ${o.status == 'Pending' ? 'selected' : ''}>Chờ xử lý</option>
-                                    <option value="Processing" ${o.status == 'Processing' ? 'selected' : ''}>Đang đóng gói</option>
-                                    <option value="Completed" ${o.status == 'Completed' ? 'selected' : ''}>Đã hoàn thành</option>
-                                    <option value="Cancelled" ${o.status == 'Cancelled' ? 'selected' : ''}>Đã hủy</option>
-                                </select>
-                                <button type="submit" class="action-btn update-btn">Cập nhật</button>
-                            </form>
-                            <form action="${pageContext.request.contextPath}/AdminOrder" method="post" style="display:inline;" onsubmit="return confirm('Xóa đơn hàng này?');">
-                                <input type="hidden" name="action" value="delete"/>
-                                <input type="hidden" name="id" value="${o.id}"/>
-                                <button type="submit" class="action-btn delete-btn">Xóa</button>
-                            </form>
+                            <c:choose>
+                                <%-- Nếu đơn hàng đã Hủy hoặc đã Hoàn thành thì không cho sửa --%>
+                                <c:when test="${o.status == 'Cancelled' || o.status == 'Completed'}">
+                                <span class="status-locked">
+                                    <i class="fa fa-lock"></i> Đã đóng đơn
+                                </span>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <form action="${pageContext.request.contextPath}/AdminOrder" method="post" style="display:inline;"onsubmit="return confirmUpdateStatus(this);">
+                                        <input type="hidden" name="action" value="updateStatus"/>
+                                        <input type="hidden" name="id" value="${o.id}"/>
+                                        <select name="status" class="status-select">
+                                            <option value="Pending" ${o.status == 'Pending' ? 'selected' : ''}>Chờ xử lý</option>
+                                            <option value="Processing" ${o.status == 'Processing' ? 'selected' : ''}>Đang đóng gói</option>
+                                            <option value="Completed" ${o.status == 'Completed' ? 'selected' : ''}>Đã hoàn thành</option>
+                                            <option value="Cancelled" ${o.status == 'Cancelled' ? 'selected' : ''}>Đã hủy</option>
+                                        </select>
+                                        <button type="submit" class="action-btn update-btn">Cập nhật</button>
+                                    </form>
+
+                                    <form action="${pageContext.request.contextPath}/AdminOrder" method="post" style="display:inline;" onsubmit="return confirm('Xóa đơn hàng này?');">
+                                        <input type="hidden" name="action" value="delete"/>
+                                        <input type="hidden" name="id" value="${o.id}"/>
+                                        <button type="submit" class="action-btn delete-btn">Xóa</button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
@@ -164,8 +176,6 @@
         </c:if>
 
         <c:forEach var="i" begin="1" end="${totalPages}">
-<%--            <a href="${pageContext.request.contextPath}/AdminOrder?page=${i}"--%>
-<%--               class="page-btn ${i == currentPage ? 'active' : ''}">${i}</a>--%>
             <a href="${pageContext.request.contextPath}/AdminOrder?page=${i}&status=${status}&fromDate=${fromDate}&toDate=${toDate}&keyword=${keyword}"
                class="page-btn ${i == currentPage ? 'active' : ''}">
                     ${i}
@@ -177,6 +187,22 @@
         </c:if>
     </div>
 </div>
+<script>
+    function confirmUpdateStatus(form) {
+        const statusSelect = form.querySelector('select[name="status"]');
+        const selectedStatus = statusSelect.value;
+        const orderId = form.querySelector('input[name="id"]').value;
 
+        let message = "Bạn có chắc chắn muốn cập nhật đơn hàng #" + orderId + " sang trạng thái này?";
+
+        if (selectedStatus === "Cancelled") {
+            message = "CẢNH BÁO: Khi hủy đơn hàng #" + orderId + ", hệ thống sẽ tự động CỘNG LẠI số lượng sản phẩm vào kho hàng. Bạn vẫn muốn tiếp tục?";
+        } else if (selectedStatus === "Completed") {
+            message = "Xác nhận đơn hàng #" + orderId + " đã hoàn tất thành công?";
+        }
+
+        return confirm(message);
+    }
+</script>
 </body>
 </html>

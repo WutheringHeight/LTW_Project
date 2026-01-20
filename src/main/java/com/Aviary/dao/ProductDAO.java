@@ -470,5 +470,14 @@ public class ProductDAO {
                         .execute()
         );
     }
+    public void returnStockAfterCancel(int productId, int quantity) {
+        String sql = "UPDATE product SET stock = stock + :qty, soldQuantity = soldQuantity - :qty WHERE id = :id";
+        jdbi.useHandle(handle -> {
+            handle.createUpdate(sql)
+                    .bind("qty", quantity)
+                    .bind("id", productId)
+                    .execute();
+        });
+    }
 
 }

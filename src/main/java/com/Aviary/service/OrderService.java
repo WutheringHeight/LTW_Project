@@ -71,10 +71,6 @@ public class OrderService {
         return orders;
     }
 
-    public void updateStatus(int id, String status) {
-        orderDAO.updateStatus(id, status);
-    }
-
     public void deleteOrder(int id) {
         orderDAO.delete(id);
     }
@@ -92,5 +88,17 @@ public class OrderService {
         return (int) Math.ceil((double) total/ pageSize);
     }
 
+    public void updateStatus(int id, String status) {
+        if ("Cancelled".equalsIgnoreCase(status)) {
+
+            List<OrderItem> items = orderDAO.findItemsByOrderId(id);
+
+            for (OrderItem item : items) {
+                productDAO.returnStockAfterCancel(item.getProductId(), item.getQuantity());
+            }
+        }
+        // 3. Cập nhật trạng thái đơn hàng
+        orderDAO.updateStatus(id, status);
+    }
 }
 
