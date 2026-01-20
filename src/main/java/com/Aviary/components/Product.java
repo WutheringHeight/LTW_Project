@@ -78,7 +78,7 @@ public class Product {
         return category_id;
     }
 
-    public void setCategory_id(int category) {
+    public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
 
@@ -99,4 +99,14 @@ public class Product {
     }
     public LocalDateTime  getCreatedAt() {return createdAt;}
     public void setCreatedAt(LocalDateTime  createdAt) {this.createdAt = createdAt;}
+    @Override
+    public String toString() {
+        return "Product{" +
+                ", category_id=" + category_id +
+                ", kind='" + kind + '\'' +
+                ", stock=" + stock +
+                ", imagesCount=" + (images != null ? images.size() : 0) +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

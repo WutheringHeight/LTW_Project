@@ -14,41 +14,40 @@ import jakarta.servlet.annotation.*;
 @WebServlet("/KindController")
 public class KindController extends HttpServlet {
     private KindService service = new KindService();
-
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
 
-        String action = req.getParameter("action");
         try {
             switch (action) {
                 case "add":
-                    service.add(req.getParameter("kindName"));
+                    service.add(request.getParameter("kindName"));
+                    request.setAttribute("msg", "Thêm loại thành công");
                     break;
 
                 case "update":
                     service.update(
-                            req.getParameter("oldName"),
-                            req.getParameter("newName")
+                            request.getParameter("oldName"),
+                            request.getParameter("newName")
                     );
+                    request.setAttribute("msg", "Cập nhật loại thành công");
                     break;
 
                 case "delete":
-                    service.delete(req.getParameter("name"));
+                    service.delete(request.getParameter("name"));
+                    request.setAttribute("msg", "Xóa loại thành công");
                     break;
             }
-
-            resp.getWriter().print(
-                    "{\"success\":true,\"message\":\"Thao tác thành công\"}"
-            );
+            request.setAttribute("kinds", service.getAll());
+            response.sendRedirect(request.getContextPath() + "/Admin");
 
         } catch (Exception e) {
-            String msg = e.getMessage().replace("\"", "'");
-            resp.getWriter().print(
-                    "{\"success\":false,\"message\":\"" + msg + "\"}"
-            );
+            request.setAttribute("kinds", service.getAll());
+            request.setAttribute("msg", "Lỗi: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/Admin");
+
         }
     }
+
 }

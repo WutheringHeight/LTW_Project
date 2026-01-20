@@ -44,4 +44,13 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
     public List<Category> getAllCategories() {return productDAO.getAllCategories();}
+
+    public List<Product> getProductsPage(int page, int pageSize) {
+        return productDAO.findPage(page, pageSize);
+    }
+    public int getTotalPages(int pageSize) {
+        int totalProducts = productDAO.countProducts();
+        return (int) Math.ceil((double) totalProducts / pageSize);
+    }
+
 }

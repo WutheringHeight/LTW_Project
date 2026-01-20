@@ -353,6 +353,38 @@ public class ProductDAO {
                         .list()
         );
     }
+    public List<Product> findPage(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        return jdbi.withHandle(handle -> {
+            List<Product> products = handle.createQuery(
+                            "SELECT * FROM product ORDER BY id DESC LIMIT :limit OFFSET :offset")
+                    .bind("limit", pageSize)
+                    .bind("offset", offset)
+                    .mapToBean(Product.class)
+                    .list();
+
+            for (Product p : products) {
+                List<ProductImage> images = handle.createQuery(
+                                "SELECT * FROM product_image WHERE product_id = :id")
+                        .bind("id", p.getId())
+                        .mapToBean(ProductImage.class)
+                        .list();
+                p.setImages(images);
+            }
+            System.out.println(products.get(0));
+            System.out.println(products.get(1));
+            return products;
+        });
+    }
+
+    public int countProducts() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM product")
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
 
 
 }

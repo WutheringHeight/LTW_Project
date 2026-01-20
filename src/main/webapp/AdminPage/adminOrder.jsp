@@ -61,7 +61,7 @@
                             </ul>
                         </td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/AdminOrder" method="post" style="display:inline;">
+                            <form action="${pageContext.request.contextPath}/AdminOrder" method="post" style="display:inline;" onsubmit="return confirm('Xác nhận cập nhập trạng thái đơn hàng này?')">
                                 <input type="hidden" name="action" value="updateStatus"/>
                                 <input type="hidden" name="id" value="${o.id}"/>
                                 <select name="status" class="status-select">
@@ -85,22 +85,24 @@
                 <tr><td colspan="9">Chưa có đơn hàng</td></tr>
             </c:otherwise>
         </c:choose>
-        <!-- Thanh phân trang -->
-        <div class="pagination">
-            <c:if test="${currentPage > 1}">
-            <a href="${pageContext.request.contextPath}/AdminOrder?page=${currentPage - 1}" class="page-btn">« Trước</a>
-            </c:if>
 
-            <c:forEach var="i" begin="1" end="${totalPages}">
-            <a href="${pageContext.request.contextPath}/AdminOrder?page=${i}"
-               class="page-btn ${i == currentPage ? 'active' : ''}">${i}</a>
-            </c:forEach>
-
-            <c:if test="${currentPage < totalPages}">
-            <a href="${pageContext.request.contextPath}/AdminOrder?page=${currentPage + 1}" class="page-btn">Sau »</a>
-            </c:if>
         </tbody>
     </table>
+    <!-- Thanh phân trang -->
+    <div class="pagination">
+        <c:if test="${currentPage > 1}">
+            <a href="${pageContext.request.contextPath}/AdminOrder?page=${currentPage - 1}" class="page-btn">« Trước</a>
+        </c:if>
+
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <a href="${pageContext.request.contextPath}/AdminOrder?page=${i}"
+               class="page-btn ${i == currentPage ? 'active' : ''}">${i}</a>
+        </c:forEach>
+
+        <c:if test="${currentPage < totalPages}">
+            <a href="${pageContext.request.contextPath}/AdminOrder?page=${currentPage + 1}" class="page-btn">Sau »</a>
+        </c:if>
+    </div>
 </div>
 
 </body>

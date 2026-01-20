@@ -83,7 +83,20 @@ public class AdminController extends HttpServlet {
             p.setKind(request.getParameter("kind"));
             p.setStock(Integer.parseInt(request.getParameter("stock")));
             p.setDescription(request.getParameter("description"));
-            // xử lý upload ảnh nếu có
+            // xử lý upload
+            Part filePart = request.getPart("thumbnail");
+            if (filePart != null && filePart.getSize() > 0) {
+                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                String uploadPath = "E:/2025learn/uploads";
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) uploadDir.mkdir();
+                filePart.write(uploadPath + File.separator + fileName);
+                p.setThumbnail("uploads/" + fileName);
+            } else {
+                Product old = productService.getProductById(p.getId());
+                p.setThumbnail(old.getThumbnail());
+            }
+
             productService.updateProduct(p);
             System.out.println("3");
             response.sendRedirect(request.getContextPath() + "/Admin");
@@ -92,13 +105,19 @@ public class AdminController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // load danh sách sản phẩm
+        int page = 1;
+        int pageSize = 10;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null) { page = Integer.parseInt(pageParam); }
         List<Category> categories = productService.getAllCategories();
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productService.getProductsPage(page, pageSize);
         List<String> kinds = kindService.getAll();
+        int totalPages = productService.getTotalPages(pageSize);
         request.setAttribute("kinds",kinds );
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("AdminPage/adminProduct.jsp").forward(request, response);
     }
 }
