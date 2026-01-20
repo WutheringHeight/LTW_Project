@@ -4,6 +4,7 @@ import com.Aviary.components.*;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.Query;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -340,7 +341,6 @@ public class ProductDAO {
                     .orElse(null);
 
             item.setImage(image);
-
             return item;
         });
     }
@@ -353,37 +353,79 @@ public class ProductDAO {
                         .list()
         );
     }
-    public List<Product> findPage(int page, int pageSize) {
+    public List<Product> findPageWithFilter(String keyword, String categoryId, String kind, int page, int pageSize ) {
         int offset = (page - 1) * pageSize;
-        return jdbi.withHandle(handle -> {
-            List<Product> products = handle.createQuery(
-                            "SELECT * FROM product ORDER BY id DESC LIMIT :limit OFFSET :offset")
-                    .bind("limit", pageSize)
-                    .bind("offset", offset)
-                    .mapToBean(Product.class)
-                    .list();
 
-            for (Product p : products) {
-                List<ProductImage> images = handle.createQuery(
-                                "SELECT * FROM product_image WHERE product_id = :id")
-                        .bind("id", p.getId())
-                        .mapToBean(ProductImage.class)
-                        .list();
-                p.setImages(images);
+        StringBuilder sql = new StringBuilder(" SELECT * FROM product WHERE 1=1 ");
+
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND ( CAST(id AS CHAR) LIKE :keyword OR productName LIKE :keyword ) ");
+        }
+
+        if (categoryId != null && !categoryId.isEmpty()) {
+            sql.append(" AND category_id = :categoryId ");
+        }
+
+        if (kind != null && !kind.isEmpty()) {
+            sql.append(" AND kind = :kind ");
+        }
+
+        sql.append(" ORDER BY id DESC LIMIT :limit OFFSET :offset");
+
+        return jdbi.withHandle(handle -> {
+            org.jdbi.v3.core.statement.Query query =
+                    handle.createQuery(sql.toString());
+
+            if (keyword != null && !keyword.isEmpty()) {
+                query.bind("keyword", "%" + keyword + "%");
             }
-            System.out.println(products.get(0));
-            System.out.println(products.get(1));
-            return products;
+            if (categoryId != null && !categoryId.isEmpty()) {
+                query.bind("categoryId", Integer.parseInt(categoryId));
+            }
+            if (kind != null && !kind.isEmpty()) {
+                query.bind("kind", kind);
+            }
+
+            query.bind("limit", pageSize);
+            query.bind("offset", offset);
+
+            return query.mapToBean(Product.class).list();
         });
     }
 
-    public int countProducts() {
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT COUNT(*) FROM product")
-                        .mapTo(Integer.class)
-                        .one()
-        );
+    public int countWithFilter(String keyword, String categoryId,String kind ) {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM product WHERE 1=1");
+
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND ( CAST(id AS CHAR) LIKE :keyword OR productName LIKE :keyword)");
+        }
+
+        if (categoryId != null && !categoryId.isEmpty()) {
+            sql.append(" AND category_id = :categoryId ");
+        }
+
+        if (kind != null && !kind.isEmpty()) {
+            sql.append(" AND kind = :kind ");
+        }
+
+        return jdbi.withHandle(handle -> {
+            org.jdbi.v3.core.statement.Query query =
+                    handle.createQuery(sql.toString());
+
+            if (keyword != null && !keyword.isEmpty()) {
+                query.bind("keyword", "%" + keyword + "%");
+            }
+            if (categoryId != null && !categoryId.isEmpty()) {
+                query.bind("categoryId", Integer.parseInt(categoryId));
+            }
+            if (kind != null && !kind.isEmpty()) {
+                query.bind("kind", kind);
+            }
+
+            return query.mapTo(Integer.class).one();
+        });
     }
+
 
     public boolean existsByName(String productName) {
         String sql = "SELECT COUNT(*) FROM product WHERE productName = :name";
@@ -405,6 +447,21 @@ public class ProductDAO {
         );
     }
 
+    public List<ProductImage> findByProductIds(List<Integer> productIds) {
+
+        if (productIds == null || productIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(
+                                "SELECT * FROM product_image WHERE product_id IN (<ids>)"
+                        )
+                        .bindList("ids", productIds)
+                        .mapToBean(ProductImage.class)
+                        .list()
+        );
+    }
 
 
 }

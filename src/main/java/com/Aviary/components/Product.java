@@ -7,7 +7,6 @@ public class Product {
     private int id;
     private String productName;
     private double price;
-    private double rating;
     private int soldQuantity;
     private String thumbnail;
     private String description;
@@ -55,8 +54,6 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
-    public double getRating() {return this.rating;}
-    public void setRating(double rating) {this.rating = rating;}
 
     public String getThumbnail() {
         return thumbnail;

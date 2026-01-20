@@ -13,7 +13,7 @@
         </div>
         <ul class="navbar-menu">
             <li><a href="${pageContext.request.contextPath}/Admin">Sản phẩm</a></li>
-            <li><a href="${pageContext.request.contextPath}/AdminUsers">Người dùng</a></li>
+            <li><a href="${pageContext.request.contextPath}/AdminPage/adminUsers.jsp">Người dùng</a></li>
             <li><a href="${pageContext.request.contextPath}/AdminOrder">Đơn hàng</a></li>
         </ul>
     </div>

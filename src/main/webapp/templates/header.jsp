@@ -37,7 +37,7 @@
 
             <a href="cart"><img src="${pageContext.request.contextPath}/image/cart.png" alt="Cart" class="icon"
                              width="30px" height="30px"/></a>
-            <a href="#"><img src="${pageContext.request.contextPath}/image/account.png" alt="User" class="icon"
+            <a href="${pageContext.request.contextPath}/userdetails.jsp"><img src="${pageContext.request.contextPath}/image/account.png" alt="User" class="icon"
                              width="30px" height="30px"/></a>
         </div>
 

@@ -35,41 +35,6 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-//        if ("add".equals(action)) {
-//            Product p = new Product();
-//            p.setProductName(request.getParameter("productName"));
-//            p.setPrice(Double.parseDouble(request.getParameter("price")));
-//            p.setCategory_id(Integer.parseInt(request.getParameter("category")));
-//            p.setKind(request.getParameter("kind"));
-//            p.setStock(Integer.parseInt(request.getParameter("stock")));
-//            p.setDescription(request.getParameter("description"));
-//            System.out.println("1");
-//            // Upload ảnh
-//            Part filePart = request.getPart("thumbnail");
-//            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-//            String uploadPath = "E:/2025learn/uploads";
-//            System.out.println("Upload path: " + uploadPath);
-//            File uploadDir = new File(uploadPath);
-//            if (!uploadDir.exists()) uploadDir.mkdir();
-//            filePart.write(uploadPath + File.separator + fileName);
-//            p.setThumbnail("uploads/" + fileName);
-//
-//            int productId = productService.addProduct(p);
-//            System.out.println("2");
-//            // Upload extra images
-//            String[] extraNames = {"extraImage1", "extraImage2"};
-//            for (String name : extraNames) {
-//                Part part = request.getPart(name);
-//                if (part != null && part.getSize() > 0) {
-//                    String fileNamei = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-//                    part.write(uploadPath + File.separator + fileNamei);
-//                    ProductImage pi = new ProductImage();
-//                    pi.setProductId(productId);
-//                    pi.setImageUrl("uploads/" + fileNamei);
-//                    productImageService.addProductImage(pi);
-//                }
-//            }
-//            response.sendRedirect(request.getContextPath() + "/Admin");
         if ("add".equals(action)) {
             try {
                 productService.addProductWithImages(request);
@@ -149,19 +114,30 @@ public class AdminController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String keyword = request.getParameter("keyword");
+        String categoryId = request.getParameter("category");
+        String kind = request.getParameter("kind");
+
         int page = 1;
         int pageSize = 10;
         String pageParam = request.getParameter("page");
         if (pageParam != null) { page = Integer.parseInt(pageParam); }
-        List<Category> categories = productService.getAllCategories();
-        List<Product> products = productService.getProductsPage(page, pageSize);
+
         List<String> kinds = kindService.getAll();
-        int totalPages = productService.getTotalPages(pageSize);
+        List<Category> categories = productService.getAllCategories();
+
+        List<Product> products = productService.getProductsPageWithFilter( keyword, categoryId, kind, page, pageSize );
+        int totalPages = productService.countProductsWithFilter(   keyword, categoryId, kind,pageSize );
+
         request.setAttribute("kinds",kinds );
         request.setAttribute("categories", categories);
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
+
+        request.setAttribute("keyword", keyword);
+        request.setAttribute("category", categoryId);
+        request.setAttribute("kind", kind);
         request.getRequestDispatcher("AdminPage/adminProduct.jsp").forward(request, response);
     }
 }

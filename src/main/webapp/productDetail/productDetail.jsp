@@ -33,9 +33,6 @@
             <!-- Thông tin bổ sung -->
             <div class="product-meta">
                 <p><strong>🎭 Thể loại:</strong> ${product.kind}</p>
-                <p class="stars">
-                    ✨Đánh giá: (${product.rating}/5)⭐
-                </p>
                 <p><strong>🔥 Đã bán:</strong> ${product.soldQuantity} sản phẩm</p>
             </div>
 

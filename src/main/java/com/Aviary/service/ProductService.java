@@ -9,6 +9,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -160,11 +161,33 @@ public class ProductService {
     }
     public List<Category> getAllCategories() {return productDAO.getAllCategories();}
 
-    public List<Product> getProductsPage(int page, int pageSize) {
-        return productDAO.findPage(page, pageSize);
+    public List<Product> getProductsPageWithFilter(String keyword, String categoryId, String kind, int page, int pageSize ) {
+        List<Product> products = productDAO.findPageWithFilter(keyword, categoryId, kind, page, pageSize);
+        if (products.isEmpty()) {
+            return products;
+        }
+
+        List<Integer> productIds = new ArrayList<>();
+        for (Product p : products) {
+            productIds.add(p.getId());
+            p.setImages(new ArrayList<>());
+        }
+
+        List<ProductImage> images = productDAO.findByProductIds(productIds);
+
+        for (ProductImage img : images) {
+            for (Product p : products) {
+                if (p.getId() == img.getProductId()) {
+                    p.getImages().add(img);
+                    break;
+                }
+            }
+        }
+
+        return products;
     }
-    public int getTotalPages(int pageSize) {
-        int totalProducts = productDAO.countProducts();
+    public int countProductsWithFilter( String keyword, String categoryId, String kind,int pageSize ) {
+        int totalProducts = productDAO.countWithFilter( keyword, categoryId, kind);
         return (int) Math.ceil((double) totalProducts / pageSize);
     }
 

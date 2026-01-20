@@ -231,6 +231,74 @@
 
 <!-- Danh sách sản phẩm -->
 <section class="list-section">
+    <div class="product-toolbar">
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <form method="get"
+                  action="${pageContext.request.contextPath}/Admin"
+                  class="search-form">
+
+                <input type="text"
+                       name="keyword"
+                       placeholder="🔍 Tìm theo tên hoặc ID..."
+                       value="${keyword}"/>
+
+                <!-- giữ filter khi search -->
+                <input type="hidden" name="category" value="${category}"/>
+                <input type="hidden" name="kind" value="${kind}"/>
+
+                <button type="submit" class="action-btn update-btn">
+                    Tìm
+                </button>
+            </form>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-box">
+            <form method="get"
+                  action="${pageContext.request.contextPath}/Admin"
+                  class="filter-form">
+
+                <div class="filter-group">
+                    <label>Danh mục</label>
+                    <select name="category">
+                        <option value="">Tất cả</option>
+                        <c:forEach var="c" items="${categories}">
+                            <option value="${c.id}"
+                                ${category == c.id.toString() ? 'selected' : ''}>
+                                    ${c.name}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Loại</label>
+                    <select name="kind">
+                        <option value="">Tất cả</option>
+                        <c:forEach var="k" items="${kinds}">
+                            <option value="${k}"
+                                ${kind == k ? 'selected' : ''}>
+                                    ${k}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <!-- giữ search khi filter -->
+                <input type="hidden" name="keyword" value="${keyword}"/>
+
+                <div class="filter-actions">
+                    <button type="submit" class="action-btn update-btn">
+                        Lọc
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
     <h2 class="form-title">Danh sách sản phẩm</h2>
     <table class="product-table">
         <thead>
