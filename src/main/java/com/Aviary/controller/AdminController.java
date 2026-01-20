@@ -17,6 +17,7 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "AdminController", value = "/Admin")
@@ -34,39 +35,47 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
+//        if ("add".equals(action)) {
+//            Product p = new Product();
+//            p.setProductName(request.getParameter("productName"));
+//            p.setPrice(Double.parseDouble(request.getParameter("price")));
+//            p.setCategory_id(Integer.parseInt(request.getParameter("category")));
+//            p.setKind(request.getParameter("kind"));
+//            p.setStock(Integer.parseInt(request.getParameter("stock")));
+//            p.setDescription(request.getParameter("description"));
+//            System.out.println("1");
+//            // Upload ảnh
+//            Part filePart = request.getPart("thumbnail");
+//            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+//            String uploadPath = "E:/2025learn/uploads";
+//            System.out.println("Upload path: " + uploadPath);
+//            File uploadDir = new File(uploadPath);
+//            if (!uploadDir.exists()) uploadDir.mkdir();
+//            filePart.write(uploadPath + File.separator + fileName);
+//            p.setThumbnail("uploads/" + fileName);
+//
+//            int productId = productService.addProduct(p);
+//            System.out.println("2");
+//            // Upload extra images
+//            String[] extraNames = {"extraImage1", "extraImage2"};
+//            for (String name : extraNames) {
+//                Part part = request.getPart(name);
+//                if (part != null && part.getSize() > 0) {
+//                    String fileNamei = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+//                    part.write(uploadPath + File.separator + fileNamei);
+//                    ProductImage pi = new ProductImage();
+//                    pi.setProductId(productId);
+//                    pi.setImageUrl("uploads/" + fileNamei);
+//                    productImageService.addProductImage(pi);
+//                }
+//            }
+//            response.sendRedirect(request.getContextPath() + "/Admin");
         if ("add".equals(action)) {
-            Product p = new Product();
-            p.setProductName(request.getParameter("productName"));
-            p.setPrice(Double.parseDouble(request.getParameter("price")));
-            p.setCategory_id(Integer.parseInt(request.getParameter("category")));
-            p.setKind(request.getParameter("kind"));
-            p.setStock(Integer.parseInt(request.getParameter("stock")));
-            p.setDescription(request.getParameter("description"));
-            System.out.println("1");
-            // Upload ảnh
-            Part filePart = request.getPart("thumbnail");
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = "E:/2025learn/uploads";
-            System.out.println("Upload path: " + uploadPath);
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdir();
-            filePart.write(uploadPath + File.separator + fileName);
-            p.setThumbnail("uploads/" + fileName);
-
-            int productId = productService.addProduct(p);
-            System.out.println("2");
-            // Upload extra images
-            String[] extraNames = {"extraImage1", "extraImage2"};
-            for (String name : extraNames) {
-                Part part = request.getPart(name);
-                if (part != null && part.getSize() > 0) {
-                    String fileNamei = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    part.write(uploadPath + File.separator + fileNamei);
-                    ProductImage pi = new ProductImage();
-                    pi.setProductId(productId);
-                    pi.setImageUrl("uploads/" + fileNamei);
-                    productImageService.addProductImage(pi);
-                }
+            try {
+                productService.addProductWithImages(request);
+                request.getSession().setAttribute("msg", "Thêm sản phẩm thành công");
+            } catch (RuntimeException e) {
+                request.getSession().setAttribute("msg", "Lỗi: " + e.getMessage());
             }
             response.sendRedirect(request.getContextPath() + "/Admin");
         } else if ("delete".equals(action)) {
@@ -83,22 +92,57 @@ public class AdminController extends HttpServlet {
             p.setKind(request.getParameter("kind"));
             p.setStock(Integer.parseInt(request.getParameter("stock")));
             p.setDescription(request.getParameter("description"));
-            // xử lý upload
-            Part filePart = request.getPart("thumbnail");
-            if (filePart != null && filePart.getSize() > 0) {
-                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                String uploadPath = "E:/2025learn/uploads";
-                File uploadDir = new File(uploadPath);
-                if (!uploadDir.exists()) uploadDir.mkdir();
-                filePart.write(uploadPath + File.separator + fileName);
+
+            Part thumbPart = request.getPart("thumbnail");
+            if (thumbPart != null && thumbPart.getSize() > 0) {
+
+                if (!thumbPart.getContentType().startsWith("image/")) {
+                    throw new RuntimeException("Thumbnail phải là ảnh");
+                }
+
+                String fileName = Paths.get(thumbPart.getSubmittedFileName())
+                        .getFileName().toString();
+
+                thumbPart.write("E:/2025learn/uploads" + File.separator + fileName);
+
                 p.setThumbnail("uploads/" + fileName);
+
             } else {
+                // giữ thumbnail cũ
                 Product old = productService.getProductById(p.getId());
                 p.setThumbnail(old.getThumbnail());
             }
 
-            productService.updateProduct(p);
-            System.out.println("3");
+            List<ProductImage> extraImages = new ArrayList<>();
+            String[][] imageFields = {
+                    {"extraImage1", "DISPLAY"},
+                    {"extraImage2", "SIZE"}
+            };
+
+            for (String[] f : imageFields) {
+
+                Part part = request.getPart(f[0]);
+
+                if (part != null && part.getSize() > 0) {
+
+                    if (!part.getContentType().startsWith("image/")) {
+                        throw new RuntimeException("Ảnh phụ phải là ảnh");
+                    }
+
+                    String fileName = Paths.get(part.getSubmittedFileName())
+                            .getFileName().toString();
+
+                    part.write("E:/2025learn/uploads/" + fileName);
+
+                    ProductImage img = new ProductImage();
+                    img.setImageUrl("uploads/" + fileName);
+                    img.setType(f[1]);
+
+                    extraImages.add(img);
+                }
+            }
+            request.getSession().setAttribute("msg", "chỉnh sản phẩm thành công");
+            productService.updateProduct(p, extraImages);
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
     }

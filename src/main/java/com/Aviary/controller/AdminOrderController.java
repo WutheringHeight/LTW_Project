@@ -21,16 +21,26 @@ public class AdminOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int page = 1;
         int pageSize = 10;
+
         String pageParam = req.getParameter("page");
-        if (pageParam != null) {
-            page = Integer.parseInt(pageParam);
-        }
-        List<Order> orders = orderService.getOrdersPage(page, pageSize);
-        int totalPages = orderService.getTotalPages(pageSize);
+        if (pageParam != null) { page = Integer.parseInt(pageParam);}
+
+        String status = req.getParameter("status");
+        String fromDate = req.getParameter("fromDate");
+        String toDate = req.getParameter("toDate");
+        String keyword  = req.getParameter("keyword");
+
+        List<Order> orders = orderService.getOrdersPage( page, pageSize, status, fromDate, toDate,keyword );
+        int totalPages = orderService.getTotalPages( pageSize, status, fromDate, toDate,keyword );
 
         req.setAttribute("orders", orders);
         req.setAttribute("currentPage", page);
         req.setAttribute("totalPages", totalPages);
+
+        req.setAttribute("status", status);
+        req.setAttribute("fromDate", fromDate);
+        req.setAttribute("toDate", toDate);
+        req.setAttribute("keyword", keyword);
 
         req.getRequestDispatcher("AdminPage/adminOrder.jsp").forward(req, resp);
     }

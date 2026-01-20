@@ -23,7 +23,7 @@ public class KindController extends HttpServlet {
             switch (action) {
                 case "add":
                     service.add(request.getParameter("kindName"));
-                    request.setAttribute("msg", "Thêm loại thành công");
+                    request.getSession().setAttribute("msg", "Thêm loại thành công");
                     break;
 
                 case "update":
@@ -31,12 +31,12 @@ public class KindController extends HttpServlet {
                             request.getParameter("oldName"),
                             request.getParameter("newName")
                     );
-                    request.setAttribute("msg", "Cập nhật loại thành công");
+                    request.getSession().setAttribute("msg", "Cập nhật loại thành công");
                     break;
 
                 case "delete":
                     service.delete(request.getParameter("name"));
-                    request.setAttribute("msg", "Xóa loại thành công");
+                    request.getSession().setAttribute("msg", "Xóa loại thành công");
                     break;
             }
             request.setAttribute("kinds", service.getAll());
@@ -44,7 +44,7 @@ public class KindController extends HttpServlet {
 
         } catch (Exception e) {
             request.setAttribute("kinds", service.getAll());
-            request.setAttribute("msg", "Lỗi: " + e.getMessage());
+            request.getSession().setAttribute("msg", "Lỗi: " + e.getMessage());
             response.sendRedirect(request.getContextPath() + "/Admin");
 
         }

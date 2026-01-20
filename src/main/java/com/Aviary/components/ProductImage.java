@@ -4,6 +4,7 @@ public class ProductImage {
     private int id;
     private int productId;
     private String imageUrl;
+    private String type;
 
     public int getProductId() {
         return productId;
@@ -27,5 +28,13 @@ public class ProductImage {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

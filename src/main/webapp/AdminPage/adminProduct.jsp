@@ -10,11 +10,16 @@
 </head>
 <body>
 <%@ include file="/templates/adminHeader.jsp" %>
+
 <c:if test="${not empty sessionScope.msg}">
-    <div class="alert">${sessionScope.msg}</div>
+    <div id="messageModal" class="modalc" style="display:block">
+        <div class="modalc-content">
+            <p>${sessionScope.msg}</p>
+            <button onclick="closeMessage()">OK</button>
+        </div>
+    </div>
     <c:remove var="msg" scope="session"/>
 </c:if>
-
 <section class="add-product-container">
     <form action="Admin" method="post" enctype="multipart/form-data" class="product-form">
         <input type="hidden" name="action" value="add"/>
@@ -22,20 +27,22 @@
 
         <div class="form-group">
             <label>Tên sản phẩm</label>
-            <input type="text" name="productName" required/>
+            <input type="text" name="productName" />
         </div>
         <div class="form-group">
             <label>Giá</label>
-            <input type="number" name="price" required/>
+            <input type="text" id="priceDisplay" placeholder="Nhập giá"
+                   oninput="formatPrice(this)" />
+            <input type="hidden" name="price" id="priceValue"/>
         </div>
         <div class="form-group">
             <label>Mô tả</label>
-            <textarea name="description" required></textarea>
+            <textarea name="description" ></textarea>
         </div>
         <div class="form-group">
             <label>Chủ đề</label>
             <div style="display:flex; align-items:center; gap:10px;">
-                <select name="category" required>
+                <select name="category" >
                     <c:forEach var="c" items="${categories}">
                         <option value="${c.id}">${c.name}</option>
                     </c:forEach>
@@ -62,7 +69,7 @@
 
         <div class="form-group">
             <label>Tồn kho</label>
-            <input type="number" name="stock" required/>
+            <input type="number" name="stock" />
         </div>
 
         <div class="form-group image-upload">
@@ -154,25 +161,20 @@
             <input type="text"
                    name="categoryName"
                    placeholder="Tên chủ đề mới"
-                   required/>
+                   />
         </div>
 
         <div class="form-group">
             <input type="file"
                    name="pathImage"
                    accept="image/*"
-                   required/>
+                   />
         </div>
 
         <button type="submit" class="submit-btn">
             Thêm
         </button>
     </form>
-    <c:if test="${not empty sessionScope.msg}">
-        <div class="alert">${sessionScope.msg}</div>
-        <c:remove var="msg" scope="session"/>
-    </c:if>
-
     <button class="close-btn" onclick="closeCategoryManager()">✕</button>
 </div>
 
@@ -180,10 +182,6 @@
 <!-- Kind Manager -->
 <div id="kindManager" class="edit-category-container modal">
     <h3 class="form-title">Quản lý loại sản phẩm</h3>
-    <c:if test="${not empty msg}">
-        <div class="alert">${msg}</div>
-    </c:if>
-
     <table class="category-table">
         <thead>
         <tr>
@@ -224,7 +222,7 @@
 
     <form action="KindController" method="post" class="category-form">
         <input type="hidden" name="action" value="add">
-        <input type="text" name="kindName" placeholder="Tên loại mới" required/>
+        <input type="text" name="kindName" placeholder="Tên loại mới" />
         <button type="submit" class="submit-btn">Thêm</button>
     </form>
 
@@ -266,27 +264,28 @@
                 <td>${p.stock}</td>
                 <td><img src="${pageContext.request.contextPath}/${p.thumbnail}" class="thumbnail"/></td>
                 <td>
-                    <c:if test="${p.images.size() >= 1}">
-                        <img src="${p.images[0].imageUrl}" class="thumbnail"/>
+                    <c:if test="${not empty p.images and p.images.size() >= 1}">
+                        <img src="${pageContext.request.contextPath}/${p.images[0].imageUrl}" class="thumbnail"/>
                     </c:if>
                 </td>
                 <td>
-                    <c:if test="${p.images.size() >= 2}">
-                        <img src="${p.images[1].imageUrl}" class="thumbnail"/>
+                    <c:if test="${not empty p.images and p.images.size() >= 2}">
+                        <img src="${pageContext.request.contextPath}/${p.images[1].imageUrl}" class="thumbnail"/>
                     </c:if>
                 </td>
 
                 <td>
                     <button type="button" class="action-btn edit-btn"
-                            onclick="openProductManager(this)"data-id="${p.id}" data-name="${p.productName}"
+                            onclick="openProductManager(this)" data-id="${p.id}" data-name="${p.productName}"
                             data-price="${p.price}" data-stock="${p.stock}" data-description="${p.description}"
-                            data-thumbnail="${p.thumbnail}" data-category="${p.category_id}" data-kind="${p.kind}">
+                            data-thumbnail="${p.thumbnail}" data-category="${p.category_id}" data-kind="${p.kind}"
+                    >
                         ✎
                     </button>
                     <form action="Admin" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="delete"/>
                         <input type="hidden" name="id" value="${p.id}"/>
-                        <button type="submit" class="action-btn delete-btn">Xóa</button>
+                        <button type="submit" class="action-btn delete-btn" onsubmit="return showConfirm('Xóa?')" >Xóa</button>
                     </form>
                 </td>
             </tr>
@@ -387,7 +386,23 @@
 </section>
 
 <script>
-    function previewImage(input, previewId) {
+    function formatPrice(input) {
+        // Lấy số, bỏ hết ký tự không phải số
+        let raw = input.value.replace(/\D/g, '');
+
+        if (raw === '') {
+            document.getElementById('priceValue').value = '';
+            input.value = '';
+            return;
+        }
+
+        // Gán giá trị thật (để submit)
+        document.getElementById('priceValue').value = raw;
+
+        // Format hiển thị: 1.000.000
+        input.value = Number(raw).toLocaleString('vi-VN');
+    }
+function previewImage(input, previewId) {
         const preview = document.getElementById(previewId);
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -400,7 +415,14 @@
             preview.src = "images/placeholder.png";
         }
     }
+    function showMessage(msg) {
+        document.getElementById("messageText").innerText = msg;
+        document.getElementById("messageModal").style.display = "block";
+    }
 
+    function closeMessage() {
+        document.getElementById("messageModal").style.display = "none";
+    }
 
     function toggleCategoryManager() {
         document.getElementById("categoryManager").style.display = "block";

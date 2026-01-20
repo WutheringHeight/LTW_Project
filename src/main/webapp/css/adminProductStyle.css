@@ -385,3 +385,57 @@ body {
     background-color: #e67e22;
 }
 
+.alert {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background-color: #ffecec;
+    color: #d8000c;
+    font-weight: 500;
+}
+.modalc {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hộp modal */
+.modalc-content {
+    background: #ffffff;
+    min-width: 320px;
+    max-width: 420px;
+    padding: 22px 24px;
+    border-radius: 12px;
+    margin: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    animation: scaleIn 0.25s ease;
+}
+
+/* Nội dung thông báo */
+.modalc-content p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Nút OK */
+.modalc-content button {
+    padding: 8px 22px;
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #fff;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}

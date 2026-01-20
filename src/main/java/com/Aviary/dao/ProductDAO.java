@@ -385,6 +385,26 @@ public class ProductDAO {
         );
     }
 
+    public boolean existsByName(String productName) {
+        String sql = "SELECT COUNT(*) FROM product WHERE productName = :name";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("name", productName)
+                        .mapTo(Integer.class)
+                        .one()
+        ) > 0;
+    }
+    public boolean existsByNameExceptId(String productName, int productId) {
+        String sql =" SELECT COUNT(*) FROM product WHERE productName = :name AND id <> :id ";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("name", productName)
+                        .bind("id", productId)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
+
 
 
 }

@@ -54,24 +54,95 @@ public class OrderDAO {
             handle.createUpdate("DELETE FROM orders WHERE id = :id").bind("id", id).execute();
         });
     }
-
-    public List<Order> findPage(int page, int pageSize) {
+    public List<Order> findPage( int page, int pageSize, String status, String fromDate, String toDate,String keyword ) {
         int offset = (page - 1) * pageSize;
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM orders ORDER BY created_at DESC LIMIT :limit OFFSET :offset")
-                        .bind("limit", pageSize)
-                        .bind("offset", offset)
-                        .mapToBean(Order.class)
-                        .list()
-        );
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM orders WHERE 1=1");
+
+        if (status != null && !status.isEmpty()) {
+            sql.append(" AND status = :status");
+        }
+
+        if (fromDate != null && !fromDate.isEmpty()) {
+            sql.append(" AND updated_at >= :fromDate");
+        }
+
+        if (toDate != null && !toDate.isEmpty()) {
+            sql.append(" AND updated_at <= :toDate");
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND ( CAST(id AS CHAR) LIKE :keyword OR customer_name LIKE :keyword OR phone LIKE :keyword ) ");
+        }
+        sql.append(" ORDER BY updated_at DESC LIMIT :limit OFFSET :offset");
+
+        return jdbi.withHandle(handle -> {
+            org.jdbi.v3.core.statement.Query query =
+                    handle.createQuery(sql.toString());
+
+            query.bind("limit", pageSize);
+            query.bind("offset", offset);
+
+            if (status != null && !status.isEmpty()) {
+                query.bind("status", status);
+            }
+
+            if (fromDate != null && !fromDate.isEmpty()) {
+                query.bind("fromDate", fromDate);
+            }
+
+            if (toDate != null && !toDate.isEmpty()) {
+                query.bind("toDate", toDate);
+            }
+            if (keyword != null && !keyword.isEmpty()) {
+                query.bind("keyword", "%" + keyword + "%");
+            }
+
+            return query.mapToBean(Order.class).list();
+        });
+    }
+    public int countOrders(String status, String fromDate, String toDate,String keyword) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT COUNT(*) FROM orders WHERE 1=1");
+
+        if (status != null && !status.isEmpty()) {
+            sql.append(" AND status = :status");
+        }
+
+        if (fromDate != null && !fromDate.isEmpty()) {
+            sql.append(" AND updated_at >= :fromDate");
+        }
+
+        if (toDate != null && !toDate.isEmpty()) {
+            sql.append(" AND updated_at <= :toDate");
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND ( CAST(id AS CHAR) LIKE :keyword OR customer_name LIKE :keyword OR phone LIKE :keyword ) ");
+        }
+
+        return jdbi.withHandle(handle -> {
+            org.jdbi.v3.core.statement.Query query =
+                    handle.createQuery(sql.toString());
+
+            if (status != null && !status.isEmpty()) {
+                query.bind("status", status);
+            }
+
+            if (fromDate != null && !fromDate.isEmpty()) {
+                query.bind("fromDate", fromDate);
+            }
+
+            if (toDate != null && !toDate.isEmpty()) {
+                query.bind("toDate", toDate);
+            }
+            if (keyword != null && !keyword.isEmpty()) {
+                query.bind("keyword", "%" + keyword + "%");
+            }
+
+            return query.mapTo(Integer.class).one();
+        });
     }
 
-    public int countOrders() {
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT COUNT(*) FROM orders")
-                        .mapTo(Integer.class)
-                        .one()
-        );
-    }
 
 }

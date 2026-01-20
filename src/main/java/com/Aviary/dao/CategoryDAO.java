@@ -51,5 +51,25 @@ public class CategoryDAO {
                         .execute()
         );
     }
+    public boolean existsByName(String name) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery(
+                                "SELECT COUNT(*) FROM category WHERE name = :name")
+                        .bind("name", name)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
+
+    public boolean existsByNameExceptId(String name, int id) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery(
+                                "SELECT COUNT(*) FROM category WHERE name = :name AND id != :id")
+                        .bind("name", name)
+                        .bind("id", id)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
 
 }

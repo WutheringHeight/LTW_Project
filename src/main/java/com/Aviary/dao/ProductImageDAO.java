@@ -12,10 +12,24 @@ public class ProductImageDAO {
     }
 
     public void addProductImage(ProductImage pi) {
-        jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO product_image (product_id, image_url) VALUES (:productId, :imageUrl)")
-                        .bind("productId", pi.getProductId())
-                        .bind("imageUrl", pi.getImageUrl())
+        String sql = " INSERT INTO product_image (product_id, image_url, image_type) VALUES (:pid, :url, :type) ";
+
+        jdbi.useHandle(h ->
+                h.createUpdate(sql)
+                        .bind("pid", pi.getProductId())
+                        .bind("url", pi.getImageUrl())
+                        .bind("type", pi.getType())
+                        .execute()
+        );
+    }
+
+    public void deleteByProductIdAndType(int productId, String type) {
+        String sql = " DELETE FROM product_image WHERE product_id = :pid AND image_type = :type ";
+
+        jdbi.useHandle(h ->
+                h.createUpdate(sql)
+                        .bind("pid", productId)
+                        .bind("type", type)
                         .execute()
         );
     }

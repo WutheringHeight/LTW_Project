@@ -13,7 +13,7 @@ public class Order {
     private double totalPrice;
     private String status;
     private LocalDateTime createdAt;
-
+    private LocalDateTime updatedAt;
     // Danh sách sản phẩm trong đơn
     private List<OrderItem> items;
 
@@ -91,5 +91,13 @@ public class Order {
 
     public void setItems(List<OrderItem> items) {
         this.items = items;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

@@ -77,17 +77,17 @@ public class OrderService {
         orderDAO.delete(id);
     }
 
-    public List<Order> getOrdersPage(int page, int pageSize) {
-        List<Order> orders = orderDAO.findPage(page, pageSize);
+    public List<Order> getOrdersPage(int page, int pageSize,String status, String fromDate, String toDate,String keyword) {
+        List<Order> orders = orderDAO.findPage(page, pageSize,status, fromDate, toDate,keyword);
         for (Order o : orders) {
             o.setItems(orderDAO.findItemsByOrderId(o.getId()));
         }
         return orders;
     }
 
-    public int getTotalPages(int pageSize) {
-        int totalOrders = orderDAO.countOrders();
-        return (int) Math.ceil((double) totalOrders / pageSize);
+    public int getTotalPages( int pageSize, String status, String fromDate, String toDate,String keyword ){
+        int total = orderDAO.countOrders(status, fromDate, toDate,keyword);
+        return (int) Math.ceil((double) total/ pageSize);
     }
 
 }

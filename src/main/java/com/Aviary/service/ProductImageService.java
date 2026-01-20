@@ -11,4 +11,7 @@ public class ProductImageService {
     public void addProductImage(ProductImage pi){
         productImageDAO.addProductImage(pi);
     }
+    public void deleteByProductIdAndType(int productId, String type) {
+        productImageDAO.deleteByProductIdAndType( productId, type);
+    }
 }

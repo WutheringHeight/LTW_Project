@@ -35,7 +35,7 @@ public class KindDAO {
     }
     public boolean isUsed(String name) {
         Integer count = jdbi.withHandle(handle ->
-                handle.createQuery("SELECT COUNT(*) FROM product WHERE name = :name")
+                handle.createQuery("SELECT COUNT(*) FROM product WHERE productName = :name")
                         .bind("name", name)
                         .mapTo(Integer.class)
                         .one()
