@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="Aviary">
+    <output-path>$PROJECT_DIR$/out/artifacts/Aviary</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/Aviary/src/main/webapp" />
+    </root>
+  </artifact>
+</component>
