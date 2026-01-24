@@ -6,7 +6,7 @@ import com.Aviary.components.JDBIProvider;
 
 public class UserDao {
     
-    public static int getUserID(String email,String id){
+    public static int getUserID(String email){
         return JDBIProvider.get().withHandle(handle -> {
             return handle.createQuery("Select ID from UserAccount where email = :email")
             .bind("email", email)
@@ -37,7 +37,9 @@ public class UserDao {
             .bind("password", password);
         });
     }
-
+    public static int createNewGoogleUser(String email){
+        return 0;
+    }
     
 
 }

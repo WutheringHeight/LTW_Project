@@ -3,8 +3,6 @@ package com.Aviary.dao;
 import java.sql.SQLException;
 
 import com.Aviary.components.JDBIProvider;
-import com.Aviary.components.UserDetail;
-import com.Aviary.components.UserSetting;
 
 public class UserDao {
     
