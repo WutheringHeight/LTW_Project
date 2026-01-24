@@ -12,9 +12,9 @@ import java.util.stream.Stream;
 
 public class ProductDAO {
 
-    private final Jdbi jdbi = JDBIProvider.get();
+    private static final Jdbi jdbi = JDBIProvider.get();
 
-    public Product getProductById(int id) {
+    public static Product getProductById(int id) {
         return jdbi.withHandle(handle -> {
             // Lấy product
             Product product = handle.createQuery("SELECT * FROM product WHERE id = :id")
@@ -37,7 +37,7 @@ public class ProductDAO {
         });
     }
 
-    public List<Product> getProductsByCategory(int category) {
+    public static List<Product> getProductsByCategory(int category) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT id, productName, price, kind, thumbnail FROM product where category_id = :id")
                         .bind("id", category)
@@ -45,14 +45,14 @@ public class ProductDAO {
                         .list());
     }
 
-    public List<Product> getLatestProducts() {
+    public static List<Product> getLatestProducts() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT id, productName, price, thumbnail FROM product ORDER BY createdAt DESC LIMIT 8")
                         .mapToBean(Product.class)
                         .list());
     }
 
-    public List<Product> getPopularProducts() {
+    public static List<Product> getPopularProducts() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT id, productName, price, thumbnail FROM product ORDER BY soldQuantity DESC LIMIT 8")
                         .mapToBean(Product.class)
@@ -60,7 +60,7 @@ public class ProductDAO {
         );
     }
 
-    public List<Product> searchProducts(String keyword) {
+    public static List<Product> searchProducts(String keyword) {
         String sql = "SELECT id, productName, price, thumbnail, category_id, kind " +
                 "FROM product WHERE productName LIKE :keyword";
 
@@ -73,7 +73,7 @@ public class ProductDAO {
     }
 
 
-    public List<Product> filterAndSort(List<Product> products, String price, String category, String kind, String sort) {
+    public static List<Product> filterAndSort(List<Product> products, String price, String category, String kind, String sort) {
         // Nếu đã có danh sách product
         if (products != null && !products.isEmpty()) {
             Stream<Product> stream = products.stream();
@@ -194,7 +194,7 @@ public class ProductDAO {
         });
     }
 
-    public List<Product> filterAndSortForGallery(List<Product> products, String price, String category, String kind, String sort) {
+    public static List<Product> filterAndSortForGallery(List<Product> products, String price, String category, String kind, String sort) {
             Stream<Product> stream = products.stream();
             if (price != null && !price.isEmpty()) {
                 switch (price) {
@@ -255,7 +255,7 @@ public class ProductDAO {
     }
 
 
-    public List<Product> getAllProducts() {
+    public static List<Product> getAllProducts() {
         return jdbi.withHandle(handle -> {
             List<Product> products = handle.createQuery(
                             "SELECT id, productName, price, category_id, kind, stock, thumbnail " +
@@ -276,7 +276,7 @@ public class ProductDAO {
     }
 
 
-    public int addProduct(Product p) {
+    public static int addProduct(Product p) {
         return jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO product (productName, price, category_id, kind, stock, thumbnail, description) " +
                                 "VALUES (:productName, :price, :category, :kind, :stock, :thumbnail, :description)")
@@ -294,7 +294,7 @@ public class ProductDAO {
     }
 
 
-    public void deleteProduct(int id) {
+    public static void deleteProduct(int id) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("DELETE FROM product WHERE id = :id")
                         .bind("id", id)
@@ -302,7 +302,7 @@ public class ProductDAO {
         );
     }
 
-    public void updateProduct(Product p) {
+    public static void updateProduct(Product p) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE product SET productName = :productName, price = :price, category_id = :category, " +
                                 "kind = :kind, stock = :stock, thumbnail = :thumbnail, description = :description " +
@@ -319,7 +319,7 @@ public class ProductDAO {
         );
     }
 
-    public CartItem getProductForCart(int productId) {
+    public static CartItem getProductForCart(int productId) {
         return jdbi.withHandle(handle -> {
 
             CartItem item = handle.createQuery(
@@ -344,7 +344,7 @@ public class ProductDAO {
             return item;
         });
     }
-    public List<Category> getAllCategories() {
+    public static List<Category> getAllCategories() {
         return jdbi.withHandle(handle ->
                 handle.createQuery(
                                 "SELECT id, name, path_image FROM category"
@@ -353,7 +353,7 @@ public class ProductDAO {
                         .list()
         );
     }
-    public List<Product> findPageWithFilter(String keyword, String categoryId, String kind, int page, int pageSize ) {
+    public static List<Product> findPageWithFilter(String keyword, String categoryId, String kind, int page, int pageSize ) {
         int offset = (page - 1) * pageSize;
 
         StringBuilder sql = new StringBuilder(" SELECT * FROM product WHERE 1=1 ");
@@ -393,7 +393,7 @@ public class ProductDAO {
         });
     }
 
-    public int countWithFilter(String keyword, String categoryId,String kind ) {
+    public static int countWithFilter(String keyword, String categoryId,String kind ) {
         StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM product WHERE 1=1");
 
         if (keyword != null && !keyword.isEmpty()) {
@@ -427,7 +427,7 @@ public class ProductDAO {
     }
 
 
-    public boolean existsByName(String productName) {
+    public static boolean existsByName(String productName) {
         String sql = "SELECT COUNT(*) FROM product WHERE productName = :name";
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
@@ -436,7 +436,7 @@ public class ProductDAO {
                         .one()
         ) > 0;
     }
-    public boolean existsByNameExceptId(String productName, int productId) {
+    public static boolean existsByNameExceptId(String productName, int productId) {
         String sql =" SELECT COUNT(*) FROM product WHERE productName = :name AND id <> :id ";
         return jdbi.withHandle(handle ->
                 handle.createQuery(sql)
@@ -447,7 +447,7 @@ public class ProductDAO {
         );
     }
 
-    public List<ProductImage> findByProductIds(List<Integer> productIds) {
+    public static List<ProductImage> findByProductIds(List<Integer> productIds) {
 
         if (productIds == null || productIds.isEmpty()) {
             return new ArrayList<>();
@@ -462,7 +462,7 @@ public class ProductDAO {
                         .list()
         );
     }
-    public void updateAfterCheckout(int productId, int quantity) {
+    public static void updateAfterCheckout(int productId, int quantity) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE product SET stock = stock - :qty, soldQuantity = soldQuantity + :qty WHERE id = :id AND stock  >= :qty")
                         .bind("qty", quantity)
@@ -470,7 +470,7 @@ public class ProductDAO {
                         .execute()
         );
     }
-    public void returnStockAfterCancel(int productId, int quantity) {
+    public static void returnStockAfterCancel(int productId, int quantity) {
         String sql = "UPDATE product SET stock = stock + :qty, soldQuantity = soldQuantity - :qty WHERE id = :id";
         jdbi.useHandle(handle -> {
             handle.createUpdate(sql)

@@ -8,16 +8,12 @@ import org.jdbi.v3.core.mapper.reflect.ColumnName;
 public class Receipt implements Serializable{
      @ColumnName("ID")
     private int id;
-    private int buyerID;
-     @ColumnName("PID")
-    private int ProductID;
-    private int quantity;
-    private int totalPrice;
+    @ColumnName("accID")
+    private int accountID;
     private Date createdAt;
     
     public Receipt(){
     }
-
 
     public int getId() {
         return this.id;
@@ -25,38 +21,6 @@ public class Receipt implements Serializable{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getBuyerID() {
-        return this.buyerID;
-    }
-
-    public void setBuyerID(int buyerID) {
-        this.buyerID = buyerID;
-    }
-
-    public int getProductID() {
-        return this.ProductID;
-    }
-
-    public void setProductID(int ProductID) {
-        this.ProductID = ProductID;
-    }
-
-    public int getQuantity() {
-        return this.quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getTotalPrice() {
-        return this.totalPrice;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public Date getCreatedAt() {
