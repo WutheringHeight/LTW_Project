@@ -37,6 +37,18 @@ public class UserDao {
             .bind("password", password);
         });
     }
+    public static int insertUser(String email, String password) {
+        return JDBIProvider.get().withHandle(handle ->
+            handle.createUpdate(
+                    "insert into UserAccount (email, password) values (:email, :password)")
+                .bind("email", email)
+                .bind("password", password)
+                .executeAndReturnGeneratedKeys("accID")
+                .mapTo(Integer.class)
+                .one()
+        );
+    }
+    
     public static int createNewGoogleUser(String email){
         return 0;
     }
