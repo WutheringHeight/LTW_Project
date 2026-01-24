@@ -7,6 +7,10 @@ import jakarta.servlet.annotation.WebServlet;
 
 import java.io.IOException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import com.Aviary.dao.UserDao;
+import com.Aviary.service.OTPService;
 import com.Aviary.service.UserService;
 
 @WebServlet("/signup")
@@ -24,14 +28,20 @@ public class SignUpController extends HttpServlet {
         
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        int id = UserService.validateUser(email,password);
-        
-        if (id != 0) {
-            request.getSession().setAttribute("UserID", id);
-            response.sendRedirect("HomePage/homePage.jsp");
-        } else {
-            request.setAttribute("error", "Email or password is incorrect. Please try again.");
+
+        //email already used
+        if(UserDao.getUserID(email) != -1){
+            request.setAttribute("error", "Email already in-used");
             request.getRequestDispatcher("LoginNSignUp/signup.jsp").forward(request, response);
         }
+        //continue with sign in process
+        //forward to OTP
+        HttpSession session = request.getSession();
+        session.setAttribute("email", email);
+        String hashedPass = BCrypt.hashpw(password, BCrypt.gensalt());
+        session.setAttribute("hashedPassword", hashedPass);
+        response.sendRedirect("signup_otp");
+
+        
     }
 }
