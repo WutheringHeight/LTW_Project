@@ -16,8 +16,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class GoogleAuthService {
-    public static String appID = "";
-    public static String appSecret = "";
+    public static String appID = "29908543455-4tlaiuqtlgmv0ed0f92petpt8sf29ium.apps.googleusercontent.com";
+    public static String appSecret = "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";
     public static String googleTokenLink = "https://accounts.google.com/o/oauth2/token";
     public static String googleUserInfoLink = "https://accounts.google.com/o/oauth2/token";
     public static String redirectIRL = "http://localhost:8080/Aviary-1.0/google_auth_callback";

@@ -39,6 +39,5 @@ public class UserPaymentUpdateServlet extends HttpServlet {
         if(cardNumber != null) paymentInfo.setCardNumber(cardNumber);
 
         PaymentDao.updatePaymentInfo(paymentInfo);
-       
     }
 }

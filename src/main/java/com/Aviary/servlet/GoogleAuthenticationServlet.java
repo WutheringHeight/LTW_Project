@@ -20,7 +20,7 @@ public class GoogleAuthenticationServlet extends HttpServlet{
 
          String googleAuthUrl =
             "https://accounts.google.com/o/oauth2/v2/auth"
-          + "?client_id=YOUR_CLIENT_ID"
+          + "?client_id=29908543455-4tlaiuqtlgmv0ed0f92petpt8sf29ium.apps.googleusercontent.com"
           + "&redirect_uri=" + URLEncoder.encode(callBackURL, "UTF-8")
           + "&response_type=code"
           + "&scope=openid email profile";

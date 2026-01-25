@@ -16,10 +16,21 @@ public class PaymentDao {
         );
     }
     public static PaymentInfo getPaymentInfo(int userID){
-        return null;
+         return JDBIProvider.get().withHandle(handle ->
+            handle.createQuery(
+                "select * from PaymentInfo where acc_ID = :accID")
+            .bind("accID", userID)
+            .mapToBean(PaymentInfo.class)
+            .findOne()
+            .orElse(null)
+    );
     }
     public static void updatePaymentInfo(PaymentInfo paymentInfo){
-        
+        JDBIProvider.get().withHandle(handle ->
+             handle.createUpdate("update PaymentInfo set deliveryAddress = :deliveryAddress, paymentMethod = :paymentMethod, bankCode = :bankCode, cardNumber = :cardNumber where acc_ID = :accountID")
+            .bindBean(paymentInfo)
+            .execute()
+        );
     }
 
 }
