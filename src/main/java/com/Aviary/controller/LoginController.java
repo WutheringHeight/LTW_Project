@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet{
         
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        int id = UserService.validateUser(email,password);
+        int id = UserService.validateUser(email,password,true);
         if (id != -1) {
             //valid log in info
             boolean twoFA = UserDetailDao.getUserDetail(id).getTwoFactorEnabled();

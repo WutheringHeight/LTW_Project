@@ -23,13 +23,13 @@ public class UserSettingDao {
         });
     }
     public static int insertUserSetting(int accID) {
-    return JDBIProvider.get().withHandle(handle ->
-        handle.createUpdate(
-                "insert into UserSettings (accID) values (:accID)")
-            .bind("accID", accID)
-            .executeAndReturnGeneratedKeys("ID")
-            .mapTo(Integer.class)
-            .one()
-    );
-}
+        return JDBIProvider.get().withHandle(handle ->
+            handle.createUpdate(
+                    "insert into UserSettings (accID) values (:accID)")
+                .bind("accID", accID)
+                .executeAndReturnGeneratedKeys("ID")
+                .mapTo(Integer.class)
+                .one()
+        );
+    }
 }

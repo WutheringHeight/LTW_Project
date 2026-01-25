@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import com.Aviary.service.UserService;
 
-@WebServlet("/signup")
+//@WebServlet("/signup")
 public class SignUpController2 extends HttpServlet {
 
     @Override
@@ -24,7 +24,7 @@ public class SignUpController2 extends HttpServlet {
         
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        int id = UserService.validateUser(email,password);
+        int id = UserService.validateUser(email,password,true);
         
         if (id != 0) {
             request.getSession().setAttribute("UserID", id);

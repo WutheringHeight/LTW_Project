@@ -37,7 +37,7 @@ public class SignupOTPController extends HttpServlet{
         if(otp.equals(input)){
             //proceeds with account creation
             String password = Util.getFromSession(session, "hashedPassword", String.class);
-            int userID = UserService.createNewAccount(email, password);
+            int userID = UserService.createNewAccount(email, password,false);
             session.setAttribute("UserID", userID);
             resp.sendRedirect("HomePage/homepage.jsp");
         }

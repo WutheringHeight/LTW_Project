@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.Aviary.dao.UserDao;
 import com.Aviary.service.GoogleAuthService;
+import com.Aviary.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,7 +28,7 @@ public class GoogleAuthenticationCallBackServlet extends HttpServlet{
         
         int userID = UserDao.getUserID(email);
         if(userID == -1){
-            userID = UserDao.createNewGoogleUser(email);
+            userID = UserService.createNewGoogleAccount(email);
         }
         session.setAttribute("userID", userID);
 
