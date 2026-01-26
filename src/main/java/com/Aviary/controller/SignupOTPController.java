@@ -32,7 +32,7 @@ public class SignupOTPController extends HttpServlet{
         HttpSession session = req.getSession();
         String email = Util.getFromSession(session, "email", String.class);
         String otp = Util.getFromSession(session, "otp", String.class);
-        String input = OTPService.getOTP(req);
+        String input = req.getParameter("otp");
 
         if(otp.equals(input)){
             //proceeds with account creation
