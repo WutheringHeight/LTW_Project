@@ -13,7 +13,7 @@
     <section style="display: flex; flex-direction:column; justify-content: center; align-items: center; min-width: 100vw; min-height: 80vh;">
         <div class="OTP-box">
         <p>A <b>OTP</b> verfication code has been sent to your email</p>
-        <form action="${otpCallBack}" style="padding: 4px; margin-bottom:0px;" id="form">
+        <form action="${otpCallBack}" style="padding: 4px; margin-bottom:0px;" id="form" method="post">
             <div class="otp-inputs">
                 <input name="otp" id="otp" type="numberic" maxlength="6" value="XXXXXX" class="gray-text" style="min-width:20px;">
             </div>
